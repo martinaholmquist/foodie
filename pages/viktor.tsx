@@ -5,7 +5,7 @@ interface Props {}
 const Viktor: NextPage<Props> = ({}) => {
   return (
     <div>
-      <p>Viktor</p>
+      <p>Viktor Strand</p>
     </div>)
 }
 
