@@ -2,8 +2,8 @@ import { NextPage } from "next"
 
 interface Props {}
 
-const Cam: NextPage<Props> = ({}) => {
+const PagenotFound: NextPage<Props> = ({}) => {
   return <div></div>
 }
 
-export default Cam
+export default PagenotFound
