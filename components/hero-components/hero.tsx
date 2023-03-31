@@ -75,7 +75,7 @@ export const Hero = ({
           alt="picture of vegatables"
         ></Image>
       </div>
-      <div className="flex justify-center h-64 items-end pb-0 sm:h-96 md:h-60">
+      <div className="flex justify-center h-40 items-end pb-0 sm:h-96 md:h-60">
         <Link
           className="font-semibold text-lg cursor-pointer bg-secondaryWhite px-7 py-4 rounded-3xl shadow-sm  shadow-black"
           href={"/coming_soon"}
