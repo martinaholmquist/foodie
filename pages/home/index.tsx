@@ -21,6 +21,7 @@ const Index: NextPage<Props> = ({}) => {
           bulletThree="Nya smaker "
           ctaText="Kom igång"
         />
+        L
       </section>
     </div>
   )
