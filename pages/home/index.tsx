@@ -1,6 +1,4 @@
 import { NextPage } from "next"
-import { Logo } from "@/components/hero-components/logo"
-import { Hero } from "@/components/hero-components/hero"
 
 interface Props {}
 
@@ -21,7 +19,6 @@ const Index: NextPage<Props> = ({}) => {
           bulletThree="Nya smaker "
           ctaText="Kom igång"
         />
-        L
       </section>
     </div>
   )
