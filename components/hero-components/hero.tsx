@@ -23,7 +23,7 @@ export const Hero = ({
       <div className="absolute bottom-0 -z-20">
         <Image
           src={"/tre_sparrisar.40.png"}
-          width={250}
+          width={300}
           height={250}
           alt="picture of vegatables"
         ></Image>
@@ -33,11 +33,11 @@ export const Hero = ({
           {heroTitle}
         </h1>
       </div>
-      <div className="flex justify-center">
-        <p className="text-center font-normal text-xl w-5/6">{heroText}</p>
+      <div className="flex justify-center px-2">
+        <p className="text-center font-normal text-xl w-6/6">{heroText}</p>
       </div>
       <div className="">
-        <ul className=" font-semibold text-xl ">
+        <ul className=" font-semibold text-xl pb-10 pt-10">
           <li className=" list-none flex items-center space-x-3 pt-5 pl-8 pr-8">
             <Image
               src={"/icon1_publicera.png"}
@@ -75,7 +75,7 @@ export const Hero = ({
           alt="picture of vegatables"
         ></Image>
       </div>
-      <div className="flex justify-center h-64 items-end pb-10 sm:h-96 md:h-60">
+      <div className="flex justify-center h-64 items-end pb-0 sm:h-96 md:h-60">
         <Link
           className="font-semibold text-lg cursor-pointer bg-secondaryWhite px-7 py-4 rounded-3xl shadow-sm  shadow-black"
           href={"/coming_soon"}
