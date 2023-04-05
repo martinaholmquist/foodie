@@ -1,6 +1,6 @@
 import { NextPage } from "next"
-import { Logo } from "@/components/hero-components/logo"
 import { Hero } from "@/components/hero-components/hero"
+import { Logo } from "@/components/hero-components/logo"
 
 interface Props {}
 
