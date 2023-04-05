@@ -17,8 +17,6 @@ const Index: NextPage = ({}) => {
     hashedPassword: "",
   })
 
-  async function postData() {}
-
   const onSubmit = async (e: SyntheticEvent) => {
     const data = await fetch("http://localhost:3000/api/register", {
       method: "POST",
