@@ -1,7 +1,30 @@
 import { Butterfly_Kids } from "@next/font/google"
-import { NextPage } from "next"
+
 import { useState } from "react"
 
+import { NextPage } from "next"
+
+interface Props {}
+
+const Index: NextPage<Props> = ({}) => {
+  return (
+    <div>
+      <div>
+        <form action="/api/create" method="POST">
+          <input type="text" placeholder="name" name="name" />
+          <input type="text" placeholder="ingredients" name="ingredients" />
+          <input type="text" placeholder="description" name="description" />
+          <input type="text" placeholder="pic" name="pic" />
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  )
+}
+
+export default Index
+
+/*
 interface FormData {
   name: string
   ingredients: string
@@ -9,6 +32,8 @@ interface FormData {
   pic: string
   id: string
 }
+
+
 
 const Index: NextPage = () => {
   const [form, setForm] = useState<FormData>({
@@ -21,7 +46,7 @@ const Index: NextPage = () => {
 
   async function create(data: FormData) {
     try {
-      fetch("http://localhost:3000/API/create", {
+      await fetch("http://localhost:3000/API/create", {
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
@@ -90,5 +115,4 @@ const Index: NextPage = () => {
     </div>
   )
 }
-
-export default Index
+export default Index*/

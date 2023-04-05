@@ -22,7 +22,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/API/foodrecepie.ts"
+    "pages/api/foodrecepie.ts",
+    "pages/API/create.js"
   ], //pages/API/recepies.jsx
   "exclude": ["node_modules"]
 }
