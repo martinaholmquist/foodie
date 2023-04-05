@@ -1,7 +1,8 @@
 import { NextPage } from "next"
 import { SyntheticEvent, useState } from "react"
+import { Logo } from "@/components/hero-components/logo"
 
-interface User {
+type User = {
   name: string
   email: string
   username: string
@@ -16,15 +17,16 @@ const Index: NextPage = ({}) => {
     hashedPassword: "",
   })
 
+  async function postData() {}
+
   const onSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault()
-    fetch("http://localhost:3000/api/register", {
+    const data = await fetch("http://localhost:3000/api/register", {
       method: "POST",
-      body: JSON.stringify({ user }),
+      body: JSON.stringify(user),
       headers: { "Content-Type": "application/json" },
     })
-      .then((res) => res.json())
-      .then((json) => setUser(json.user))
+    const res = await data.json()
+    e.preventDefault()
   }
 
   return (
