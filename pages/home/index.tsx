@@ -9,6 +9,7 @@ const Index: NextPage<Props> = ({}) => {
     <div className="home overflow-hidden">
       <header></header>
       <section>
+        <Logo foodieLogo={"/Loggo_B&W.png"} />
         <Hero
           heroTitle="Dela, smaka och utvecklas!"
           heroText="Foodie skapades av ett gäng matälskare
