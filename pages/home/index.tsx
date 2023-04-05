@@ -6,7 +6,7 @@ interface Props {}
 
 const Index: NextPage<Props> = ({}) => {
   return (
-    <div className="home">
+    <div className="home overflow-hidden">
       <header>
         <Logo foodieLogo={"./Loggo_B&W.png"} />
       </header>
