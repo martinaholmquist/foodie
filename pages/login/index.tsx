@@ -1,3 +1,4 @@
+import { FormButton } from "@/components/form-components/form-button"
 import { FormFielld } from "@/components/form-components/form-field"
 import { Layout } from "@/components/layout"
 import { NextPage } from "next"
@@ -71,15 +72,11 @@ const Index: NextPage<FormData> = ({}) => {
               />
             </>
           )}
-
-          <button
-            type="submit"
+          <FormButton
+            type={"submit"}
             name="_action"
-            value={action}
-            className="rounded-xl mt-2 bg-secondaryWhite px-3 py-2 text-black font-semibold transition duration-300 ease-in-out  hover:bg-black hover:text-secondaryWhite hover:-translate-y-1"
-          >
-            {action === "login" ? "Log In" : "Register"}
-          </button>
+            value={action === "login" ? "Log In" : "Register"}
+          />
         </form>
       </div>
     </Layout>
