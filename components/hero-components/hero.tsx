@@ -71,7 +71,7 @@ export const Hero = ({
         <Image
           src={"/Sparris_tallrik.png"}
           width={200}
-          height={0}
+          height={1}
           alt="picture of vegatables"
         ></Image>
       </div>
