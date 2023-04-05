@@ -13,42 +13,35 @@ datasource db {
 
 model User {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
-  name            String?
-  username        String?   @unique
-  bio             String?
-  email           String?   @unique
-  image           String?
+  name            String
+  username        String    @unique
+  email           String    @unique
   profileImage    String?
-  hashedPassword  String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  followingIds    String[] @db.ObjectId
-  hasNotification Boolean?
-  posts         Post[]
-  comments      Comment[]
-  
+  hashedPassword  String
+  recepies        Recepie[]
+  comments        Comment[]
 }
 
-model Post {
+model Recepie {
   id                 String @id @default(auto()) @map("_id") @db.ObjectId
-  body               String
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  userId             String @db.ObjectId
-  likedIds           String[] @db.ObjectId
+  servings           String?
+  title              String
+  time               String?
+  ingredients        String
+  intructions        String
+  kuriosa            String?
+  author             User @relation(fields: [authorId], references: [id])
+  authorId           String     @db.ObjectId
   image              String?
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  comments          Comment[]
+  comments           Comment[]
 }
 
 model Comment {
   id                 String @id @default(auto()) @map("_id") @db.ObjectId
-  body               String
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-  commentRating      String
+  commentRating      String?
+  commentbody        String
   userId             String @db.ObjectId
-  postId             String @db.ObjectId
+  recepieId          String @db.ObjectId
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  recepie Recepie @relation(fields: [recepieId], references: [id], onDelete: Cascade)
 }
