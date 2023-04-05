@@ -79,7 +79,7 @@ export const Hero = ({
         <Link
           className="font-semibold text-lg cursor-pointer bg-secondaryWhite px-7 py-4 rounded-3xl shadow-sm  shadow-black"
           href={
-            "https://docs.google.com/spreadsheets/d/1m8fA3InZtMA7jzUt5ooNFvNnnu0x7rlsw9FMW0XFo-8/edit?usp=sharing"
+            ""
           }
         >
           {ctaText}
