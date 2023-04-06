@@ -75,10 +75,12 @@ export const Hero = ({
           alt="picture of vegatables"
         ></Image>
       </div>
-      <div className="flex justify-center h-40 items-end pb-0 sm:h-96 md:h-60">
+      <div className="flex justify-center h-40 items-end pb-0 sm:h-64 md:h-60 xs:h-64">
         <Link
           className="font-semibold text-lg cursor-pointer bg-secondaryWhite px-7 py-4 rounded-3xl shadow-sm  shadow-black"
-          href={"/coming_soon"}
+          href={
+            "https://docs.google.com/spreadsheets/d/1m8fA3InZtMA7jzUt5ooNFvNnnu0x7rlsw9FMW0XFo-8/edit?usp=sharing"
+          }
         >
           {ctaText}
         </Link>

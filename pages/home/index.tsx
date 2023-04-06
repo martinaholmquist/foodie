@@ -1,16 +1,15 @@
 import { NextPage } from "next"
-import { Logo } from "@/components/hero-components/logo"
 import { Hero } from "@/components/hero-components/hero"
+import { Logo } from "@/components/hero-components/logo"
 
 interface Props {}
 
 const Index: NextPage<Props> = ({}) => {
   return (
-    <div className="home">
-      <header>
-        <Logo foodieLogo={"./Loggo_B&W.png"} />
-      </header>
+    <div className="home overflow-hidden">
+      <header></header>
       <section>
+        <Logo foodieLogo={"/Loggo_B&W.png"} />
         <Hero
           heroTitle="Dela, smaka och utvecklas!"
           heroText="Foodie skapades av ett gäng matälskare

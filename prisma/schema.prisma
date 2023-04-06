@@ -1,30 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
+model Comment {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  commentRating      String?
+  commentbody        String
+  userId             String @db.ObjectId
+  recepieId          String @db.ObjectId
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  recepie Recepie @relation(fields: [recepieId], references: [id], onDelete: Cascade)
 }
-
-datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
-}
-
-model User {
-  id              String @id @default(auto()) @map("_id") @db.ObjectId
-  name            String?
-  username        String?   @unique
-  bio             String?
-  email           String?   @unique
-  emailVerified   DateTime?
-  image           String?
-  coverImage      String?
-  profileImage    String?
-  hashedPassword  String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  followingIds    String[] @db.ObjectId
-  hasNotification Boolean?
-}
-
-
