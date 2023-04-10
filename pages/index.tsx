@@ -4,7 +4,7 @@ import styles from "@/styles/Home.module.css"
 interface Props {}
 
 const Index: NextPage<Props> = ({}) => {
-  return <div>Hello Tina</div>
+  return <div>User Feed</div>
 }
 
 export default Index

@@ -23,7 +23,7 @@ export const Hero = ({
       <div className="absolute bottom-0 -z-20">
         <Image
           src={"/tre_sparrisar.40.png"}
-          width={300}
+          width={250}
           height={250}
           alt="picture of vegatables"
         ></Image>
@@ -67,7 +67,7 @@ export const Hero = ({
           </li>
         </ul>
       </div>
-      <div className="absolute bottom-28 right-0 -z-10">
+      <div className="absolute bottom-24 right-0 -z-10">
         <Image
           src={"/Sparris_tallrik.png"}
           width={200}
@@ -75,12 +75,10 @@ export const Hero = ({
           alt="picture of vegatables"
         ></Image>
       </div>
-      <div className="flex justify-center h-40 items-end pb-0 sm:h-64 md:h-60 xs:h-64">
+      <div className="flex justify-center h-40 items-end pb-0 sm:h-64 md:h-60 xs:h-48">
         <Link
-          className="font-semibold text-lg cursor-pointer bg-secondaryWhite px-7 py-4 rounded-3xl shadow-sm  shadow-black"
-          href={
-            "https://docs.google.com/spreadsheets/d/1m8fA3InZtMA7jzUt5ooNFvNnnu0x7rlsw9FMW0XFo-8/edit?usp=sharing"
-          }
+          className="font-semibold text-lg cursor-pointer bg-secondaryWhite px-7 py-4 rounded-3xl"
+          href={"/login"}
         >
           {ctaText}
         </Link>
