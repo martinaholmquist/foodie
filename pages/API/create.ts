@@ -3,32 +3,9 @@
 //const prisma = new PrismaClient()  HELA TIDEN GÖMD
 //import { PrismaClient, recepie } from "@prisma/client"
 
-import prisma from "../../lib/prismasql"
-
-import type { NextApiRequest, NextApiResponse } from "next"
+import prisma from "../../libs/prismadb"
 /*
-interface Data {}
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  const { name, ingredients, description, pic } = req.body
-
-  try {
-    await prisma.recepie.create({
-      data: {
-        name,
-        ingredients,
-        description,
-        pic,
-      },
-    })
-    res.status(200).json({ message: "Recepie created" })
-  } catch (error) {
-    console.log(error)
-  }
-}*/
+import type { NextApiRequest, NextApiResponse } from "next"
 
 export default async function handler(
   req: NextApiRequest,
@@ -48,4 +25,4 @@ export default async function handler(
     console.log(error)
     return res.status(400).end()
   }
-}
+}*/
