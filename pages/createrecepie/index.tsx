@@ -7,6 +7,7 @@ type Recepie = {
   ingredients: string
   intructions: string
   authorId: string
+  image: string
 }
 
 const Index: NextPage = ({}) => {
@@ -15,6 +16,7 @@ const Index: NextPage = ({}) => {
     ingredients: "",
     intructions: "",
     authorId: "",
+    image: "",
   })
 
   const onSubmit = async (e: SyntheticEvent) => {
@@ -65,6 +67,14 @@ const Index: NextPage = ({}) => {
           placeholder="authorId"
           value={recepie.authorId}
           onChange={(e) => setRecepie({ ...recepie, authorId: e.target.value })}
+        />
+
+        <input
+          type="text"
+          name="recepie[image]"
+          placeholder="image"
+          value={recepie.image}
+          onChange={(e) => setRecepie({ ...recepie, image: e.target.value })}
         />
 
         <input
