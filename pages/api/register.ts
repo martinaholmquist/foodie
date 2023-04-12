@@ -12,6 +12,7 @@ export default async function handler(
     if (req.method !== "POST") {
       return res.status(405).end()
     }
+
     //Förvantad data
     const { email, password, name, username } = req.body
     //Kollar om användaren finns
