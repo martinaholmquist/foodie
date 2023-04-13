@@ -1,3 +1,5 @@
+import useCurrentLoggedInUser from "@/hooks/useCurrentUser"
+
 interface Logo {
   foodieLogo: string
   className: string

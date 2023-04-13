@@ -74,9 +74,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 export default Index
 */
 
+import useCurrentLoggedInUser from "@/hooks/useCurrentUser"
 import { NextPage } from "next"
+import Link from "next/link"
 import { useEffect, useState } from "react"
-
+import { useRouter } from "next/router"
+import { useSession } from "next-auth/react"
 interface recepieProps {
   id: string
   servings: string
@@ -89,6 +92,8 @@ interface recepieProps {
 
 const Index: NextPage<recepieProps> = ({}) => {
   const [data, setData] = useState<recepieProps[]>([])
+
+  const { data: session, status } = useSession()
 
   const recepieData = async () => {
     const res = await fetch("http://localhost:3000/api/recepies")
@@ -105,6 +110,11 @@ const Index: NextPage<recepieProps> = ({}) => {
         <div key={items.id}>
           <li>{items.title}</li>
           <li>{items.ingredients}</li>
+          <div>
+            {status == "authenticated" && (
+              <div>signed in as {session.user?.name}</div>
+            )}
+          </div>
         </div>
       ))}
     </div>

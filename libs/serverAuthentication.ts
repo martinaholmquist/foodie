@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from "next"
+import type { NextApiRequest } from "next"
 import { getSession } from "next-auth/react"
 import prismadb from "@/libs/prismadb"
 
@@ -15,6 +15,6 @@ const serverAuthentication = async (req: NextApiRequest) => {
   if (!currentLoggedInUser) {
     throw new Error("Not signed in")
   }
-  return currentLoggedInUser
+  return { currentLoggedInUser }
 }
 export default serverAuthentication
