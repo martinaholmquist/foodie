@@ -17,17 +17,24 @@ export const FormFielld = ({
 }: FormFielldProps) => {
   return (
     <>
-      <label htmlFor={htmlFor}>{label}</label>
-      <div className=" shadow-md shadow-gray-400 p-2 rounded-md">
-        <input
-          className=" bg-transparent border-b-2 border-gray-300 text-black focus:outline-none "
-          type={type}
-          name={htmlFor}
-          onChange={onChange}
-          value={value}
-          placeholder={placeholder}
-          required
-        />
+      <div className="border-black border-[1px] mx-6 rounded-xl mb-3  h-16 relative">
+        <label
+          className=" font-medium text-xs absolute top-2 left-4 "
+          htmlFor={htmlFor}
+        >
+          {label}
+        </label>
+        <div className="w-full h-full flex items-center pt-3 pl-4">
+          <input
+            className="  text-black focus:outline-none w-full font-bold text-lg font-sans"
+            type={type}
+            name={htmlFor}
+            onChange={onChange}
+            value={value}
+            placeholder={placeholder}
+            required
+          />
+        </div>
       </div>
     </>
   )

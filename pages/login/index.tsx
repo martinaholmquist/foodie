@@ -6,6 +6,7 @@ import { NextPage } from "next"
 import { SyntheticEvent, useState } from "react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/router"
+import { Logo } from "@/components/hero-components/logo"
 
 const Index: NextPage = ({}) => {
   const [action, setAction] = useState("login")
@@ -50,32 +51,37 @@ const Index: NextPage = ({}) => {
 
   return (
     <Layout>
+      <Logo
+        foodieLogo={"/Loggo_B&W.png"}
+        className=" w-24
+      "
+      />
       <div className=" h-4/5 justify-center items-center flex flex-col">
-        <button
+        {/** <button
           onClick={() => setAction(action == "login" ? "register" : "login")}
           className="absolute top-8 right-8 rounded-xl bg-primaryPink font-semibold text-black px-3 py-2 transition duration-300 ease-in-out hover:bg-black hover:text-secondaryWhite hover:-translate-y-1"
         >
           {action === "login" ? "Register" : "Log In"}
         </button>
+        */}
 
-        <h1 className=" p-5">Welcome To Foodie</h1>
         <form
-          className="justify-center items-center flex flex-col gap-5"
+          className="justify-center items-center flex flex-col gap-5 w-full pl-6 pr-6"
           onSubmit={action == "login" ? handleSubmit : submitRegistration}
         >
           <FormFielld
             htmlFor="email"
-            label="Email"
+            label="Mailadress"
             value={formData.email}
-            placeholder="Email"
+            placeholder=""
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
           />
           <FormFielld
             htmlFor="hashedPassword"
-            label="Password"
-            placeholder="Password"
+            label="Lösenord"
+            placeholder=""
             value={formData.password}
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
@@ -88,7 +94,7 @@ const Index: NextPage = ({}) => {
               <FormFielld
                 htmlFor="name"
                 label="Name"
-                placeholder="Full Name"
+                placeholder=""
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
@@ -96,7 +102,7 @@ const Index: NextPage = ({}) => {
               />
               <FormFielld
                 htmlFor="username"
-                placeholder="User Name"
+                placeholder=""
                 label="User Name"
                 value={formData.username}
                 onChange={(e) =>

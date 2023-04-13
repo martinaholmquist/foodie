@@ -2,17 +2,20 @@ import useCurrentLoggedInUser from "@/hooks/useCurrentUser"
 
 interface Logo {
   foodieLogo: string
-  className: string
+  className?: string
+  width?: number
+  height?: number
 }
-export const Logo = ({ foodieLogo, className }: Logo) => {
+export const Logo = ({ foodieLogo, className, width, height }: Logo) => {
   return (
-    <div className="flex justify-center pt-5">
+    <>
       <img
         className={className}
         src={`${foodieLogo}`}
         alt="foodie-logo"
-        width={200}
+        width={width}
+        height={height}
       />
-    </div>
+    </>
   )
 }
