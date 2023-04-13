@@ -63,6 +63,17 @@ interface recepieProps {
 }
 
 export default function Home({ recepies }: recepieProps) {
+
+  const [recepieId, setRecepieId] = useState<recepieProps>()
+  const deleteRecepie = async (id: string) => {
+
+    const res = await fetch("http://localhost:3000/api/deleteRecepie", {
+      method: 'DELETE',
+      body: id
+    })
+const deletedRecepie = await res.json()
+  }
+
   return (
     <div className="max-w-5xl mx-auto">
       <h2 className="mt-24 font-bold text-grey-700 text-3xl text-center">
@@ -97,6 +108,7 @@ export default function Home({ recepies }: recepieProps) {
               <dt className="flex justify-center">Intructions</dt>
               <dt>{items.intructions}</dt>
             </div>
+            <button onClick={deleteRecepie(items.id)}>Delete id: {items.id}</button>
           </div>
         ))}
       </div>
