@@ -64,15 +64,19 @@ interface recepieProps {
 
 export default function Home({ recepies }: recepieProps) {
 
+  /* // delete recepie
   const [recepieId, setRecepieId] = useState<recepieProps>()
-  const deleteRecepie = async (id: string) => {
+  const deleteRecepie = async (id: recepieProps) => {
+
+    setRecepieId(id)
 
     const res = await fetch("http://localhost:3000/api/deleteRecepie", {
-      method: 'DELETE',
-      body: id
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: recepieId,
     })
-const deletedRecepie = await res.json()
-  }
+  const deletedRecepie = await res.json()
+  } */
 
   return (
     <div className="max-w-5xl mx-auto">
@@ -108,7 +112,7 @@ const deletedRecepie = await res.json()
               <dt className="flex justify-center">Intructions</dt>
               <dt>{items.intructions}</dt>
             </div>
-            <button onClick={deleteRecepie(items.id)}>Delete id: {items.id}</button>
+            {/* <button onClick={deleteRecepie}>Delete id: {items.id}</button> */}
           </div>
         ))}
       </div>
