@@ -1,7 +1,3 @@
-/* TODO - 
-Skapa funktionalitet 
-Skapa post
- */
 import FirstRecepieFromView from "./firstRecepieFromView"
 import IngredienserRecepieFromView from "./ingredienserRecepieFromView"
 import KategoriView from "./kategoriView"
