@@ -7,7 +7,7 @@ const RubrikRecepieFormView = ({}) => {
     return (
       <div>
         {/* bild / exit */}
-        <div className="h-[75px] pl-3 pt-8 mt-4">
+        <div className="h-[75px] pl-5 pt-8 mt-4">
           <img src="Logo Foodie Black 1 (1).svg" alt="Foodie.logo" />
         </div>
         {/* rubrik */}
