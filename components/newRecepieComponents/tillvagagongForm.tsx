@@ -1,7 +1,11 @@
 
-interface Props {}
+interface Props {
+  placeholderProp: string
+  siffra: number 
+}
 
-const TillvagagongForm = ({}) => {
+const TillvagagongForm = ({ placeholderProp, siffra }: Props) => {
+  
   return (
     <div className="pl-20 relative">
       <div className="h-5 w-5 absolute left-10 top-3">
@@ -18,11 +22,11 @@ const TillvagagongForm = ({}) => {
           />
         </svg>
       </div>
-      <input
-        type="text"
-        placeholder="Ingrediens 3"
-        className="border rounded-md w-[326px] h-12 px-2 font-sans shadow-lg"
-      />
+      <form action="">
+        <label htmlFor="">
+          <textarea name="" id="" cols={35} rows={4} placeholder={placeholderProp + " " + siffra} className="rounded-sm shadow-lg placeholder: pt-2 pl-2"></textarea>
+        </label>
+      </form>
     </div>
   )
 }

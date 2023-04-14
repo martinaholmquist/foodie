@@ -1,14 +1,20 @@
-
 interface Props {}
 
 const KuriosaForm = ({}) => {
   return (
-    <div className="flex justify-center">
-      <input
-        type="text"
-        placeholder="Vad vill du berätta"
-        className="w-[380px] h-[131px]"
-      />
+    <div className="flex justify-center pt-[10px]">
+      <form action="">
+        <label htmlFor="">
+          <textarea
+            name=""
+            id=""
+            cols={41}
+            rows={5}
+            placeholder="Vad vill du berätta?"
+            className="rounded-sm shadow-lg placeholder: pt-2 pl-2"
+          ></textarea>
+        </label>
+      </form>
     </div>
   )
 }
