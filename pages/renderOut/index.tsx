@@ -1,6 +1,6 @@
 import { FormButton } from "@/components/form-components/form-button"
 import { FormFielld } from "@/components/form-components/form-field"
-import { Layout } from "@/components/layout"
+import { Layout } from "@/components/newRecepieComponents/weebPageLayout"
 import { NextApiRequest, NextApiResponse, NextPage } from "next"
 import prismadb from "@/libs/prismadb"
 import { GetServerSideProps } from "next"
@@ -63,7 +63,6 @@ interface recepieProps {
 }
 
 export default function Home({ recepies }: recepieProps) {
-
   /* // delete recepie
   const [recepieId, setRecepieId] = useState<recepieProps>()
   const deleteRecepie = async (id: recepieProps) => {

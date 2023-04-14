@@ -25,7 +25,7 @@ module.exports = {
     extend: {
       colors: {
         primaryPink: "#F1C6D4",
-        secondarypink: "#FAFAFA",
+        secondarypink: "#F6E5EB",
         primaryYellow: "#FFD966",
         primaryGreen: "#AEDF6F",
         secondaryWhite: "#FFFFFF",
@@ -35,7 +35,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["var(----font-publicSans)"],
-        title: ["Bodoni Moda", "sans-serif"],
+        title: ["Bodoni Moda", "serif"],
       },
     },
   },
