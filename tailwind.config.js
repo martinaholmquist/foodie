@@ -36,7 +36,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["var(----font-publicSans)"],
-        title: ["Bodoni Moda", "sans-serif"],
+        title: ["Bodoni Moda", "serif"],
       },
     },
   },

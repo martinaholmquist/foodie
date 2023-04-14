@@ -78,7 +78,7 @@ export const Hero = ({
       <div className="flex justify-center h-40 items-end pb-0 sm:h-64 md:h-60 xs:h-48">
         <Link
           className="font-semibold text-lg cursor-pointer bg-secondaryWhite px-7 py-4 rounded-3xl"
-          href={"/login"}
+          href={"/auth"}
         >
           {ctaText}
         </Link>
