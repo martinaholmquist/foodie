@@ -92,6 +92,7 @@ interface recepieProps {
 
 const Index: NextPage<recepieProps> = ({}) => {
   const [data, setData] = useState<recepieProps[]>([])
+  const { data: session, status } = useSession()
 
   const recepieData = async () => {
     const res = await fetch("http://localhost:3000/api/recepies")
@@ -104,13 +105,11 @@ const Index: NextPage<recepieProps> = ({}) => {
 
   return (
     <div>
-      {data.map((items) => (
-        <div key={items.id}>
-          <li>{items.title}</li>
-          <li>{items.ingredients}</li>
-          <div></div>
-        </div>
-      ))}
+      <div>
+        {status == "authenticated" && (
+          <div>signed in as {session.user?.name}</div>
+        )}
+      </div>
     </div>
   )
 }
