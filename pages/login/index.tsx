@@ -1,6 +1,6 @@
 import { FormButton } from "@/components/form-components/form-button"
 import { FormFielld } from "@/components/form-components/form-field"
-import { Layout } from "@/components/newRecepieComponents/weebPageLayout"
+import { Layout } from "@/components/layout"
 import { NextPage } from "next"
 import { useState } from "react"
 
