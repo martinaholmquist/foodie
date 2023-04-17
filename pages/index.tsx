@@ -110,11 +110,7 @@ const Index: NextPage<recepieProps> = ({}) => {
         <div key={items.id}>
           <li>{items.title}</li>
           <li>{items.ingredients}</li>
-          <div>
-            {status == "authenticated" && (
-              <div>signed in as {session.user?.name}</div>
-            )}
-          </div>
+          <div></div>
         </div>
       ))}
     </div>
