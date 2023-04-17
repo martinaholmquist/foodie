@@ -1,4 +1,4 @@
-import WeebPageLayout from "@/components/newRecepieComponents/weebPageLayout"
+import RecepieModule from "@/components/modals/recepieModule"
 import { NextPage } from "next"
 
 /* TODO - 
@@ -14,7 +14,7 @@ interface Props {}
 const Index: NextPage<Props> = ({}) => {
   return (
     <div>
-      <WeebPageLayout />
+      <RecepieModule />
     </div>
   )
 }
