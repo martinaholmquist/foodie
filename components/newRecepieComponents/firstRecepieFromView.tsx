@@ -33,7 +33,7 @@ const [recepie, setRecepie] = useState<Recepie>({
         onChange={(e) => setRecepie({ ...recepie, title: e.target.value })}
       />
 
-      <FirstRecepieFromPhoto />
+      <FirstRecepieFromPhoto value={""} />
       <NewRecepiePopUpTableOption
         name="Antal portioner"
         a={"2"}

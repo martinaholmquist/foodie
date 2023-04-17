@@ -21,6 +21,7 @@ type Recepie = {
 interface props {
   placeholder: string
   Number: number
+  onChange?: (...args: any) => any
 }
 
 const RecepieModule = ({}) => {
@@ -45,7 +46,10 @@ const RecepieModule = ({}) => {
         value={recepie.title}
         onChange={(e) => setRecepie({ ...recepie, title: e.target.value })}
       />
-      <FirstRecepieFromPhoto />
+      <FirstRecepieFromPhoto
+        value={recepie.image}
+        onChange={(e) => setRecepie({ ...recepie, image: e.target.value })}
+      />
       <NewRecepiePopUpTableOption
         name="Antal portioner"
         a={"2"}
