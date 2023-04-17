@@ -73,7 +73,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 export default Index
 */
-
+"use client"
 import useCurrentLoggedInUser from "@/hooks/useCurrentUser"
 import { NextPage } from "next"
 import Link from "next/link"
@@ -92,8 +92,6 @@ interface recepieProps {
 
 const Index: NextPage<recepieProps> = ({}) => {
   const [data, setData] = useState<recepieProps[]>([])
-
-  const { data: session, status } = useSession()
 
   const recepieData = async () => {
     const res = await fetch("http://localhost:3000/api/recepies")
