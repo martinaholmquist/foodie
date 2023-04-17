@@ -1,4 +1,4 @@
-/ This is your Prisma schema file,
+// This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
@@ -47,8 +47,8 @@ model Recepie {
   servings           String?
   title              String
   time               String?
-  ingredients        String
-  intructions        String
+  ingredients        String[]
+  intructions        String[]
   kuriosa            String?
   author             User @relation(fields: [authorId], references: [id])
   authorId           String     @db.ObjectId
