@@ -4,11 +4,16 @@ import Credentials from "next-auth/providers/credentials"
 import { compare } from "bcrypt"
 import { AuthOptions } from "next-auth"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import GoogleProvider from "next-auth/providers/google"
 
 export const authOptions: AuthOptions = {
   // Next Auth Inställningar för inlogg
   adapter: PrismaAdapter(prismadb),
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
     Credentials({
       id: "credentials",
       name: "credentials ",

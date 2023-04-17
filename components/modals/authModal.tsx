@@ -97,8 +97,9 @@ const AuthModal = () => {
           />
           <GoogleButton
             value={"Fortsätt med Google"}
-            type={"submit"}
+            type={"button"}
             className="rounded-md w-full h-12   text-black  font-semibold"
+            onClick={() => signIn("google")}
           />
         </div>
       </form>
