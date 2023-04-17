@@ -1,9 +1,10 @@
+import AuthModal from "@/components/modals/authModal"
 import { NextPage } from "next"
 
 interface Props {}
 
 const Index: NextPage<Props> = ({}) => {
-  return <div>Coming Soon</div>
+  return <AuthModal />
 }
 
 export default Index

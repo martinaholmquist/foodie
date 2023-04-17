@@ -1,6 +1,7 @@
 import "@/styles/globals.css"
 import type { AppProps } from "next/app"
 import { Public_Sans } from "@next/font/google"
+import { SessionProvider } from "next-auth/react"
 
 const publicSans = Public_Sans({
   subsets: ["latin"],
@@ -11,8 +12,10 @@ const publicSans = Public_Sans({
 //weight: ["300", "400", "500"],
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={publicSans.className}>
-      <Component {...pageProps} />
-    </main>
+    <SessionProvider session={pageProps.session}>
+      <main className={publicSans.className}>
+        <Component {...pageProps} />
+      </main>
+    </SessionProvider>
   )
 }
