@@ -73,7 +73,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 export default Index
 */
-
+import { signOut } from "next-auth/react"
 import useCurrentLoggedInUser from "@/hooks/useCurrentUser"
 import { NextPage } from "next"
 import Link from "next/link"
@@ -92,7 +92,7 @@ interface recepieProps {
 
 const Index: NextPage<recepieProps> = ({}) => {
   const [data, setData] = useState<recepieProps[]>([])
-
+  const router = useRouter()
   const { data: session, status } = useSession()
 
   const recepieData = async () => {
@@ -106,17 +106,9 @@ const Index: NextPage<recepieProps> = ({}) => {
 
   return (
     <div>
-      {data.map((items) => (
-        <div key={items.id}>
-          <li>{items.title}</li>
-          <li>{items.ingredients}</li>
-          <div>
-            {status == "authenticated" && (
-              <div>signed in as {session.user?.name}</div>
-            )}
-          </div>
-        </div>
-      ))}
+      <button className=" p-5 bg-white" onClick={() => signOut()}>
+        Sign Out
+      </button>
     </div>
   )
 }

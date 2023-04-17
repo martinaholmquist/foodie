@@ -47,8 +47,8 @@ model Recepie {
   servings           String?
   title              String
   time               String?
-  ingredients        String
-  intructions        String
+  ingredients        String[]
+  intructions        String[]
   kuriosa            String?
   author             User @relation(fields: [authorId], references: [id])
   authorId           String     @db.ObjectId
