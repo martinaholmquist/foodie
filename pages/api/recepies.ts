@@ -13,7 +13,7 @@ export default async function handler(
   }
 
   try {
-    const allRecepies = await prismadb.recepie.findMany()
+    const allRecepies = prismadb.recepie.findMany()
 
     return res.status(200).json(allRecepies)
   } catch (error) {
