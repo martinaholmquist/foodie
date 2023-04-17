@@ -9,44 +9,6 @@ import { useState, useEffect } from "react"
 import { PrismaClient } from "@prisma/client"
 import { table } from "console"
 
-/*
-<div className="max-w-5xl mx-auto">
-      <h2 className="mt-24 font-bold text-grey-700 text-3xl ">RECEPT</h2>
-
-      <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
-        <table>
-          <tr className="border border-grey-500 rounded-lg">
-            <th>title</th>
-            <th>ingredients</th>
-            <th>intructions</th>
-            <th>image</th>
-          </tr>
-          {recepies.map((items) => (
-            <tr
-              key={items.id}
-              className="border border-grey-500 rounded-lg p-3"
-            >
-              <td>TITLE{items.title}</td>
-              <td>ingredients{items.ingredients}</td>
-              <td>intructions{items.intructions}</td>
-              <td>
-                {items.image && (
-                  <img
-                    src={items.image}
-                    alt=""
-                    width={250}
-                    height={100}
-                    className="object-cover rounded-lg border border-grey-500"
-                  />
-                )}
-              </td>
-            </tr>
-          ))}
-        </table>
-      </div>
-    </div>
-    */
-
 interface recepieProps {
   recepies: [
     {
