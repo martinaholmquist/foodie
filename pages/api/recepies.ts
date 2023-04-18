@@ -17,7 +17,6 @@ export default async function handler(
 
     return res.status(200).json(allRecepies)
   } catch (error) {
-    log(error)
     return res.status(400).end()
   }
 }
