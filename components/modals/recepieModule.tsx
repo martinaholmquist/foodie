@@ -37,7 +37,7 @@ const RecepieModule = ({}) => {
    image: "",
  })
   
- /*  const onSubmit = async (e: SyntheticEvent) => {
+  const onSubmit = async (e: SyntheticEvent) => {
     const data = await fetch("http://localhost:3000/api/newRecepie", {
       method: "POST",
       body: JSON.stringify(recepie),
@@ -45,11 +45,11 @@ const RecepieModule = ({}) => {
     })
     const res = await data.json()
     e.preventDefault()
-  } */
+  }
 
   return (
     <>
-       {/* <form action=""   className="space-y-4">  */}
+      <form action="" className="space-y-4">
         {/* autherID hidden */}
         <FirstRecepieFrom
           placeholderProp={""}
@@ -114,8 +114,9 @@ const RecepieModule = ({}) => {
         <h2 className=" px-5 font-title font-bold text-2xl">Kategori</h2>
         <AddfieldForm placeholderProp="Lägg till taggar" />
 
-        {/* <input type="submit"/> */}
-     {/*  </form> */}
+        {/* Publicing button */}
+        <input type="submit" />
+      </form>
     </>
   )
 }
