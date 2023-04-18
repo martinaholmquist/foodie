@@ -106,9 +106,13 @@ const Index: NextPage<recepieProps> = ({}) => {
 
   return (
     <div>
-      <button className=" p-5 bg-white" onClick={() => signOut()}>
+      <button
+        className=" p-5 bg-white"
+        onClick={() => signOut({ callbackUrl: "/auth" })}
+      >
         Sign Out
       </button>
+      <h1>{session?.user?.email}</h1>
     </div>
   )
 }
