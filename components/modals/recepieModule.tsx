@@ -49,7 +49,7 @@ const RecepieModule = ({}) => {
 
   return (
     <>
-       <form action=""   className="space-y-4"> 
+       {/* <form action=""   className="space-y-4">  */}
         {/* autherID hidden */}
         <FirstRecepieFrom
           placeholderProp={""}
@@ -115,7 +115,7 @@ const RecepieModule = ({}) => {
         <AddfieldForm placeholderProp="Lägg till taggar" />
 
         {/* <input type="submit"/> */}
-      </form>
+     {/*  </form> */}
     </>
   )
 }
