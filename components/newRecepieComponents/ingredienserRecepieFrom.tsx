@@ -1,13 +1,11 @@
 interface Props {
   placeholderProp: string
   siffra: number
+  value: []
+  onChange?: (...args: any) => any
 }
 
-export const IngredienserRecepieFrom = ({ placeholderProp, siffra }: Props) => {
-
-  function hide() {
-  
-}
+export const IngredienserRecepieFrom = ({ placeholderProp, siffra, value, onChange }: Props) => {
 
   return (
     <div className="pl-20 relative">
@@ -30,6 +28,8 @@ export const IngredienserRecepieFrom = ({ placeholderProp, siffra }: Props) => {
       <input
         type="text"
         placeholder={placeholderProp + " " + siffra}
+        value={value}
+        onChange={onChange}
         className="border rounded-md w-[326px] h-12 px-2 font-sans shadow-lg"
       />
     </div>

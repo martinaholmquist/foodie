@@ -8,6 +8,12 @@ import TillvagagongForm from "../newRecepieComponents/tillvagagongForm"
 import KuriosaForm from "../newRecepieComponents/kuriosaForm"
 import NewRecepieShareButton from "../newRecepieComponents/newRecepieShareButton"
 import { SyntheticEvent, useState } from "react"
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
+
+
+/* TODO-
+ingrediens och instruktions varje tabel egen arrayindex nu har alla samma
+*/
 
 type Recepie = {
   title: string
@@ -26,34 +32,33 @@ interface props {
 }
 
 const RecepieModule = ({}) => {
- 
- const [recepie, setRecepie] = useState<Recepie>({
-   title: "",
-   time: "",
-   servings: "",
-   ingredients: [],
-   intructions: [],
-   authorId: "",
-   image: "",
- })
-  
- /*  const onSubmit = async (e: SyntheticEvent) => {
-    const data = await fetch("http://localhost:3000/api/newRecepie", {
+  const [recepie, setRecepie] = useState<Recepie>({
+    title: "",
+    time: "",
+    servings: "",
+    ingredients: [],
+    intructions: [],
+    authorId: "643003e89aa23529f72677a7",
+    image: "",
+  })
+
+  const onSubmit = async (e: SyntheticEvent) => {
+    const data = await fetch("http://localhost:3000/api/createrecepie", {
       method: "POST",
       body: JSON.stringify(recepie),
       headers: { "Content-Type": "application/json" },
     })
     const res = await data.json()
     e.preventDefault()
-  } */
+  }
 
   return (
-    <>
-       {/* <form action=""   className="space-y-4">  */}
+    <div className="flex flex-col justify-center">
+      <form action="" onSubmit={onSubmit} className="space-y-4">
         {/* autherID hidden */}
         <FirstRecepieFrom
           placeholderProp={""}
-          value={"643003e89aa23529f72677a7"}
+          value={recepie.authorId}
           onChange={(e) => setRecepie({ ...recepie, authorId: e.target.value })}
         />
 
@@ -92,18 +97,60 @@ const RecepieModule = ({}) => {
         />
         {/* IngredienserFrom */}
         <h2 className=" px-5 font-title font-bold text-2xl">Ingredienser</h2>
-        <IngredienserRecepieFrom placeholderProp={"Ingrediens"} siffra={1} />
-        <IngredienserRecepieFrom placeholderProp={"Ingrediens"} siffra={2} />
-        <IngredienserRecepieFrom placeholderProp={"Ingrediens"} siffra={3} />
+        <IngredienserRecepieFrom
+          placeholderProp={"Ingrediens"}
+          siffra={1}
+          value={recepie.ingredients}
+          onChange={(e) =>
+            setRecepie({ ...recepie, ingredients: e.target.value })
+          }
+        />
+        <IngredienserRecepieFrom
+          placeholderProp={"Ingrediens"}
+          siffra={2}
+          value={recepie.ingredients}
+          onChange={(e) =>
+            setRecepie({ ...recepie, ingredients: e.target.value })
+          }
+        />
+        <IngredienserRecepieFrom
+          placeholderProp={"Ingrediens"}
+          siffra={3}
+          value={recepie.ingredients}
+          onChange={(e) =>
+            setRecepie({ ...recepie, ingredients: e.target.value })
+          }
+        />
         <AddfieldForm placeholderProp={""} />
 
         {/* Tillvägagångssätt */}
         <h2 className=" px-5 font-title font-bold text-2xl">
           Tillvägagångssätt
         </h2>
-        <TillvagagongForm placeholderProp={"Steg"} siffra={1} />
-        <TillvagagongForm placeholderProp={"Steg"} siffra={2} />
-        <TillvagagongForm placeholderProp={"Steg"} siffra={3} />
+        <TillvagagongForm
+          placeholderProp={"Steg"}
+          siffra={1}
+          value={recepie.intructions}
+          onChange={(e) =>
+            setRecepie({ ...recepie, intructions: e.target.value })
+          }
+        />
+        <TillvagagongForm
+          placeholderProp={"Steg"}
+          siffra={2}
+          value={recepie.intructions}
+          onChange={(e) =>
+            setRecepie({ ...recepie, intructions: e.target.value })
+          }
+        />
+        <TillvagagongForm
+          placeholderProp={"Steg"}
+          siffra={3}
+          value={recepie.intructions}
+          onChange={(e) =>
+            setRecepie({ ...recepie, intructions: e.target.value })
+          }
+        />
         <AddfieldForm placeholderProp={"Lägg till steg"} />
 
         {/* Kuriosa */}
@@ -114,9 +161,9 @@ const RecepieModule = ({}) => {
         <h2 className=" px-5 font-title font-bold text-2xl">Kategori</h2>
         <AddfieldForm placeholderProp="Lägg till taggar" />
 
-        {/* <input type="submit"/> */}
-     {/*  </form> */}
-    </>
+        <input type="submit" name="Post" />
+      </form>
+    </div>
   )
 }
 
