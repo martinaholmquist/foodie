@@ -1,9 +1,9 @@
 interface Props {
-  placeholder: string
-  Number: number
+  placeholderProp: string
+  siffra: number
 }
 
-export const IngredienserRecepieFrom = ({ placeholder, Number }: Props) => {
+export const IngredienserRecepieFrom = ({ placeholderProp, siffra }: Props) => {
 
   function hide() {
   
@@ -29,7 +29,7 @@ export const IngredienserRecepieFrom = ({ placeholder, Number }: Props) => {
       </div>
       <input
         type="text"
-        placeholder={placeholder + " " + Number}
+        placeholder={placeholderProp + " " + siffra}
         className="border rounded-md w-[326px] h-12 px-2 font-sans shadow-lg"
       />
     </div>
