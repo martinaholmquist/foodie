@@ -1,4 +1,4 @@
-import RecepieModule from "@/components/modals/recepieModule"
+import RecepieModule from "@/components/modals/publishRecepie"
 import { NextPage } from "next"
 
 /* TODO - 
@@ -12,11 +12,7 @@ justera om så knapp alltid syns
 interface Props {}
 
 const Index: NextPage<Props> = ({}) => {
-  return (
-    <div>
-      <RecepieModule />
-    </div>
-  )
+  return <RecepieModule />
 }
 
 export default Index
