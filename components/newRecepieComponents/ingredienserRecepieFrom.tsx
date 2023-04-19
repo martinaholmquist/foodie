@@ -1,13 +1,24 @@
+import { useState } from "react"
+
 interface Props {
   placeholderProp: string
   siffra: number
+  value: []
+  onChange?: (...args: any) => any
 }
 
-export const IngredienserRecepieFrom = ({ placeholderProp, siffra }: Props) => {
+export const IngredienserRecepieFrom = ({ placeholderProp, siffra, value, onChange }: Props) => {
 
-  function hide() {
+  /*  const [ingrediens, setIngrediens] = useState(['']) */
   
-}
+/*   const [inputFields, setInputFields] = useState([{ Ingredient: ""}]) */
+  /* const handleFormChange = (index, event) => {
+    const data = { ...inputFields }
+    data[index], [event.target.name] = event.target.value
+    setInputFields(data)
+  } */
+ 
+  
 
   return (
     <div className="pl-20 relative">
@@ -30,6 +41,8 @@ export const IngredienserRecepieFrom = ({ placeholderProp, siffra }: Props) => {
       <input
         type="text"
         placeholder={placeholderProp + " " + siffra}
+        value={value}
+        onChange={onChange}
         className="border rounded-md w-[326px] h-12 px-2 font-sans shadow-lg"
       />
     </div>
@@ -37,3 +50,47 @@ export const IngredienserRecepieFrom = ({ placeholderProp, siffra }: Props) => {
 }
 
 export default IngredienserRecepieFrom
+
+{
+/*
+  ingrediens
+        <button className="bg-white"
+          onClick={() => {
+            setIngrediens([...ingrediens, ""])
+          }}>
+          ADDING ingrediens
+        </button>
+        {ingrediens.map((ingredient, index) => {
+          return (
+            <div className="flex">
+              <input type="text" value={ingredient} />
+              <button
+                onClick={() => {
+                  const ingrediensArray = ingrediens.filter((i, j) => {
+                    return index !== j
+                  })
+                  console.log(ingrediensArray)
+                  setIngrediens(ingrediensArray)
+                }}
+              ></button>
+            </div>
+          )
+        })} 
+  
+   <div>
+      {inputFields.map((inputIngrediens, index) => {
+        return (
+          <div key={index}>
+            <input
+              type="text"
+              placeholder="ingrediens"
+              value={inputIngrediens.Ingredient}
+             onChange={(event) => handleFormChange(index, event)} 
+            />
+          </div>
+        )
+      })}
+    </div>
+  
+  */
+}
