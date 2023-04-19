@@ -73,13 +73,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
 export default Index
 */
-"use client"
+
 import useCurrentLoggedInUser from "@/hooks/useCurrentUser"
 import { NextPage } from "next"
-import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { useSession } from "next-auth/react"
+import { Layout } from "@/components/layout"
+
 interface recepieProps {
   id: string
   servings: string
@@ -92,6 +93,7 @@ interface recepieProps {
 
 const Index: NextPage<recepieProps> = ({}) => {
   const [data, setData] = useState<recepieProps[]>([])
+
   const { data: session, status } = useSession()
 
   const recepieData = async () => {
@@ -105,13 +107,33 @@ const Index: NextPage<recepieProps> = ({}) => {
 
   return (
     <div>
-      <div>
-        {status == "authenticated" && (
-          <div>signed in as {session.user?.name}</div>
-        )}
-      </div>
+      {data.map((items) => (
+        <div key={items.id}>
+          <li>{items.title}</li>
+          <li>{items.ingredients}</li>
+          <div>
+            {status == "authenticated" && (
+              <div>signed in as {session.user?.name}</div>
+            )}
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
 
 export default Index
+
+/*
+  <div>
+      <button
+        className=" p-5 bg-white"
+        onClick={() => signOut({ callbackUrl: "/auth" })}
+      >
+        Sign Out
+      </button>
+      <h1>{session?.user?.email}</h1>
+    </div>
+    
+
+*/
