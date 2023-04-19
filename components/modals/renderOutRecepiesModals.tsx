@@ -15,6 +15,14 @@ interface recepieProps {
   image: string
 }
 
+/*     {status == "authenticated" && (
+                  <div className="font-sans text-1xl">
+                    <div className=" h-4 w-4 bg-red-800 rounded-full">
+                      Receptägare {session.user?.name}
+                    </div>
+                  </div>
+                )}*/
+
 const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   const [data, setData] = useState<recepieProps[]>([])
 
@@ -50,14 +58,15 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
 
             <div className="rounded-lg p-2">
               <p className="font-title font-bold text-2xl">{items.title}</p>
-              <div>
-                {status == "authenticated" && (
-                  <div className="font-sans text-1xl">
-                    Receptägare {session.user?.name}
-                  </div>
-                )}
+              <div className="flex  items-center">
+                <div className="h-4 w-4 bg-red-800 rounded-full"></div>
+                <p className="pl-4">receptägare</p>
               </div>
-              <p className="font-sans text-1xl"> Tid {items.time}</p>
+
+              <div>
+                <img src="/klocka.png" alt="klocka" />
+                <p className="font-sans text-1xl"> Tid {items.time}</p>
+              </div>
             </div>
           </div>
         ))}
