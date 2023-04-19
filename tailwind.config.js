@@ -28,6 +28,7 @@ module.exports = {
       colors: {
         primaryPink: "#F1C6D4",
         secondarypink: "#F6E5EB",
+        anotherpink: "#F5F5F5",
         primaryYellow: "#FFD966",
         primaryGreen: "#AEDF6F",
         secondaryWhite: "#FFFFFF",

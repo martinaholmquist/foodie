@@ -8,14 +8,24 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   if (req.method !== "GET") {
-    return res.status(404).end
+    return res.status(404).end()
   }
 
   try {
-    const allRecepies = await prismadb.recepie.findMany()
-
+    const allRecepies = await prismadb.user.findMany({
+      include: {
+        recepies: {
+          select: {
+            title: true,
+            image: true,
+          },
+        },
+      },
+    })
+    console.log(allRecepies)
     return res.status(200).json(allRecepies)
   } catch (error) {
+    console.error(error)
     return res.status(400).end()
   }
 }
