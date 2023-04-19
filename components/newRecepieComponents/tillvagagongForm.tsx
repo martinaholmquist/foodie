@@ -24,7 +24,7 @@ const TillvagagongForm = ({ placeholderProp, siffra }: Props) => {
           </svg>
         </button>
       </div>
-      <form action="">
+      
         <label htmlFor="">
           <textarea
             name=""
@@ -35,7 +35,7 @@ const TillvagagongForm = ({ placeholderProp, siffra }: Props) => {
             className="rounded-sm shadow-lg placeholder: pt-2 pl-2"
           ></textarea>
         </label>
-      </form>
+      
     </div>
   )
 }

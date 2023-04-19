@@ -3,8 +3,8 @@ interface Props {}
 const NewRecepieShareButton = ({}) => {
     return (
       <div className="fixed z-50">
-        <div className="flex absolute left-80 top-[615px] rounded-full pt-1">
-          <button className="">
+        <div className="flex absolute left-80 pt-[580px] rounded-full">
+          <button type="submit" className="">
             <svg
               width="88"
               height="88"
