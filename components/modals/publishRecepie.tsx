@@ -26,17 +26,16 @@ interface props {
 }
 
 const RecepieModule = ({}) => {
- 
- const [recepie, setRecepie] = useState<Recepie>({
-   title: "",
-   time: "",
-   servings: "",
-   ingredients: [],
-   intructions: [],
-   authorId: "",
-   image: "",
- })
-  
+  const [recepie, setRecepie] = useState<Recepie>({
+    title: "",
+    time: "",
+    servings: "",
+    ingredients: [],
+    intructions: [],
+    authorId: "",
+    image: "",
+  })
+
   const onSubmit = async (e: SyntheticEvent) => {
     const data = await fetch("http://localhost:3000/api/newRecepie", {
       method: "POST",
@@ -61,7 +60,7 @@ const RecepieModule = ({}) => {
         {/* <NewRecepieShareButton /> */}
 
         {/* Rubrik */}
-        <RubrikRecepieFormView />
+
         {/* Första formuläradelen */}
         <FirstRecepieFrom
           placeholderProp={"Namn på maträtt"}

@@ -1,139 +1,25 @@
-/*interface recepieProps {
-  recepies: [
-    {
-      id: string
-      servings: string
-      title: string
-      time: string
-      ingredients: string
-      intructions: string
-      kuriosa: string
-    }
-  ]
-}
-
-export default function Home({ recepies }: recepieProps) {
-  return (
-    <div>
-      {recepies.map((items) => (
-        <div key={items.id}>
-          <li>{items.title}</li>
-          <li>{items.ingredients}</li>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/recepies")
-  const recepies = await res.json()
-  return {
-    props: { recepies },
-  }
-}*/
-
-/*
-import { NextPage, GetServerSideProps } from "next"
-
-interface recepieProps {
-  recepies: [
-    {
-      id: string
-      servings: string
-      title: string
-      time: string
-      ingredients: string
-      intructions: string
-      kuriosa: string
-    }
-  ]
-}
-
-const Index: NextPage<recepieProps> = ({ recepies }) => {
-  return (
-    <div>
-      {recepies.map((items) => (
-        <div key={items.id}>
-          <li>{items.title}</li>
-          <li>{items.ingredients}</li>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const res = await fetch("http://localhost:3000/api/recepies")
-  const recepies = await res.json()
-  return {
-    props: { recepies },
-  }
-}
-
-export default Index
-*/
-
-import useCurrentLoggedInUser from "@/hooks/useCurrentUser"
 import { NextPage } from "next"
-import { useEffect, useState } from "react"
-import { useRouter } from "next/router"
-import { useSession } from "next-auth/react"
-import { Layout } from "@/components/layout"
+import { Hero } from "@/components/hero-components/hero"
+import { Logo } from "@/components/hero-components/logo"
 
-interface recepieProps {
-  id: string
-  servings: string
-  title: string
-  time: string
-  ingredients: string
-  intructions: string
-  kuriosa: string
-}
+interface Props {}
 
-const Index: NextPage<recepieProps> = ({}) => {
-  const [data, setData] = useState<recepieProps[]>([])
-
-  const { data: session, status } = useSession()
-
-  const recepieData = async () => {
-    const res = await fetch("http://localhost:3000/api/recepies")
-    const recepies = await res.json()
-    setData(recepies)
-  }
-  useEffect(() => {
-    recepieData()
-  }, [])
-
+const Index: NextPage<Props> = ({}) => {
   return (
-    <div>
-      {data.map((items) => (
-        <div key={items.id}>
-          <li>{items.title}</li>
-          <li>{items.ingredients}</li>
-          <div>
-            {status == "authenticated" && (
-              <div>signed in as {session.user?.name}</div>
-            )}
-          </div>
-        </div>
-      ))}
+    <div className="">
+      <Logo foodieLogo={"/Loggo_B&W.png"} className={"w-52 md:w-80"} />
+      <Hero
+        heroTitle="Dela, smaka och utvecklas!"
+        heroText="Foodie skapades av ett gäng matälskare
+          som ville dela med sig av egna recept och 
+          kunna njuta av andras fräcka tips!"
+        bulletOne="Publicera recept"
+        bulletTwo="Få uppskattning"
+        bulletThree="Nya smaker "
+        ctaText="Kom igång"
+      />
     </div>
   )
 }
 
 export default Index
-
-/*
-  <div>
-      <button
-        className=" p-5 bg-white"
-        onClick={() => signOut({ callbackUrl: "/auth" })}
-      >
-        Sign Out
-      </button>
-      <h1>{session?.user?.email}</h1>
-    </div>
-    
-
-*/

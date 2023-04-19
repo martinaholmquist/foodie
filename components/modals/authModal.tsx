@@ -41,7 +41,7 @@ const AuthModal = () => {
         redirect: false,
       })
       if (result?.ok) {
-        router.push("/")
+        router.push("/home")
       }
     } catch (error) {
       console.log(error)
