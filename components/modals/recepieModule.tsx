@@ -56,12 +56,15 @@ const RecepieModule = ({}) => {
     <div className="flex flex-col justify-center">
       <form action="" onSubmit={onSubmit} className="space-y-4">
         {/* autherID hidden */}
-        <FirstRecepieFrom
-          placeholderProp={""}
-          value={recepie.authorId}
-          onChange={(e) => setRecepie({ ...recepie, authorId: e.target.value })}
-        />
-
+        <div hidden>
+          <FirstRecepieFrom
+            placeholderProp={""}
+            value={recepie.authorId}
+            onChange={(e) =>
+              setRecepie({ ...recepie, authorId: e.target.value })
+            }
+          />
+        </div>
         {/* Publicing button */}
         {/* <NewRecepieShareButton /> */}
 
