@@ -124,8 +124,8 @@ const RecepieModule = ({}) => {
             setRecepie({ ...recepie, ingredients: e.target.value })
           }
         />
-        <AddfieldForm placeholderProp={""} />
-
+        {/* <AddfieldForm placeholderProp={""} />
+ */}
         {/* Tillvägagångssätt */}
         <h2 className=" px-5 font-title font-bold text-2xl">
           Tillvägagångssätt
