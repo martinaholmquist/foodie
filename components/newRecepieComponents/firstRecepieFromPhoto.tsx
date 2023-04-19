@@ -1,6 +1,9 @@
-interface Props {}
+interface Props {
+  value: string
+  onChange?: (...args: any) => any
+}
 
-const FirstRecepieFromPhoto = ({}) => {
+const FirstRecepieFromPhoto = ({value, onChange}: Props) => {
     return (
       <div className="flex items-center justify-center">
         <label
@@ -11,7 +14,7 @@ const FirstRecepieFromPhoto = ({}) => {
             <img src="image 60.svg" alt="foto link" />
             <p className="text-xl">Lägg till en bild</p>
           </div>
-          <input id="dropzone-file" type="file" className="hidden" />
+          <input id="dropzone-file" type="file" className="hidden" value={value} onChange={onChange}/>
         </label>
       </div>
     )

@@ -11,20 +11,21 @@ interface Props {}
 const weebPageLayout = ({}) => {
   return (
     <div className="h-screen">
+      <form>
+        <NewRecepieShareButton />
 
-      <NewRecepieShareButton/>
+        <RubrikRecepieFormView />
 
-      <RubrikRecepieFormView />
+        <FirstRecepieFromView />
 
-      <FirstRecepieFromView />
+        <IngredienserRecepieFromView />
 
-      <IngredienserRecepieFromView />
+        <TillvagagongFormView />
 
-      <TillvagagongFormView />
+        <KuriosaFormView />
 
-      <KuriosaFormView />
-
-      <KategoriView />
+        <KategoriView />
+      </form>
     </div>
   )
 }
