@@ -76,10 +76,11 @@ export default Index
 import { signOut } from "next-auth/react"
 import useCurrentLoggedInUser from "@/hooks/useCurrentUser"
 import { NextPage } from "next"
-import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { useSession } from "next-auth/react"
+import { Layout } from "@/components/layout"
+
 interface recepieProps {
   id: string
   servings: string
@@ -91,21 +92,13 @@ interface recepieProps {
 }
 
 const Index: NextPage<recepieProps> = ({}) => {
-  const [data, setData] = useState<recepieProps[]>([])
-  const router = useRouter()
-  const { data: session, status } = useSession()
+  return <div>Home Page</div>
+}
 
-  const recepieData = async () => {
-    const res = await fetch("http://localhost:3000/api/recepies")
-    const recepies = await res.json()
-    setData(recepies)
-  }
-  useEffect(() => {
-    recepieData()
-  }, [])
+export default Index
 
-  return (
-    <div>
+/*
+  <div>
       <button
         className=" p-5 bg-white"
         onClick={() => signOut({ callbackUrl: "/auth" })}
@@ -114,7 +107,6 @@ const Index: NextPage<recepieProps> = ({}) => {
       </button>
       <h1>{session?.user?.email}</h1>
     </div>
-  )
-}
+    
 
-export default Index
+*/
