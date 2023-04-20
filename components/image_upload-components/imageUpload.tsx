@@ -19,15 +19,15 @@ export const ImageUpload = () => {
       .then((url) => setURL(url))
   }
   return (
-    <div>
+    <>
       <input
+        id="dropzone-file"
         type="file"
+        className="hidden"
         onChange={(e: any) => {
           setImageUpload(e.target.files[0])
         }}
       />
-      <div>{url}</div>
-      <button onClick={uploadImage}>Upload Image</button>
-    </div>
+    </>
   )
 }

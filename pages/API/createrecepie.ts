@@ -1,6 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import prismadb from "../../libs/prismadb"
 
+interface Recepie {
+  authorId: string
+  title: string
+  servings: string
+  time: string
+  image: string
+  ingredients: string[]
+  intructions: string[]
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -10,10 +20,17 @@ export default async function handler(
   }
 
   try {
-    const { title, servings, time, ingredients, intructions, authorId, image } =
-      req.body
+    const {
+      title,
+      servings,
+      time,
+      ingredients,
+      intructions,
+      authorId,
+      image,
+    }: Recepie = req.body
 
-    const user = await prismadb.recepie.create({
+    const newRecepie = await prismadb.recepie.create({
       data: {
         authorId,
         title,
@@ -25,7 +42,7 @@ export default async function handler(
       },
     })
 
-    return res.status(200).json(user)
+    return res.status(200).json(newRecepie)
   } catch (error) {
     console.log(error)
     return res.status(400).end()

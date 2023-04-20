@@ -2,23 +2,23 @@ import { Layout } from "@/components/layout"
 import RenderOutRecepiesModals from "@/components/modals/homeModal"
 import RecepieModule from "@/components/modals/publishRecepie"
 import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecepieFormView"
+import useCurrentUser from "@/hooks/useCurrentUser"
 import { NextPage } from "next"
 import { useSession } from "next-auth/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface Props {}
 
 const Index: NextPage<Props> = ({}) => {
   const [action, setAction] = useState("explore")
-  const [background, setBackground] = useState("")
+  const [background, setBackground] = useState("bg-white")
   const { data: session, status } = useSession()
 
-  const openRecepieModal = () => {
+  const handleExploreClick = () => {
     setAction("explore")
     setBackground("bg-white")
   }
-
-  const openPublishModal = () => {
+  const handlePublishClick = () => {
     setAction("publish")
     setBackground("bg-primaryPink")
   }
@@ -26,12 +26,12 @@ const Index: NextPage<Props> = ({}) => {
   return (
     <>
       <Layout bg={background}>
-        {status == "authenticated" && (
-          <div>signed in as {session.user?.email}</div>
-        )}
-
+        <div>Inloggad som {session?.user?.email}</div>
         <RubrikRecepieFormView
-          onClick={action == "explore" ? openPublishModal : openRecepieModal}
+          onExploreClick={handleExploreClick}
+          onPublishClick={handlePublishClick}
+          exploreDisabled={action === "explore"}
+          publishDisabled={action === "publish"}
         />
         {action == "explore" ? <RenderOutRecepiesModals /> : <RecepieModule />}
       </Layout>
