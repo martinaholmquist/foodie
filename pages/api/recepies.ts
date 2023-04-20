@@ -12,8 +12,8 @@ export default async function handler(
   }
 
   try {
-    const allRecepies = await prismadb.recepie.findMany()
-
+    const allRecepies = await prismadb.recepie.findMany({})
+    console.log(allRecepies)
     return res.status(200).json(allRecepies)
   } catch (error) {
     return res.status(400).end()

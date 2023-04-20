@@ -2,20 +2,20 @@ import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecep
 import { NextPage } from "next"
 import { useState, useEffect } from "react"
 
-interface recepieProps {
+interface userProps {
   id: string
   name: string
   profileImage: string
-  recepies: [{ title: string; image: string }]
+  recepies: [{ title: string; image: string; time: string }]
 }
 
-const index: NextPage<recepieProps> = ({}) => {
-  const [data, setData] = useState<recepieProps[]>([])
+const index: NextPage<userProps> = ({}) => {
+  const [data, setData] = useState<userProps[]>([])
 
   const recepieData = async () => {
     const res = await fetch("http://localhost:3000/api/nestedFetch")
-    const recepies = await res.json()
-    setData(recepies)
+    const recepiesUsers = await res.json()
+    setData(recepiesUsers)
   }
   useEffect(() => {
     recepieData()
@@ -27,8 +27,32 @@ const index: NextPage<recepieProps> = ({}) => {
         {" "}
         <RubrikRecepieFormView />
       </div>{" "}
-      <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4 ">
-        {data.map((items) => (
+      {data.map((item) => (
+        <div>
+          {item.recepies.map((items) => (
+            <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4 ">
+              <img src={items.image} alt="image" />
+              <p className="font-title font-bold text-2xl">
+                {items.title} {item.name} {items.time}
+              </p>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export default index
+
+/*
+ <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4 ">
+        </div>
+
+
+
+
+  {data.map((items) => (         
           <div key={items.id} className=" bg-primaryPink rounded-lg">
             {items.profileImage && (
               <img
@@ -54,10 +78,4 @@ const index: NextPage<recepieProps> = ({}) => {
               </p>
             </div>
           </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-export default index
+        ))}*/

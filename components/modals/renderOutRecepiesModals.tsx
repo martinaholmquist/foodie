@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react"
 import RubrikRecepieFormView from "../newRecepieComponents/rubrikRecepieFormView"
-import RenderAllRecepies from "../rendercomponents/renderAllRecepies"
+
 import { NextPage } from "next"
 import { useSession } from "next-auth/react"
 
 interface recepieProps {
-  id: string
-  servings: string
-  title: string
-  time: string
-  ingredients: string
-  intructions: string
-  kuriosa: string
-  image: string
+  id?: string
+  servings?: string
+  title?: string
+  time?: string
+  ingredients?: string
+  intructions?: string
+  kuriosa?: string
+  image?: string
+  author?: {
+    name: string
+  }
 }
 
 /*     {status == "authenticated" && (
@@ -60,12 +63,13 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
               <p className="font-title font-bold text-2xl">{items.title}</p>
               <div className="flex  items-center">
                 <div className="h-4 w-4 bg-red-800 rounded-full"></div>
-                <p className="pl-4">receptägare</p>
+                <p className="pl-4 font-sans text-1xl">Here I want user.name</p>
               </div>
-
-              <div>
-                <img src="/klocka.png" alt="klocka" />
-                <p className="font-sans text-1xl"> Tid {items.time}</p>
+              <div className="flex  items-center">
+                <div>
+                  <img src="/klocka.png" alt="klocka" />
+                </div>
+                <p className="pl-4 font-sans text-1xl"> {items.time}</p>
               </div>
             </div>
           </div>
