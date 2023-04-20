@@ -3,27 +3,31 @@ import { useState } from "react"
 interface Props {
   placeholderProp: string
   siffra: number
-  value: []
+  value?: string[]
   onChange?: (...args: any) => any
+  onClick?: (...args: any) => any
 }
 
-export const IngredienserRecepieFrom = ({ placeholderProp, siffra, value, onChange }: Props) => {
-
+export const IngredienserRecepieFrom = ({
+  placeholderProp,
+  siffra,
+  value,
+  onChange,
+  onClick,
+}: Props) => {
   /*  const [ingrediens, setIngrediens] = useState(['']) */
-  
-/*   const [inputFields, setInputFields] = useState([{ Ingredient: ""}]) */
+
+  /*   const [inputFields, setInputFields] = useState([{ Ingredient: ""}]) */
   /* const handleFormChange = (index, event) => {
     const data = { ...inputFields }
     data[index], [event.target.name] = event.target.value
     setInputFields(data)
   } */
- 
-  
 
   return (
-    <div className="pl-20 relative">
-      <div className="h-5 w-5 absolute left-10 top-3">
-        <button>
+    <div className="flex w-full items-center pt-4">
+      <div className=" pl-2 pr-3">
+        <button onClick={onClick}>
           <svg
             width="24"
             height="24"
@@ -52,7 +56,7 @@ export const IngredienserRecepieFrom = ({ placeholderProp, siffra, value, onChan
 export default IngredienserRecepieFrom
 
 {
-/*
+  /*
   ingrediens
         <button className="bg-white"
           onClick={() => {

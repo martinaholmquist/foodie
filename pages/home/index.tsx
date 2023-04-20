@@ -10,19 +10,22 @@ interface Props {}
 
 const Index: NextPage<Props> = ({}) => {
   const [action, setAction] = useState("explore")
+  const [background, setBackground] = useState("")
   const { data: session, status } = useSession()
 
   const openRecepieModal = () => {
     setAction("explore")
+    setBackground("bg-white")
   }
 
   const openPublishModal = () => {
     setAction("publish")
+    setBackground("bg-primaryPink")
   }
 
   return (
     <>
-      <Layout>
+      <Layout bg={background}>
         {status == "authenticated" && (
           <div>signed in as {session.user?.email}</div>
         )}

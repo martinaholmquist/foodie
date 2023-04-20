@@ -7,17 +7,24 @@ interface Props {
   c: string
   d: string
   value: string
-  onChange?: (...args:any) => any
+  onChange?: (...args: any) => any
 }
 
-const NewRecepiePopUpTableOption = ({ name,a,b,c,d, value, onChange }: Props) => {
-
+const NewRecepiePopUpTableOption = ({
+  name,
+  a,
+  b,
+  c,
+  d,
+  value,
+  onChange,
+}: Props) => {
   return (
-    <div className="h-auto text-center">
+    <div className="h-auto text-center pt-4">
       <select
         name=""
         id=""
-        className="border rounded-md w-96 h-12 px-2 font-sans shadow-lg bg-white"
+        className="border rounded-md w-full h-12 px-2 font-sans shadow-lg bg-white"
         value={value}
         onChange={onChange}
       >
@@ -27,9 +34,6 @@ const NewRecepiePopUpTableOption = ({ name,a,b,c,d, value, onChange }: Props) =>
         <option value={c}>{c}</option>
         <option value={d}>{d}</option>
       </select>
-
-      {/* gör hidden */}
-      <input type="text" value={value} onChange={onChange}/>
     </div>
   )
 }

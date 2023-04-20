@@ -8,6 +8,9 @@ import TillvagagongForm from "../newRecepieComponents/tillvagagongForm"
 import KuriosaForm from "../newRecepieComponents/kuriosaForm"
 import NewRecepieShareButton from "../newRecepieComponents/newRecepieShareButton"
 import { SyntheticEvent, useState } from "react"
+import { FormButton } from "../form-components/form-button"
+import useCurrentLoggedInUser from "@/hooks/useCurrentUser"
+import axios from "axios"
 
 type Recepie = {
   title: string
@@ -19,10 +22,9 @@ type Recepie = {
   image: string
 }
 
-interface props {
-  placeholder: string
-  Number: number
-  onChange?: (...args: any) => any
+interface Input {
+  id: number
+  value: string
 }
 
 const RecepieModule = ({}) => {
@@ -32,12 +34,31 @@ const RecepieModule = ({}) => {
     servings: "",
     ingredients: [],
     intructions: [],
-    authorId: "",
+    authorId: "643003e89aa23529f72677a7",
     image: "",
   })
 
+  const [inputs, setInputs] = useState<Input[]>([{ id: 0, value: "" }])
+
+  const handleAddInput = () => {
+    const newId = inputs[inputs.length - 1].id + 1
+    setInputs([...inputs, { id: newId, value: "" }])
+  }
+
+  const handleRemoveInput = (id: number) => {
+    const updatedInputs = inputs.filter((input) => input.id !== id)
+    setInputs(updatedInputs)
+  }
+
+  const handleInputChange = (id: number, value: string) => {
+    const updatedInputs = inputs.map((input) =>
+      input.id === id ? { ...input, value } : input
+    )
+    setInputs(updatedInputs)
+  }
+
   const onSubmit = async (e: SyntheticEvent) => {
-    const data = await fetch("http://localhost:3000/api/newRecepie", {
+    const data = await fetch("http://localhost:3000/api/createrecepie", {
       method: "POST",
       body: JSON.stringify(recepie),
       headers: { "Content-Type": "application/json" },
@@ -48,29 +69,184 @@ const RecepieModule = ({}) => {
 
   return (
     <>
-      <form action="" className="space-y-4">
-        {/* autherID hidden */}
-        <FirstRecepieFrom
-          placeholderProp={""}
-          value={"643003e89aa23529f72677a7"}
-          onChange={(e) => setRecepie({ ...recepie, authorId: e.target.value })}
-        />
+      <form onSubmit={onSubmit} className="">
+        <div className=" pt-8  px-6">
+          <div>
+            <input
+              type="text"
+              placeholder="Namn på maträtt"
+              value={recepie.title}
+              className="border rounded-md w-full h-12 px-2 font-sans shadow-lg"
+              onChange={(e) =>
+                setRecepie({ ...recepie, title: e.target.value })
+              }
+            />
+          </div>
+          <div className="flex items-center justify-center pt-5">
+            <label
+              htmlFor="dropzone-file"
+              className="flex justify-center w-96 h-52 bg-secondarypink rounded-md shadow-lg"
+            >
+              <div className="flex flex-col items-center justify-center ">
+                <img src="image 60.svg" alt="foto link" />
+                <p className="text-xl">Lägg till en bild</p>
+              </div>
+              <input id="dropzone-file" type="file" className="hidden" />
+            </label>
+          </div>
 
-        {/* Publicing button */}
-        {/* <NewRecepieShareButton /> */}
+          <NewRecepiePopUpTableOption
+            name="Antal portioner"
+            a={"2"}
+            b={"4"}
+            c={"6"}
+            d={"8"}
+            value={recepie.servings}
+            onChange={(e) =>
+              setRecepie({ ...recepie, servings: e.target.value })
+            }
+          />
 
-        {/* Rubrik */}
-        <RubrikRecepieFormView />
-        {/* Första formuläradelen */}
-        <FirstRecepieFrom
-          placeholderProp={"Namn på maträtt"}
-          value={recepie.title}
-          onChange={(e) => setRecepie({ ...recepie, title: e.target.value })}
-        />
-        <FirstRecepieFromPhoto
-          value={recepie.image}
-          onChange={(e) => setRecepie({ ...recepie, image: e.target.value })}
-        />
+          <NewRecepiePopUpTableOption
+            name="Tid"
+            a={"5"}
+            b={"15"}
+            c={"45"}
+            d={"60"}
+            value={recepie.time}
+            onChange={(e) => setRecepie({ ...recepie, time: e.target.value })}
+          />
+
+          <div className=" pt-12">
+            <h2 className="  font-title font-bold text-2xl">Ingredienser</h2>
+          </div>
+
+          <IngredienserRecepieFrom
+            placeholderProp={"Ingrediens"}
+            siffra={1}
+            value={recepie.ingredients}
+            onChange={(e) =>
+              setRecepie({ ...recepie, ingredients: e.target.value })
+            }
+          />
+          <IngredienserRecepieFrom
+            placeholderProp={"Ingrediens"}
+            siffra={2}
+            value={recepie.ingredients}
+            onChange={(e) =>
+              setRecepie({ ...recepie, ingredients: e.target.value })
+            }
+          />
+          <IngredienserRecepieFrom
+            placeholderProp={"Ingrediens"}
+            siffra={3}
+            value={recepie.ingredients}
+            onChange={(e) =>
+              setRecepie({ ...recepie, ingredients: e.target.value })
+            }
+          />
+          {inputs.map((inputs) => (
+            <IngredienserRecepieFrom
+              placeholderProp={"Ingrediens"}
+              siffra={4}
+              onClick={() => handleRemoveInput(inputs.id)}
+            />
+          ))}
+
+          <AddfieldForm
+            placeholderProp={"Lägg till ingrediens"}
+            onClick={(e) => {
+              e.preventDefault
+            }}
+          />
+
+          <div className=" pt-12">
+            <h2 className="  font-title font-bold text-2xl">
+              Tillvägagångssätt
+            </h2>
+          </div>
+          <TillvagagongForm
+            placeholderProp={"Steg"}
+            siffra={1}
+            value={recepie.intructions}
+            onChange={(e) =>
+              setRecepie({ ...recepie, intructions: e.target.value })
+            }
+          />
+          <TillvagagongForm
+            placeholderProp={"Steg"}
+            siffra={2}
+            value={recepie.intructions}
+            onChange={(e) =>
+              setRecepie({ ...recepie, intructions: e.target.value })
+            }
+          />
+          <TillvagagongForm
+            placeholderProp={"Steg"}
+            siffra={3}
+            value={recepie.intructions}
+            onChange={(e) =>
+              setRecepie({ ...recepie, intructions: e.target.value })
+            }
+          />
+          <AddfieldForm placeholderProp={"Lägg till steg"} />
+
+          <div className=" pt-12">
+            <h2 className="  font-title font-bold text-2xl">Kuriosa</h2>
+          </div>
+          <div className="flex w-full items-center pt-4">
+            <textarea
+              name=""
+              id=""
+              placeholder={"Vad vill du berätta?"}
+              cols={100}
+              rows={4}
+              className=" resize-none rounded-sm px-3 pt-3"
+            ></textarea>
+          </div>
+
+          <div className=" pt-12">
+            <h2 className="  font-title font-bold text-2xl">Kategori</h2>
+          </div>
+          <AddfieldForm placeholderProp={"Lägg till taggar"} />
+
+          <FormButton
+            value={"Skicka"}
+            type={"submit"}
+            className="rounded-md  w-full h-12 bg-primaryPink  text-black  font-semibold "
+          />
+        </div>
+      </form>
+    </>
+  )
+}
+
+export default RecepieModule
+
+/*
+<form action="" className="space-y-4">
+        <div className=" text-center">
+          <input
+            type="text"
+            placeholder="Namn på maträtt"
+            value=""
+            className="border rounded-md w-96 h-12 px-2 font-sans shadow-lg"
+          />
+        </div>
+
+        <div className="flex items-center justify-center">
+          <label
+            htmlFor="dropzone-file"
+            className="flex justify-center w-96 h-52 bg-secondarypink rounded-md shadow-lg"
+          >
+            <div className="flex flex-col items-center justify-center ">
+              <img src="image 60.svg" alt="foto link" />
+              <p className="text-xl">Lägg till en bild</p>
+            </div>
+            <input id="dropzone-file" type="file" className="hidden" />
+          </label>
+        </div>
+
         <NewRecepiePopUpTableOption
           name="Antal portioner"
           a={"2"}
@@ -89,14 +265,15 @@ const RecepieModule = ({}) => {
           value={recepie.time}
           onChange={(e) => setRecepie({ ...recepie, time: e.target.value })}
         />
-        {/* IngredienserFrom */}
+
+      
         <h2 className=" px-5 font-title font-bold text-2xl">Ingredienser</h2>
         <IngredienserRecepieFrom placeholderProp={"Ingrediens"} siffra={1} />
         <IngredienserRecepieFrom placeholderProp={"Ingrediens"} siffra={2} />
         <IngredienserRecepieFrom placeholderProp={"Ingrediens"} siffra={3} />
-        <AddfieldForm placeholderProp={""} />
+        <AddfieldForm placeholderProp={"Lägg till"} />
 
-        {/* Tillvägagångssätt */}
+    
         <h2 className=" px-5 font-title font-bold text-2xl">
           Tillvägagångssätt
         </h2>
@@ -105,19 +282,45 @@ const RecepieModule = ({}) => {
         <TillvagagongForm placeholderProp={"Steg"} siffra={3} />
         <AddfieldForm placeholderProp={"Lägg till steg"} />
 
-        {/* Kuriosa */}
+      
         <h2 className=" px-5 font-title font-bold text-2xl">Kuriosa</h2>
-        <KuriosaForm />
+        <div className="flex justify-center pt-[10px]">
+          <label htmlFor="">
+            <textarea
+              name=""
+              id=""
+              cols={41}
+              rows={5}
+              placeholder="Vad vill du berätta?"
+              className="rounded-sm shadow-lg placeholder: pt-2 pl-2"
+            ></textarea>
+          </label>
+        </div>
 
-        {/* Kategori */}
+      
         <h2 className=" px-5 font-title font-bold text-2xl">Kategori</h2>
-        <AddfieldForm placeholderProp="Lägg till taggar" />
-
-        {/* Publicing button */}
+        <div className="text-center">
+          <div className="relative">
+            <div className="absolute left-11 top-[14px]">
+              <svg
+                width="18"
+                height="19"
+                viewBox="0 0 18 19"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17.88 10.64H10.12V18.84H8.36V10.64H0.6V8.88H8.36V0.679999H10.12V8.88H17.88V10.64Z"
+                  fill="black"
+                />
+              </svg>
+            </div>
+            <button className="border rounded-md w-96 h-12 px-2 font-sans shadow-lg text-center bg-white">
+              {"Lägg till taggar!"}
+            </button>
+          </div>
+        </div>
+       
         <input type="submit" />
       </form>
-    </>
-  )
-}
-
-export default RecepieModule
+    </>*/
