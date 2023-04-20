@@ -60,7 +60,7 @@ const RecepieModule = ({}) => {
         {/* <NewRecepieShareButton /> */}
 
         {/* Rubrik */}
-
+        <RubrikRecepieFormView />
         {/* Första formuläradelen */}
         <FirstRecepieFrom
           placeholderProp={"Namn på maträtt"}

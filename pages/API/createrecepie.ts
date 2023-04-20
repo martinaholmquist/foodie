@@ -10,11 +10,13 @@ export default async function handler(
   }
 
   try {
-    const { title, ingredients, intructions, authorId, image } = req.body
+    const { title, servings, time, ingredients, intructions, authorId, image } = req.body
 
     const user = await prismadb.recepie.create({
       data: {
         title,
+        servings,
+        time,
         ingredients,
         intructions,
         authorId,

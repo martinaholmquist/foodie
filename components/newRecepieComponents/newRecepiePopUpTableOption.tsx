@@ -27,6 +27,9 @@ const NewRecepiePopUpTableOption = ({ name,a,b,c,d, value, onChange }: Props) =>
         <option value={c}>{c}</option>
         <option value={d}>{d}</option>
       </select>
+
+      {/* gör hidden */}
+      <input type="text" value={value} onChange={onChange}/>
     </div>
   )
 }
