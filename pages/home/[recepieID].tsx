@@ -1,5 +1,5 @@
+import Link from "next/link"
 import { useRouter } from "next/router"
-import { type } from "os"
 import React, { useEffect, useState } from "react"
 
 type recpieData = {
@@ -22,14 +22,15 @@ const RecepieView = ({}) => {
     const recepies = await res.json()
     setData(recepies)
   }
+
   useEffect(() => {
     recepieData()
   }, [])
 
   return (
-    <div>
+    <div className="">
       <div>
-        <img src={data?.image} alt="image" />
+        <img src={data?.image} alt="image" height={400} width={400} />
       </div>
       <h1>{data?.title}</h1>
       <h1>{data?.time} min</h1>
@@ -46,6 +47,7 @@ const RecepieView = ({}) => {
           <li>{item}</li>
         ))}
       </ul>
+      <Link href={"/home"}> Back </Link>
     </div>
   )
 }
