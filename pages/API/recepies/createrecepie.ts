@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import prismadb from "../../libs/prismadb"
+import prismadb from "../../../libs/prismadb"
 
 interface Recepie {
   authorId: string

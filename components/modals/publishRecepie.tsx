@@ -5,7 +5,7 @@ import TillvagagongForm from "../newRecepieComponents/tillvagagongForm"
 import { SyntheticEvent, useState } from "react"
 import { FormButton } from "../form-components/form-button"
 import useCurrentUser from "@/hooks/useCurrentUser"
-import { ImageUpload } from "../image_upload-components/imageUpload"
+import { ImageUpload } from "./imageUpload"
 
 type Recepie = {
   title: string
@@ -95,11 +95,14 @@ const RecepieModule = ({}) => {
   }
 
   const onSubmit = async (e: SyntheticEvent) => {
-    const data = await fetch("http://localhost:3000/api/createrecepie", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json" },
-    })
+    const data = await fetch(
+      "http://localhost:3000/api/recepies/createrecepie",
+      {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-Type": "application/json" },
+      }
+    )
     const res = await data.json()
     e.preventDefault()
   }
