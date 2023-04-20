@@ -41,7 +41,7 @@ const AuthModal = () => {
         redirect: false,
       })
       if (result?.ok) {
-        router.push("/")
+        router.push("/home")
       }
     } catch (error) {
       console.log(error)
@@ -49,7 +49,7 @@ const AuthModal = () => {
   }
 
   return (
-    <Layout>
+    <Layout bg="bg-white">
       <NavBar />
       <Heading headingContent="Skapa konto eller logga in" />
       <form onSubmit={action == "login" ? handleSubmit : submitRegistration}>

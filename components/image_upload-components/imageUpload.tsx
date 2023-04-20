@@ -1,19 +1,22 @@
 import { useState } from "react"
 import { storage } from "@/libs/firebase"
-import { ref, uploadBytesResumable } from "firebase/storage"
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 
 export const ImageUpload = () => {
   const [imageUpload, setImageUpload] = useState<File>()
-
+  const [url, setURL] = useState("")
   const uploadImage = async () => {
     if (imageUpload == null) return
     const imageRef = ref(storage, `images/${imageUpload.name}`)
 
     const myUpload = uploadBytesResumable(imageRef, imageUpload, {
       contentType: "image/png",
-    }).then(() => {
-      alert("Image Uploaded")
     })
+      .then(() => {
+        alert("Image Uploaded")
+      })
+      .then(() => getDownloadURL(ref(storage, `images/${imageUpload.name}`)))
+      .then((url) => setURL(url))
   }
   return (
     <div>
@@ -23,6 +26,7 @@ export const ImageUpload = () => {
           setImageUpload(e.target.files[0])
         }}
       />
+      <div>{url}</div>
       <button onClick={uploadImage}>Upload Image</button>
     </div>
   )

@@ -1,15 +1,20 @@
-
 interface Props {
   placeholderProp: string
-  siffra: number 
+  siffra: number
+  value?: string[]
+  onChange?: (...args: any) => any
 }
 
-const TillvagagongForm = ({ placeholderProp, siffra }: Props) => {
-  
+const TillvagagongForm = ({
+  placeholderProp,
+  siffra,
+  value,
+  onChange,
+}: Props) => {
   return (
-    <div className="pl-20 relative">
-      <div className="h-5 w-5 absolute left-10 top-3">
-        <button>
+    <div className="flex w-full items-center pt-4">
+      <div className=" pl-2 pr-3">
+        <button className=" pb-10">
           <svg
             width="24"
             height="24"
@@ -24,18 +29,15 @@ const TillvagagongForm = ({ placeholderProp, siffra }: Props) => {
           </svg>
         </button>
       </div>
-      <form action="">
-        <label htmlFor="">
-          <textarea
-            name=""
-            id=""
-            cols={35}
-            rows={4}
-            placeholder={placeholderProp + " " + siffra}
-            className="rounded-sm shadow-lg placeholder: pt-2 pl-2"
-          ></textarea>
-        </label>
-      </form>
+
+      <textarea
+        name=""
+        id=""
+        placeholder={placeholderProp + " " + siffra}
+        cols={100}
+        rows={4}
+        className=" resize-none rounded-sm px-3 pt-3"
+      ></textarea>
     </div>
   )
 }
