@@ -12,7 +12,7 @@ type recepieProps = {
   recepies?: [{ title: string; image: string; time: string }]
 }
 
-const RenderOutRecepieModule: NextPage<recepieProps> = ({}) => {
+const Utforska: NextPage<recepieProps> = ({}) => {
   const [data, setData] = useState<recepieProps[]>([])
 
   const { data: session, status } = useSession()
@@ -28,10 +28,7 @@ const RenderOutRecepieModule: NextPage<recepieProps> = ({}) => {
 
   return (
     <div className="bg-anotherpink flex flex-col justify-center space-y-4">
-      <div>
-        {" "}
-        <RubrikRecepieFormView />
-      </div>{" "}
+      <div> </div>{" "}
       <div className="">
         {data.map((item) => (
           <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4">
@@ -64,4 +61,4 @@ const RenderOutRecepieModule: NextPage<recepieProps> = ({}) => {
   )
 }
 
-export default RenderOutRecepieModule
+export default Utforska
