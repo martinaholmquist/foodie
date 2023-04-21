@@ -24,7 +24,7 @@ interface Input {
 
 const RecepieModule = ({}) => {
   const { data: currentUser } = useCurrentUser()
-
+  const [imageUrl, setImageUrl] = useState("")
   const [recepie, setRecepie] = useState<Recepie>({
     title: "",
     time: "",
@@ -131,7 +131,6 @@ const RecepieModule = ({}) => {
                 <img src="image 60.svg" alt="foto link" />
                 <p className="text-xl">Lägg till en bild</p>
               </div>
-              <ImageUpload />
             </label>
           </div>
 

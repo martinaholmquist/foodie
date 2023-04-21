@@ -16,7 +16,7 @@ const Index: NextPage<Props> = ({}) => {
 
   const handleExploreClick = () => {
     setAction("explore")
-    setBackground("bg-white")
+    setBackground("bg-anotherpink")
   }
   const handlePublishClick = () => {
     setAction("publish")
