@@ -3,7 +3,8 @@ import RubrikRecepieFormView from "../newRecepieComponents/rubrikRecepieFormView
 
 import { NextPage } from "next"
 import { useSession } from "next-auth/react"
-import { type } from "os"
+
+import { useRouter } from "next/router"
 
 type recepieProps = {
   id?: string
@@ -16,6 +17,11 @@ const Utforska: NextPage<recepieProps> = ({}) => {
   const [data, setData] = useState<recepieProps[]>([])
 
   const { data: session, status } = useSession()
+  const router = useRouter()
+
+  const handleClick = (id: any) => {
+    router.push(`/home/${id}`)
+  }
 
   const recepieData = async () => {
     const res = await fetch("http://localhost:3000/api/nestedFetch")
