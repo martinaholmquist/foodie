@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import RubrikRecepieFormView from "../newRecepieComponents/rubrikRecepieFormView"
-import RenderAllRecepies from "../rendercomponents/renderAllRecepies"
+//import RenderAllRecepies from "../rendercomponents/renderAllRecepies"
 import { NextPage } from "next"
 import { useSession } from "next-auth/react"
 

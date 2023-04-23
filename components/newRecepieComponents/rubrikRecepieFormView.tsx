@@ -12,13 +12,17 @@ const RubrikRecepieFormView = ({ onClick }: Props) => {
       {/* rubrik */}
       <div className="flex justify-center h-10 space-x-10 text-[30px] mt-14 mb-2">
         <div className="font-title">
-          <button onClick={onClick}>Utforska</button>
+          <button className="no-underline hover:underline" onClick={onClick}>
+            Utforska
+          </button>
         </div>
         <div className="text-[35px]">
           <p>|</p>
         </div>
         <div className="font-title">
-          <button onClick={onClick}>Publicera</button>
+          <button className="no-underline hover:underline" onClick={onClick}>
+            Publicera
+          </button>
         </div>
       </div>
     </div>
