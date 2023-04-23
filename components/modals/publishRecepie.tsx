@@ -2,10 +2,11 @@ import NewRecepiePopUpTableOption from "../newRecepieComponents/newRecepiePopUpT
 import IngredienserRecepieFrom from "../newRecepieComponents/ingredienserRecepieFrom"
 import AddfieldForm from "../newRecepieComponents/addfieldForm"
 import TillvagagongForm from "../newRecepieComponents/tillvagagongForm"
-import { SyntheticEvent, useState } from "react"
+import { SyntheticEvent, useEffect, useState } from "react"
 import { FormButton } from "../form-components/form-button"
 import useCurrentUser from "@/hooks/useCurrentUser"
 import { ImageUpload } from "./imageUpload"
+import handleUpload from "@/libs/testUpload"
 
 type Recepie = {
   title: string
@@ -24,6 +25,8 @@ interface Input {
 
 const RecepieModule = ({}) => {
   const { data: currentUser } = useCurrentUser()
+  const [image, setImage] = useState<File | null>(null)
+  const [url, setURL] = useState("")
 
   const [recepie, setRecepie] = useState<Recepie>({
     title: "",
@@ -85,16 +88,24 @@ const RecepieModule = ({}) => {
 
   const instructionValues = instructionInputs.map((inputs) => inputs.value)
 
+  const upload = async () => {
+    await handleUpload({ imageUpload: image, setUrl: setURL })
+  }
+
   const body = {
     authorId: currentUser?.id,
     title: recepie.title,
     time: recepie.time,
+    image: url,
     servings: recepie.servings,
     ingredients: inputValues,
     intructions: instructionValues,
   }
 
   const onSubmit = async (e: SyntheticEvent) => {
+    e.preventDefault()
+    console.log(recepie.image)
+
     const data = await fetch(
       "http://localhost:3000/api/recepies/createrecepie",
       {
@@ -104,7 +115,7 @@ const RecepieModule = ({}) => {
       }
     )
     const res = await data.json()
-    e.preventDefault()
+    console.log(res)
   }
 
   return (
@@ -130,11 +141,20 @@ const RecepieModule = ({}) => {
               <div className="flex flex-col items-center justify-center ">
                 <img src="image 60.svg" alt="foto link" />
                 <p className="text-xl">Lägg till en bild</p>
+                <br />
+                <button type="button" onClick={() => upload()}>
+                  Upload Image
+                </button>
               </div>
-              <ImageUpload />
+              <input
+                id="dropzone-file"
+                type="file"
+                className="hidden"
+                onChange={(e: any) => setImage(e.target.files[0])}
+              />
             </label>
           </div>
-
+          <h2>{url}</h2>
           <NewRecepiePopUpTableOption
             name="Antal portioner"
             a={"2"}
@@ -164,6 +184,7 @@ const RecepieModule = ({}) => {
           {inputs.map((inputs) => (
             <IngredienserRecepieFrom
               placeholderProp={"Ingrediens"}
+              key={inputs.id}
               siffra={inputs.id}
               value={inputs.value}
               onClick={() =>
@@ -187,6 +208,7 @@ const RecepieModule = ({}) => {
           {instructionInputs.map((inputs) => (
             <TillvagagongForm
               placeholderProp={"Steg"}
+              key={inputs.id}
               siffra={inputs.id}
               value={inputs.value}
               onClick={() =>

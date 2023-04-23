@@ -47,7 +47,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
             {items.image && (
               <img
                 src={items.image}
-                alt=""
+                alt="Bild"
                 width={550}
                 height={100}
                 className="object-cover rounded-lg w-100 h-96"
