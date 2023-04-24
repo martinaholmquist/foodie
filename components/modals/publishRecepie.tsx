@@ -34,7 +34,7 @@ const RecepieModule = ({}) => {
     servings: "",
     ingredients: [],
     intructions: [],
-    authorId: "643003e89aa23529f72677a7",
+    authorId: "",
     image: "",
   })
 
