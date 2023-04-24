@@ -26,6 +26,9 @@ interface Input {
 const RecepieModule = ({}) => {
   const { data: currentUser } = useCurrentUser()
 
+  const [image, setImage] = useState<File | null>(null)
+  const [url, setURL] = useState("")
+
   const [recepie, setRecepie] = useState<Recepie>({
     title: "",
     time: "",
@@ -139,12 +142,23 @@ const RecepieModule = ({}) => {
               <div className="flex flex-col items-center justify-center ">
                 <img src="image 60.svg" alt="foto link" />
                 <p className="text-xl">Lägg till en bild</p>
-                <br />
-                <button type="button" onClick={() => upload()}>
+                <button
+                  className="p-2 bg-slate-600 mt-5"
+                  type="button"
+                  onClick={() => upload()}
+                >
                   Upload Image
                 </button>
+                <br />
               </div>
-              <ImageUpload />
+              <input
+                id="dropzone-file"
+                type="file"
+                className="hidden"
+                onChange={(e: any) => {
+                  setImage(e.target.files[0])
+                }}
+              />
             </label>
           </div>
           <h2>{url}</h2>

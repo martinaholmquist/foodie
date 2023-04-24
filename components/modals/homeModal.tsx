@@ -32,34 +32,32 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
 
   return (
     <div className="bg-anotherpink flex flex-col justify-center space-y-4">
-      <div> </div>{" "}
-      <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4 ">
-        {data.map((items) => (
-          <div
-            key={items.id}
-            className=" bg-primaryPink rounded-lg cursor-pointer"
-            onClick={() => handleClick(items.id)}
-          >
-            {items.image && (
-              <img
-                src={items.image}
-                alt=""
-                width={550}
-                height={100}
-                className="object-cover rounded-lg w-100 h-96"
-              />
-            )}
-
-            <div className="rounded-lg p-2">
-              <p className="font-title font-bold text-2xl">{items.title}</p>
-              <div className="flex  items-center">
-                <div className="h-4 w-4 bg-red-800 rounded-full"></div>
-                <p className="pl-4">receptägare</p>
-              </div>
-
-              <div>
-                <img src="/klocka.png" alt="klocka" />
-                <p className="font-sans text-1xl"> Tid {items.time}</p>
+      <div className="">
+        {data.map((item) => (
+          <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4">
+            {item.recepies?.map((items) => (
+              <div
+                className=" bg-primaryPink rounded-lg"
+                onClick={() => handleClick(item.id)}
+              >
+                <img
+                  src={items.image}
+                  alt="image"
+                  width={551}
+                  height={100}
+                  className="object-cover rounded-lg w-100 h-96"
+                />
+                <p className="font-title font-bold text-2xl">{items.title}</p>
+                <div className="flex  items-center">
+                  <div className="h-4 w-4 bg-red-800 rounded-full"></div>
+                  <p className="pl-4 font-sans text-1xl">{item.name}</p>
+                </div>
+                <div className="flex  items-center">
+                  <div>
+                    <img src="/klocka.png" alt="klocka" />
+                  </div>
+                  <p className="pl-4 font-sans text-1xl"> {items.time}</p>
+                </div>
               </div>
             ))}
           </div>
