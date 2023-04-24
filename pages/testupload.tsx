@@ -1,4 +1,4 @@
-import { ImageUpload } from "@/components/image_upload-components/imageUpload"
+import { ImageUpload } from "@/components/modals/imageUpload"
 import { NextPage } from "next"
 
 interface Props {}

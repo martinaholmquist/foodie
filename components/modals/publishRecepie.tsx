@@ -1,23 +1,19 @@
-import RubrikRecepieFormView from "../newRecepieComponents/rubrikRecepieFormView"
-import FirstRecepieFrom from "../newRecepieComponents/firstRecepieFrom"
-import FirstRecepieFromPhoto from "../newRecepieComponents/firstRecepieFromPhoto"
 import NewRecepiePopUpTableOption from "../newRecepieComponents/newRecepiePopUpTableOption"
 import IngredienserRecepieFrom from "../newRecepieComponents/ingredienserRecepieFrom"
 import AddfieldForm from "../newRecepieComponents/addfieldForm"
 import TillvagagongForm from "../newRecepieComponents/tillvagagongForm"
-import KuriosaForm from "../newRecepieComponents/kuriosaForm"
-import NewRecepieShareButton from "../newRecepieComponents/newRecepieShareButton"
 import { SyntheticEvent, useState } from "react"
 import { FormButton } from "../form-components/form-button"
-import useCurrentLoggedInUser from "@/hooks/useCurrentUser"
-import axios from "axios"
+import useCurrentUser from "@/hooks/useCurrentUser"
+import { ImageUpload } from "./imageUpload"
+import { url } from "inspector"
 
 type Recepie = {
   title: string
   time: string
   servings: string
-  ingredients: []
-  intructions: []
+  ingredients: [{}]
+  intructions: [{}]
   authorId: string
   image: string
 }
@@ -28,26 +24,48 @@ interface Input {
 }
 
 const RecepieModule = ({}) => {
+  const { data: currentUser } = useCurrentUser()
+  const [imageUrl, setImageUrl] = useState("")
   const [recepie, setRecepie] = useState<Recepie>({
     title: "",
     time: "",
     servings: "",
-    ingredients: [],
-    intructions: [],
-    authorId: "643003e89aa23529f72677a7",
+    ingredients: [{ id: 1, value: "" }],
+    intructions: [{ id: 1, value: "" }],
+    authorId: "",
     image: "",
   })
 
-  const [inputs, setInputs] = useState<Input[]>([{ id: 0, value: "" }])
+  const [inputs, setInputs] = useState<Input[]>([
+    { id: 1, value: "" },
+    { id: 2, value: "" },
+    { id: 3, value: "" },
+  ])
+
+  const [instructionInputs, setinstructionInputs] = useState<Input[]>([
+    { id: 1, value: "" },
+    { id: 2, value: "" },
+    { id: 3, value: "" },
+  ])
 
   const handleAddInput = () => {
     const newId = inputs[inputs.length - 1].id + 1
     setInputs([...inputs, { id: newId, value: "" }])
   }
 
+  const handleAddInputInstructions = () => {
+    const iID = instructionInputs[instructionInputs.length - 1].id + 1
+    setinstructionInputs([...instructionInputs, { id: iID, value: "" }])
+  }
+
   const handleRemoveInput = (id: number) => {
     const updatedInputs = inputs.filter((input) => input.id !== id)
     setInputs(updatedInputs)
+  }
+
+  const handleRemoveInstructionInput = (id: number) => {
+    const updatedInputs = instructionInputs.filter((input) => input.id !== id)
+    setinstructionInputs(updatedInputs)
   }
 
   const handleInputChange = (id: number, value: string) => {
@@ -57,12 +75,35 @@ const RecepieModule = ({}) => {
     setInputs(updatedInputs)
   }
 
+  const handleInstructionInputChange = (id: number, value: string) => {
+    const updatedInputs = instructionInputs.map((input) =>
+      input.id === id ? { ...input, value } : input
+    )
+    setinstructionInputs(updatedInputs)
+  }
+
+  const inputValues = inputs.map((input) => input.value)
+
+  const instructionValues = instructionInputs.map((inputs) => inputs.value)
+
+  const body = {
+    authorId: currentUser?.id,
+    title: recepie.title,
+    time: recepie.time,
+    servings: recepie.servings,
+    ingredients: inputValues,
+    intructions: instructionValues,
+  }
+
   const onSubmit = async (e: SyntheticEvent) => {
-    const data = await fetch("http://localhost:3000/api/createrecepie", {
-      method: "POST",
-      body: JSON.stringify(recepie),
-      headers: { "Content-Type": "application/json" },
-    })
+    const data = await fetch(
+      "http://localhost:3000/api/recepies/createrecepie",
+      {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-Type": "application/json" },
+      }
+    )
     const res = await data.json()
     e.preventDefault()
   }
@@ -90,8 +131,12 @@ const RecepieModule = ({}) => {
               <div className="flex flex-col items-center justify-center ">
                 <img src="image 60.svg" alt="foto link" />
                 <p className="text-xl">Lägg till en bild</p>
+                <ImageUpload
+                  onUploadSuccess={() =>
+                    setRecepie({ ...recepie, image: imageUrl })
+                  }
+                />
               </div>
-              <input id="dropzone-file" type="file" className="hidden" />
             </label>
           </div>
 
@@ -121,43 +166,21 @@ const RecepieModule = ({}) => {
             <h2 className="  font-title font-bold text-2xl">Ingredienser</h2>
           </div>
 
-          <IngredienserRecepieFrom
-            placeholderProp={"Ingrediens"}
-            siffra={1}
-            value={recepie.ingredients}
-            onChange={(e) =>
-              setRecepie({ ...recepie, ingredients: e.target.value })
-            }
-          />
-          <IngredienserRecepieFrom
-            placeholderProp={"Ingrediens"}
-            siffra={2}
-            value={recepie.ingredients}
-            onChange={(e) =>
-              setRecepie({ ...recepie, ingredients: e.target.value })
-            }
-          />
-          <IngredienserRecepieFrom
-            placeholderProp={"Ingrediens"}
-            siffra={3}
-            value={recepie.ingredients}
-            onChange={(e) =>
-              setRecepie({ ...recepie, ingredients: e.target.value })
-            }
-          />
           {inputs.map((inputs) => (
             <IngredienserRecepieFrom
               placeholderProp={"Ingrediens"}
-              siffra={4}
-              onClick={() => handleRemoveInput(inputs.id)}
+              siffra={inputs.id}
+              value={inputs.value}
+              onClick={() =>
+                inputs.id == 3 ? null : handleRemoveInput(inputs.id)
+              }
+              onChange={(e) => handleInputChange(inputs.id, e.target.value)}
             />
           ))}
 
           <AddfieldForm
             placeholderProp={"Lägg till ingrediens"}
-            onClick={(e) => {
-              e.preventDefault
-            }}
+            onClick={handleAddInput}
           />
 
           <div className=" pt-12">
@@ -165,31 +188,25 @@ const RecepieModule = ({}) => {
               Tillvägagångssätt
             </h2>
           </div>
-          <TillvagagongForm
-            placeholderProp={"Steg"}
-            siffra={1}
-            value={recepie.intructions}
-            onChange={(e) =>
-              setRecepie({ ...recepie, intructions: e.target.value })
-            }
+
+          {instructionInputs.map((inputs) => (
+            <TillvagagongForm
+              placeholderProp={"Steg"}
+              siffra={inputs.id}
+              value={inputs.value}
+              onClick={() =>
+                inputs.id == 3 ? null : handleRemoveInstructionInput(inputs.id)
+              }
+              onChange={(e) =>
+                handleInstructionInputChange(inputs.id, e.target.value)
+              }
+            />
+          ))}
+
+          <AddfieldForm
+            placeholderProp={"Lägg till steg"}
+            onClick={handleAddInputInstructions}
           />
-          <TillvagagongForm
-            placeholderProp={"Steg"}
-            siffra={2}
-            value={recepie.intructions}
-            onChange={(e) =>
-              setRecepie({ ...recepie, intructions: e.target.value })
-            }
-          />
-          <TillvagagongForm
-            placeholderProp={"Steg"}
-            siffra={3}
-            value={recepie.intructions}
-            onChange={(e) =>
-              setRecepie({ ...recepie, intructions: e.target.value })
-            }
-          />
-          <AddfieldForm placeholderProp={"Lägg till steg"} />
 
           <div className=" pt-12">
             <h2 className="  font-title font-bold text-2xl">Kuriosa</h2>

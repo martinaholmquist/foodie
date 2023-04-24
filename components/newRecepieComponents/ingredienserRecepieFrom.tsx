@@ -3,7 +3,7 @@ import { useState } from "react"
 interface Props {
   placeholderProp: string
   siffra: number
-  value?: string[]
+  value?: string
   onChange?: (...args: any) => any
   onClick?: (...args: any) => any
 }
@@ -27,7 +27,7 @@ export const IngredienserRecepieFrom = ({
   return (
     <div className="flex w-full items-center pt-4">
       <div className=" pl-2 pr-3">
-        <button onClick={onClick}>
+        <button onClick={onClick} type="button">
           <svg
             width="24"
             height="24"

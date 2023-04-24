@@ -1,8 +1,9 @@
 interface Props {
   placeholderProp: string
   siffra: number
-  value?: string[]
+  value?: string
   onChange?: (...args: any) => any
+  onClick?: (...args: any) => any
 }
 
 const TillvagagongForm = ({
@@ -10,11 +11,12 @@ const TillvagagongForm = ({
   siffra,
   value,
   onChange,
+  onClick,
 }: Props) => {
   return (
     <div className="flex w-full items-center pt-4">
       <div className=" pl-2 pr-3">
-        <button className=" pb-10">
+        <button className=" pb-10" onClick={onClick}>
           <svg
             width="24"
             height="24"
@@ -31,6 +33,8 @@ const TillvagagongForm = ({
       </div>
 
       <textarea
+        value={value}
+        onChange={onChange}
         name=""
         id=""
         placeholder={placeholderProp + " " + siffra}

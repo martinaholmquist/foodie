@@ -18,7 +18,6 @@ export default async function handler(
           select: {
             title: true,
             image: true,
-            time: true,
           },
         },
       },
