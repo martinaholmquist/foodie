@@ -1,24 +1,41 @@
+import { Layout } from "@/components/layout"
+import RenderOutRecepiesModals from "@/components/modals/homeModal"
+import RecepieModule from "@/components/modals/publishRecepie"
+import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecepieFormView"
+import useCurrentUser from "@/hooks/useCurrentUser"
 import { NextPage } from "next"
-import { Hero } from "@/components/hero-components/hero"
-import { Logo } from "@/components/hero-components/logo"
+import { useSession } from "next-auth/react"
+import { useEffect, useState } from "react"
 
 interface Props {}
 
 const Index: NextPage<Props> = ({}) => {
+  const [action, setAction] = useState("explore")
+  const [background, setBackground] = useState("bg-white")
+  const { data: session, status } = useSession()
+
+  const handleExploreClick = () => {
+    setAction("explore")
+    setBackground("bg-anotherpink")
+  }
+  const handlePublishClick = () => {
+    setAction("publish")
+    setBackground("bg-primaryPink")
+  }
+
   return (
-    <div className="">
-      <Logo foodieLogo={"/Loggo_B&W.png"} className={"w-52 md:w-80"} />
-      <Hero
-        heroTitle="Dela, smaka och utvecklas!"
-        heroText="Foodie skapades av ett gäng matälskare
-          som ville dela med sig av egna recept och 
-          kunna njuta av andras fräcka tips!"
-        bulletOne="Publicera recept"
-        bulletTwo="Få uppskattning"
-        bulletThree="Nya smaker "
-        ctaText="Kom igång"
-      />
-    </div>
+    <>
+      <Layout bg={background}>
+        <div>Inloggad som {session?.user?.email}</div>
+        <RubrikRecepieFormView
+          onExploreClick={handleExploreClick}
+          onPublishClick={handlePublishClick}
+          exploreDisabled={action === "explore"}
+          publishDisabled={action === "publish"}
+        />
+        {action == "explore" ? <RenderOutRecepiesModals /> : <RecepieModule />}
+      </Layout>
+    </>
   )
 }
 

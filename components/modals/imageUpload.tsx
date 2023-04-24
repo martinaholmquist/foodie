@@ -2,8 +2,13 @@ import { useState } from "react"
 import { storage } from "@/libs/firebase"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 
-export const ImageUpload = () => {
+type ImageUploadProps = {
+  onUploadSuccess: (url: string) => void
+}
+//{ setImageUrl }: ImageUploadProps
+export const ImageUpload = ({ onUploadSuccess }: ImageUploadProps) => {
   const [imageUpload, setImageUpload] = useState<File>()
+
   const [url, setURL] = useState("")
   const uploadImage = async () => {
     if (imageUpload == null) return
@@ -16,18 +21,21 @@ export const ImageUpload = () => {
         alert("Image Uploaded")
       })
       .then(() => getDownloadURL(ref(storage, `images/${imageUpload.name}`)))
-      .then((url) => setURL(url))
+      .then((url) => {
+        setURL(url)
+        onUploadSuccess(url)
+      })
   }
   return (
-    <div>
+    <>
       <input
+        id="dropzone-file"
         type="file"
+        className="hidden"
         onChange={(e: any) => {
           setImageUpload(e.target.files[0])
         }}
       />
-      <div>{url}</div>
-      <button onClick={uploadImage}>Upload Image</button>
-    </div>
+    </>
   )
 }
