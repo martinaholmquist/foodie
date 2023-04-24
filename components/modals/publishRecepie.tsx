@@ -6,6 +6,7 @@ import { SyntheticEvent, useState } from "react"
 import { FormButton } from "../form-components/form-button"
 import useCurrentUser from "@/hooks/useCurrentUser"
 import { ImageUpload } from "./imageUpload"
+import { url } from "inspector"
 
 type Recepie = {
   title: string
@@ -130,6 +131,11 @@ const RecepieModule = ({}) => {
               <div className="flex flex-col items-center justify-center ">
                 <img src="image 60.svg" alt="foto link" />
                 <p className="text-xl">Lägg till en bild</p>
+                <ImageUpload
+                  onUploadSuccess={() =>
+                    setRecepie({ ...recepie, image: imageUrl })
+                  }
+                />
               </div>
             </label>
           </div>

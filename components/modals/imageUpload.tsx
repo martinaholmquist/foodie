@@ -3,10 +3,10 @@ import { storage } from "@/libs/firebase"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 
 type ImageUploadProps = {
-  setImageUrl: (url: string) => void
+  onUploadSuccess: (url: string) => void
 }
 //{ setImageUrl }: ImageUploadProps
-export const ImageUpload = ({ setImageUrl }: ImageUploadProps) => {
+export const ImageUpload = ({ onUploadSuccess }: ImageUploadProps) => {
   const [imageUpload, setImageUpload] = useState<File>()
 
   const [url, setURL] = useState("")
@@ -21,7 +21,10 @@ export const ImageUpload = ({ setImageUrl }: ImageUploadProps) => {
         alert("Image Uploaded")
       })
       .then(() => getDownloadURL(ref(storage, `images/${imageUpload.name}`)))
-      .then((url) => setImageUrl(url))
+      .then((url) => {
+        setURL(url)
+        onUploadSuccess(url)
+      })
   }
   return (
     <>
