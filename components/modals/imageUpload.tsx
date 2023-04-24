@@ -6,7 +6,7 @@ type ImageUploadProps = {
   onUploadSuccess: (url: string) => void
 }
 //{ setImageUrl }: ImageUploadProps
-export const ImageUpload = ({ onUploadSuccess }: ImageUploadProps) => {
+export const ImageUpload = () => {
   const [imageUpload, setImageUpload] = useState<File>()
 
   const [url, setURL] = useState("")
@@ -23,7 +23,6 @@ export const ImageUpload = ({ onUploadSuccess }: ImageUploadProps) => {
       .then(() => getDownloadURL(ref(storage, `images/${imageUpload.name}`)))
       .then((url) => {
         setURL(url)
-        onUploadSuccess(url)
       })
   }
   return (
