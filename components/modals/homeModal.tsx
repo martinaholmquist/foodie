@@ -4,15 +4,11 @@ import { NextPage } from "next"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
 
-interface recepieProps {
+type recepieProps = {
   id?: string
-  servings?: string
-  title?: string
-  time?: string
-  ingredients?: string
-  intructions?: string
-  kuriosa?: string
-  image?: string
+  name?: string
+  profileImage?: string
+  recepies?: [{ title: string; image: string; time: string }]
 }
 
 const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
@@ -26,7 +22,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   }
 
   const recepieData = async () => {
-    const res = await fetch("http://localhost:3000/api/recepies")
+    const res = await fetch("http://localhost:3000/api/nestedFetch")
     const recepies = await res.json()
     setData(recepies)
   }
@@ -35,7 +31,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   }, [])
 
   return (
-    <div className="bg-white flex flex-col justify-center space-y-4">
+    <div className="bg-anotherpink flex flex-col justify-center space-y-4">
       <div> </div>{" "}
       <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4 ">
         {data.map((items) => (
@@ -47,7 +43,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
             {items.image && (
               <img
                 src={items.image}
-                alt="Bild"
+                alt=""
                 width={550}
                 height={100}
                 className="object-cover rounded-lg w-100 h-96"
@@ -65,7 +61,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
                 <img src="/klocka.png" alt="klocka" />
                 <p className="font-sans text-1xl"> Tid {items.time}</p>
               </div>
-            </div>
+            ))}
           </div>
         ))}
       </div>

@@ -1,11 +1,10 @@
 import { useState } from "react"
 import { storage } from "@/libs/firebase"
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
-interface Props {
-  onImageUpload: (url: string) => void
-}
+
 export const ImageUpload = () => {
   const [imageUpload, setImageUpload] = useState<File>()
+
   const [url, setURL] = useState("")
 
   const handleUpload = async () => {
@@ -19,9 +18,7 @@ export const ImageUpload = () => {
         alert("Image Uploaded")
       })
       .then(() => getDownloadURL(ref(storage, `images/${imageUpload.name}`)))
-      .then((url) => {
-        setURL(url)
-      })
+      .then((url) => setURL(url))
   }
 
   return (

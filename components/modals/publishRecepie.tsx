@@ -25,8 +25,6 @@ interface Input {
 
 const RecepieModule = ({}) => {
   const { data: currentUser } = useCurrentUser()
-  const [image, setImage] = useState<File | null>(null)
-  const [url, setURL] = useState("")
 
   const [recepie, setRecepie] = useState<Recepie>({
     title: "",
@@ -146,12 +144,7 @@ const RecepieModule = ({}) => {
                   Upload Image
                 </button>
               </div>
-              <input
-                id="dropzone-file"
-                type="file"
-                className="hidden"
-                onChange={(e: any) => setImage(e.target.files[0])}
-              />
+              <ImageUpload />
             </label>
           </div>
           <h2>{url}</h2>
