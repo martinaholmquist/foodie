@@ -13,6 +13,7 @@ const KuriosaForm = ({}) => {
             className="rounded-sm shadow-lg placeholder: pt-2 pl-2"
           ></textarea>
         </label>
+      </form>
     </div>
   )
 }
