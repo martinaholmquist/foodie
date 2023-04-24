@@ -1,25 +1,32 @@
 import { useEffect, useState } from "react"
 import RubrikRecepieFormView from "../newRecepieComponents/rubrikRecepieFormView"
+//import RenderAllRecepies from "../rendercomponents/renderAllRecepies"
 import { NextPage } from "next"
 import { useSession } from "next-auth/react"
-import { useRouter } from "next/router"
 
-type recepieProps = {
+interface recepieProps {
   id?: string
-  name?: string
-  profileImage?: string
-  recepies?: [{ title: string; image: string; time: string }]
+  servings?: string
+  title?: string
+  time?: string
+  ingredients?: string
+  intructions?: string
+  kuriosa?: string
+  image?: string
 }
+
+/*     {status == "authenticated" && (
+                  <div className="font-sans text-1xl">
+                    <div className=" h-4 w-4 bg-red-800 rounded-full">
+                      Receptägare {session.user?.name}
+                    </div>
+                  </div>
+                )}*/
 
 const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   const [data, setData] = useState<recepieProps[]>([])
 
   const { data: session, status } = useSession()
-  const router = useRouter()
-
-  const handleClick = (id: any) => {
-    router.push(`/home/${id}`)
-  }
 
   const recepieData = async () => {
     const res = await fetch("http://localhost:3000/api/nestedFetch")
@@ -31,33 +38,35 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   }, [])
 
   return (
-    <div className="bg-anotherpink flex flex-col justify-center space-y-4">
-      <div className="">
-        {data.map((item) => (
-          <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4">
-            {item.recepies?.map((items) => (
-              <div
-                className=" bg-primaryPink rounded-lg"
-                onClick={() => handleClick(item.id)}
-              >
-                <img
-                  src={items.image}
-                  alt="image"
-                  width={551}
-                  height={100}
-                  className="object-cover rounded-lg w-100 h-96"
-                />
-                <p className="font-title font-bold text-2xl">{items.title}</p>
-                <div className="flex  items-center">
-                  <div className="h-4 w-4 bg-red-800 rounded-full"></div>
-                  <p className="pl-4 font-sans text-1xl">{item.name}</p>
-                </div>
-                <div className="flex  items-center">
-                  <div>
-                    <img src="/klocka.png" alt="klocka" />
-                  </div>
-                  <p className="pl-4 font-sans text-1xl"> {items.time}</p>
-                </div>
+    <div className="bg-white flex flex-col justify-center space-y-4">
+      <div> </div>{" "}
+      <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4 ">
+        {data.map((items) => (
+          <div
+            key={items.id}
+            className=" bg-primaryPink rounded-lg cursor-pointer"
+            onClick={() => handleClick(items.id)}
+          >
+            {items.image && (
+              <img
+                src={items.image}
+                alt=""
+                width={550}
+                height={100}
+                className="object-cover rounded-lg w-100 h-96"
+              />
+            )}
+
+            <div className="rounded-lg p-2">
+              <p className="font-title font-bold text-2xl">{items.title}</p>
+              <div className="flex  items-center">
+                <div className="h-4 w-4 bg-red-800 rounded-full"></div>
+                <p className="pl-4">receptägare</p>
+              </div>
+
+              <div>
+                <img src="/klocka.png" alt="klocka" />
+                <p className="font-sans text-1xl"> Tid {items.time}</p>
               </div>
             ))}
           </div>

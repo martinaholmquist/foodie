@@ -18,13 +18,11 @@ export default async function handler(
           select: {
             title: true,
             image: true,
-            time: true,
-            id: true,
           },
         },
       },
     })
-    console.log(allRecepies)
+    // console.log(allRecepies)
     return res.status(200).json(allRecepies)
   } catch (error) {
     console.error(error)
