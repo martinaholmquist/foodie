@@ -19,6 +19,7 @@ export default async function handler(
             title: true,
             image: true,
             time: true,
+            id: true,
           },
         },
       },
