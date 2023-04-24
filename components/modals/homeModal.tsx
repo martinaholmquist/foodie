@@ -32,12 +32,14 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
 
   return (
     <div className="bg-anotherpink flex flex-col justify-center space-y-4">
-      <div> </div>{" "}
       <div className="">
         {data.map((item) => (
           <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4">
             {item.recepies?.map((items) => (
-              <div className=" bg-primaryPink rounded-lg">
+              <div
+                className=" bg-primaryPink rounded-lg"
+                onClick={() => handleClick(item.id)}
+              >
                 <img
                   src={items.image}
                   alt="image"
