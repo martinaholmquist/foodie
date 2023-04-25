@@ -18,6 +18,7 @@ export default async function handler(
           select: {
             title: true,
             image: true,
+            id: true,
           },
         },
       },
