@@ -54,6 +54,7 @@ model Recepie {
   authorId           String     @db.ObjectId
   image              String?
   comments           Comment[]
+  createdAt          DateTime @default(now())
   
 }
 

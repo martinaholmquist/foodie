@@ -16,6 +16,7 @@ const RubrikRecepieFormView = (props: Props) => {
       <div className="flex justify-center h-10 space-x-10 text-[30px] mt-14 mb-2">
         <div className="font-title">
           <button
+            className="no-underline hover:underline"
             onClick={props.onExploreClick}
             disabled={props.exploreDisabled}
           >
@@ -27,6 +28,7 @@ const RubrikRecepieFormView = (props: Props) => {
         </div>
         <div className="font-title">
           <button
+            className="no-underline hover:underline"
             onClick={props.onPublishClick}
             disabled={props.publishDisabled}
           >

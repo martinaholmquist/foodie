@@ -12,18 +12,24 @@ export default async function handler(
   }
 
   try {
-    const allRecepies = await prismadb.user.findMany({
+    const allRecepies = await prismadb.recepie.findMany({
+      orderBy: [
+        {
+          createdAt: "desc",
+        },
+      ],
+
       include: {
-        recepies: {
+        author: {
           select: {
-            title: true,
-            image: true,
+            name: true,
+            profileImage: true,
             id: true,
           },
         },
       },
     })
-    // console.log(allRecepies)
+
     return res.status(200).json(allRecepies)
   } catch (error) {
     console.error(error)
