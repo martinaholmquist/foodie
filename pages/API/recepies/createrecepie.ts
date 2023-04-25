@@ -9,6 +9,7 @@ interface Recepie {
   image: string
   ingredients: string[]
   intructions: string[]
+  kuriosa : string
 }
 
 export default async function handler(
@@ -28,6 +29,7 @@ export default async function handler(
       intructions,
       authorId,
       image,
+      kuriosa,
     }: Recepie = req.body
 
     const newRecepie = await prismadb.recepie.create({
@@ -39,6 +41,7 @@ export default async function handler(
         ingredients,
         intructions,
         image,
+        kuriosa,
       },
     })
 
