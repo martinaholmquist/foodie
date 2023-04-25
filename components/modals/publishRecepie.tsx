@@ -7,6 +7,7 @@ import { FormButton } from "../form-components/form-button"
 import useCurrentUser from "@/hooks/useCurrentUser"
 import { ImageUpload } from "./imageUpload"
 import handleUpload from "@/libs/testUpload"
+import KuriosaForm from "../newRecepieComponents/kuriosaForm"
 
 type Recepie = {
   title: string
@@ -16,6 +17,7 @@ type Recepie = {
   intructions: [{}]
   authorId: string
   image: string
+  kuriosa: string
 }
 
 interface Input {
@@ -37,6 +39,7 @@ const RecepieModule = ({}) => {
     intructions: [{ id: 1, value: "" }],
     authorId: "",
     image: "",
+    kuriosa: "",
   })
 
   const [inputs, setInputs] = useState<Input[]>([
@@ -101,6 +104,7 @@ const RecepieModule = ({}) => {
     servings: recepie.servings,
     ingredients: inputValues,
     intructions: instructionValues,
+    kuriosa: recepie.kuriosa,
   }
 
   const onSubmit = async (e: SyntheticEvent) => {
@@ -236,14 +240,13 @@ const RecepieModule = ({}) => {
             <h2 className="  font-title font-bold text-2xl">Kuriosa</h2>
           </div>
           <div className="flex w-full items-center pt-4">
-            <textarea
-              name=""
-              id=""
-              placeholder={"Vad vill du berätta?"}
-              cols={100}
-              rows={4}
-              className=" resize-none rounded-sm px-3 pt-3"
-            ></textarea>
+            <KuriosaForm
+              placeholderProp={""}
+              value={recepie.kuriosa}
+              onChange={(e) =>
+                setRecepie({ ...recepie, kuriosa: e.target.value })
+              }
+            />
           </div>
 
           <div className=" pt-12">
