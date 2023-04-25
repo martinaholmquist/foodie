@@ -1,28 +1,25 @@
 import { useEffect, useState } from "react"
 import RubrikRecepieFormView from "../newRecepieComponents/rubrikRecepieFormView"
-//import RenderAllRecepies from "../rendercomponents/renderAllRecepies"
 import { NextPage } from "next"
 import { useSession } from "next-auth/react"
+import { useRouter } from "next/router"
 
-interface recepieProps {
+type recepieProps = {
   id?: string
   name?: string
   profileImage?: string
   recepies?: [{ title: string; image: string; time: string; id: string }]
 }
 
-/*     {status == "authenticated" && (
-                  <div className="font-sans text-1xl">
-                    <div className=" h-4 w-4 bg-red-800 rounded-full">
-                      Receptägare {session.user?.name}
-                    </div>
-                  </div>
-                )}*/
-
 const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   const [data, setData] = useState<recepieProps[]>([])
 
   const { data: session, status } = useSession()
+  const router = useRouter()
+
+  const handleClick = (id: any) => {
+    router.push(`/home/${id}`)
+  }
 
   const recepieData = async () => {
     const res = await fetch("http://localhost:3000/api/nestedFetch")
