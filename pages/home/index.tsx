@@ -1,9 +1,7 @@
 import { Layout } from "@/components/layout"
 import RenderOutRecepiesModals from "@/components/modals/homeModal"
-import Utforska from "@/components/modals/utforska"
 import RecepieModule from "@/components/modals/publishRecepie"
 import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecepieFormView"
-import useCurrentUser from "@/hooks/useCurrentUser"
 import { NextPage } from "next"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
@@ -34,7 +32,7 @@ const Index: NextPage<Props> = ({}) => {
           exploreDisabled={action === "explore"}
           publishDisabled={action === "publish"}
         />
-        {action == "explore" ? <Utforska /> : <RecepieModule />}
+        {action == "explore" ? <RenderOutRecepiesModals /> : <RecepieModule />}
       </Layout>
     </>
   )
