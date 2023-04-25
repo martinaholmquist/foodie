@@ -10,6 +10,7 @@ type recpieData = {
   intructions: [string]
   kuriosa: string
   image: string
+  id: any
 }
 
 const RecepieView = ({}) => {
@@ -28,7 +29,7 @@ const RecepieView = ({}) => {
   }, [])
 
   return (
-    <div className="">
+    <div className="" key={data?.id}>
       <div>
         <img src={data?.image} alt="image" height={400} width={400} />
       </div>
