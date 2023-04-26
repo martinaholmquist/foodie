@@ -13,9 +13,11 @@ const RubrikRecepieFormView = (props: Props) => {
         <img src="Logo Foodie Black 1 (1).svg" alt="Foodie.logo" />
       </div>
       {/* rubrik */}
-      <div className="flex justify-center h-10 space-x-10 text-[30px] mt-14 mb-2">
-        <div className="font-title">
+      <div className="flex justify-center  space-x-10 text-[30px] mt-14 mb-2">
+        <div className="font-title ">
           <button
+            className=""
+            //className="border-b-[6px] border-black rounded-[3px]"
             onClick={props.onExploreClick}
             disabled={props.exploreDisabled}
           >
@@ -25,7 +27,7 @@ const RubrikRecepieFormView = (props: Props) => {
         <div className="text-[35px]">
           <p>|</p>
         </div>
-        <div className="font-title">
+        <div className="font-title ">
           <button
             onClick={props.onPublishClick}
             disabled={props.publishDisabled}

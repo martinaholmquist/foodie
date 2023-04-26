@@ -5,7 +5,6 @@ import TillvagagongForm from "../newRecepieComponents/tillvagagongForm"
 import { SyntheticEvent, useEffect, useState } from "react"
 import { FormButton } from "../form-components/form-button"
 import useCurrentUser from "@/hooks/useCurrentUser"
-import { ImageUpload } from "./imageUpload"
 import handleUpload from "@/libs/testUpload"
 
 type Recepie = {
@@ -27,6 +26,7 @@ const RecepieModule = ({}) => {
   const { data: currentUser } = useCurrentUser()
 
   const [image, setImage] = useState<File | null>(null)
+  const [isUploaded, setIsUploaded] = useState(false)
   const [url, setURL] = useState("")
 
   const [recepie, setRecepie] = useState<Recepie>({
@@ -91,6 +91,8 @@ const RecepieModule = ({}) => {
 
   const upload = async () => {
     await handleUpload({ imageUpload: image, setUrl: setURL })
+    setIsUploaded(true)
+    console.log(image)
   }
 
   const body = {
@@ -121,7 +123,7 @@ const RecepieModule = ({}) => {
 
   return (
     <>
-      <form onSubmit={onSubmit} className="">
+      <form onSubmit={onSubmit}>
         <div className=" pt-8  px-6">
           <div>
             <input
@@ -139,26 +141,38 @@ const RecepieModule = ({}) => {
               htmlFor="dropzone-file"
               className="flex justify-center w-96 h-52 bg-secondarypink rounded-md shadow-lg"
             >
-              <div className="flex flex-col items-center justify-center ">
-                <img src="image 60.svg" alt="foto link" />
-                <p className="text-xl">Lägg till en bild</p>
-                <button
-                  className="p-2 bg-slate-600 mt-5"
-                  type="button"
-                  onClick={() => upload()}
-                >
-                  Upload Image
-                </button>
-                <br />
-              </div>
-              <input
-                id="dropzone-file"
-                type="file"
-                className="hidden"
-                onChange={(e: any) => {
-                  setImage(e.target.files[0])
-                }}
-              />
+              {isUploaded ? (
+                <img
+                  src={url}
+                  alt="Uploaded Image"
+                  className=" w-full h-full"
+                  width={200}
+                  height={200}
+                />
+              ) : (
+                <div>
+                  <div className="flex flex-col items-center justify-center ">
+                    <img src="image 60.svg" alt="foto link" />
+                    <p className="text-xl">Lägg till en bild</p>
+                    <button
+                      className="p-2 bg-slate-600 mt-5"
+                      type="button"
+                      onClick={() => upload()}
+                    >
+                      Upload Image
+                    </button>
+                    <br />
+                  </div>
+                  <input
+                    id="dropzone-file"
+                    type="file"
+                    className="hidden"
+                    onChange={(e: any) => {
+                      setImage(e.target.files[0])
+                    }}
+                  />
+                </div>
+              )}
             </label>
           </div>
           <h2>{url}</h2>
@@ -195,7 +209,7 @@ const RecepieModule = ({}) => {
               siffra={inputs.id}
               value={inputs.value}
               onClick={() =>
-                inputs.id == 3 ? null : handleRemoveInput(inputs.id)
+                inputs.id < 4 ? null : handleRemoveInput(inputs.id)
               }
               onChange={(e) => handleInputChange(inputs.id, e.target.value)}
             />
@@ -219,7 +233,7 @@ const RecepieModule = ({}) => {
               siffra={inputs.id}
               value={inputs.value}
               onClick={() =>
-                inputs.id == 3 ? null : handleRemoveInstructionInput(inputs.id)
+                inputs.id < 4 ? null : handleRemoveInstructionInput(inputs.id)
               }
               onChange={(e) =>
                 handleInstructionInputChange(inputs.id, e.target.value)
@@ -254,7 +268,7 @@ const RecepieModule = ({}) => {
           <FormButton
             value={"Skicka"}
             type={"submit"}
-            className="rounded-md  w-full h-12 bg-primaryPink  text-black  font-semibold "
+            className="rounded-md  w-full h-12 bg-primaryPink  text-black  font-semibold"
           />
         </div>
       </form>

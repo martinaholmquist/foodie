@@ -30,7 +30,6 @@ export const ImageUpload = () => {
           setImageUpload(e.target.files[0])
         }}
       />
-      <button onClick={handleUpload}>upload</button>
     </>
   )
 }

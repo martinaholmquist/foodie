@@ -37,7 +37,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
           <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4">
             {item.recepies?.map((items) => (
               <div
-                className="bg-primaryPink rounded-lg"
+                className="bg-primaryPink rounded-lg cursor-pointer"
                 onClick={() => handleClick(items.id)}
               >
                 <img
