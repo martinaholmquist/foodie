@@ -351,7 +351,7 @@ const RecepieModule = ({}) => {
             <FormButton
               value={"Publicera"}
               type={"submit"}
-              className="rounded-full mt-[39px] mb-1 w-[127px] h-[56px] border bg-secondaryPurple text-white font-sans text-[17px]"
+              className="rounded-full mt-[82px] mb-1 w-[127px] h-[56px] border bg-secondaryPurple text-white font-sans text-[17px]"
             />
           </div>
         </div>
