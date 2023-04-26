@@ -145,4 +145,4 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   )
 }
 
-export default RenderOutRecepiesModals
+export default RenderOutRecepiesModals*/
