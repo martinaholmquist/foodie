@@ -8,6 +8,7 @@ import useCurrentUser from "@/hooks/useCurrentUser"
 import { ImageUpload } from "./imageUpload"
 import handleUpload from "@/libs/testUpload"
 import KuriosaForm from "../newRecepieComponents/kuriosaForm"
+import CategoriForm from "../newRecepieComponents/categoriForm"
 
 type Recepie = {
   title: string
@@ -18,6 +19,7 @@ type Recepie = {
   authorId: string
   image: string
   kuriosa: string
+  category: string
 }
 
 interface Input {
@@ -40,6 +42,7 @@ const RecepieModule = ({}) => {
     authorId: "",
     image: "",
     kuriosa: "",
+    category: ""
   })
 
   const [inputs, setInputs] = useState<Input[]>([
@@ -105,6 +108,7 @@ const RecepieModule = ({}) => {
     ingredients: inputValues,
     intructions: instructionValues,
     kuriosa: recepie.kuriosa,
+    category: recepie.category
   }
 
   const onSubmit = async (e: SyntheticEvent) => {
@@ -199,7 +203,7 @@ const RecepieModule = ({}) => {
               siffra={inputs.id}
               value={inputs.value}
               onClick={() =>
-                inputs.id == 3 ? null : handleRemoveInput(inputs.id)
+                inputs.id < 4 ? null : handleRemoveInput(inputs.id)
               }
               onChange={(e) => handleInputChange(inputs.id, e.target.value)}
             />
@@ -223,7 +227,7 @@ const RecepieModule = ({}) => {
               siffra={inputs.id}
               value={inputs.value}
               onClick={() =>
-                inputs.id == 3 ? null : handleRemoveInstructionInput(inputs.id)
+                inputs.id < 4 ? null : handleRemoveInstructionInput(inputs.id)
               }
               onChange={(e) =>
                 handleInstructionInputChange(inputs.id, e.target.value)
@@ -241,7 +245,7 @@ const RecepieModule = ({}) => {
           </div>
           <div className="flex w-full items-center pt-4">
             <KuriosaForm
-              placeholderProp={""}
+              placeholderProp={"Vad vill du berätta?"}
               value={recepie.kuriosa}
               onChange={(e) =>
                 setRecepie({ ...recepie, kuriosa: e.target.value })
@@ -249,16 +253,37 @@ const RecepieModule = ({}) => {
             />
           </div>
 
-          <div className=" pt-12">
+          {/* <div className=" pt-12">
             <h2 className="  font-title font-bold text-2xl">Kategori</h2>
           </div>
-          <AddfieldForm placeholderProp={"Lägg till taggar"} />
+          <AddfieldForm placeholderProp={"Lägg till tagg"} /> */}
 
-          <FormButton
-            value={"Skicka"}
-            type={"submit"}
-            className="rounded-md  w-full h-12 bg-primaryPink  text-black  font-semibold "
-          />
+            <div className=" mt-14 bg-red-200">
+              <h2 className="  font-title font-bold text-2xl">Kategori</h2>
+              <CategoriForm
+                name={"Lägg till tagg"}
+                a={"1"}
+                b={"2"}
+                c={"3"}
+                d={"4"}
+                e={"5"}
+                f={"6"}
+                value={recepie.category}
+                onChange={(e) =>
+                  setRecepie({
+                    ...recepie,
+                    category: e.target.value,
+                  })
+                }
+            />
+          </div>
+          <div className="w-full text-center">
+            <FormButton
+              value={"Publicera"}
+              type={"submit"}
+              className="rounded-md mt-10 h-12 border bg-secondaryRed text-white"
+            />
+          </div>
         </div>
       </form>
     </>

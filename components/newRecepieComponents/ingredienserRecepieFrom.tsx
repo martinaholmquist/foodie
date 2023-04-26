@@ -47,7 +47,7 @@ export const IngredienserRecepieFrom = ({
         placeholder={placeholderProp + " " + siffra}
         value={value}
         onChange={onChange}
-        className="border rounded-md w-[326px] h-12 px-2 font-sans shadow-lg"
+        className="border rounded-md w-[337px] h-12 px-2 font-sans shadow-lg"
       />
     </div>
   )
