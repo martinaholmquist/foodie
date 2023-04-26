@@ -55,7 +55,7 @@ model Recepie {
   image              String?
   comments           Comment[]
   createdAt          DateTime @default(now())
-  category           String?
+  category           String
   
 }
 

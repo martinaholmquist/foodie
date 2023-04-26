@@ -57,7 +57,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
                 {item.title}
               </p>
               <div className=" pl-2 pt-1 flex  items-center">
-                <div className="h-4 w-4 bg-primaryRed rounded-full"></div>
+                <div className="h-4 w-4 bg-secondaryRed rounded-full"></div>
                 <p className="pl-4 font-sans text-1xl font-medium">
                   {item.author?.name}
                 </p>

@@ -28,14 +28,14 @@ module.exports = {
       colors: {
         primaryPink: "#F1C6D4",
         secondarypink: "#F6E5EB",
-        anotherpink: "#F5F5F5",
+        anotherpink: "#FCF4F6",
         primaryYellow: "#FFD966",
         primaryGreen: "#AEDF6F",
         secondaryWhite: "#FFFFFF",
         secondaryRed: "#6C2323",
+        secondaryPurple: "#89023E",
         secondaryBrown: "#453C3C",
         secondaryBlack: "#000",
-        primaryRed: "#6C2323",
       },
       fontFamily: {
         sans: ["var(----font-publicSans)"],

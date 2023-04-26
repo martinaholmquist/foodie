@@ -9,7 +9,7 @@ interface Props {
 
 const RubrikRecepieFormView = (props: Props) => {
   return (
-    <div className="">
+    <div className="bg-anotherpink">
       {/* bild / exit */}
       <div className="h-[75px] pl-5 pt-8 ">
         <img src="Logo Foodie Black 1 (1).svg" alt="Foodie.logo" />
@@ -26,13 +26,13 @@ const RubrikRecepieFormView = (props: Props) => {
             Utforska
           </button>
           <div
-            className={`bg-primaryRed h-[5px] w-full ${props.displayExpl}  bottom-1 rounded-md`}
+            className={`bg-secondaryPurple h-[5px] w-full ${props.displayExpl}  bottom-1 rounded-md`}
           ></div>
         </div>
         <div className="text-[35px]">
           <p>|</p>
         </div>
-        <div className="font-title relative">
+        <div className="font-title relative ">
           <button
             onClick={props.onPublishClick}
             disabled={props.publishDisabled}
@@ -40,7 +40,7 @@ const RubrikRecepieFormView = (props: Props) => {
             Publicera
           </button>
           <div
-            className={`bg-primaryRed h-[5px] w-full  ${props.displayPub}  bottom-1 rounded-md`}
+            className={`bg-secondaryPurple h-[5px] w-full  ${props.displayPub}  bottom-1 rounded-md `}
           ></div>
         </div>
       </div>
