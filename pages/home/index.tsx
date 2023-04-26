@@ -28,6 +28,8 @@ const Index: NextPage<Props> = ({}) => {
       <Layout bg={background}>
         <div>Inloggad som {session?.user?.email}</div>
         <RubrikRecepieFormView
+          displayExpl={action === "explore" ? "absolute" : "hidden"}
+          displayPub={action === "publish" ? "absolute" : "hidden"}
           onExploreClick={handleExploreClick}
           onPublishClick={handlePublishClick}
           exploreDisabled={action === "explore"}

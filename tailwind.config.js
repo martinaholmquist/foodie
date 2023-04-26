@@ -35,6 +35,7 @@ module.exports = {
         secondaryRed: "#6C2323",
         secondaryBrown: "#453C3C",
         secondaryBlack: "#000",
+        primaryRed: "#6C2323",
       },
       fontFamily: {
         sans: ["var(----font-publicSans)"],

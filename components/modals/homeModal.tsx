@@ -9,7 +9,7 @@ type recepieProps = {
   image?: string
   time?: string
   id?: string
-  createdAt?: string
+  //createdAt?: string
 
   author?: {
     name: string
@@ -49,20 +49,27 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
               <img
                 src={item.image}
                 alt="image"
-                width={551}
+                width={550}
                 height={100}
-                className="object-cover rounded-lg w-100 h-96"
+                className="object-cover rounded-lg w-100 h-60"
               />
-              <p className="font-title font-bold text-2xl">{item.title}</p>
-              <div className="flex  items-center">
-                <div className="h-4 w-4 bg-red-800 rounded-full"></div>
-                <p className="pl-4 font-sans text-1xl">{item.author?.name}</p>
+              <p className="font-title font-medium text-2xl pl-2 pt-2 ">
+                {item.title}
+              </p>
+              <div className=" pl-2 pt-1 flex  items-center">
+                <div className="h-4 w-4 bg-primaryRed rounded-full"></div>
+                <p className="pl-4 font-sans text-1xl font-medium">
+                  {item.author?.name}
+                </p>
               </div>
-              <div className="flex  items-center">
+              <div className=" pl-2 pt-1 pb-2 flex  items-center">
                 <div>
                   <img src="/klocka.png" alt="klocka" />
                 </div>
-                <p className="pl-4 font-sans text-1xl"> {item.time} min</p>
+                <p className="pl-4 font-sans font-medium text-1xl">
+                  {" "}
+                  {item.time} min
+                </p>
               </div>
             </div>
           </div>
