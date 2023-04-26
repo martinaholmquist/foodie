@@ -18,6 +18,8 @@ const RubrikRecepieFormView = (props: Props) => {
       <div className="flex justify-center space-x-10 text-[30px] mt-14 mb-2">
         <div className="font-title relative">
           <button
+            className=""
+            //className="border-b-[6px] border-black rounded-[3px]"
             onClick={props.onExploreClick}
             disabled={props.exploreDisabled}
           >

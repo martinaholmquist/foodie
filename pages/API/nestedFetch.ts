@@ -24,7 +24,7 @@ export default async function handler(
         },
       },
     })
-    console.log(allRecepies)
+
     return res.status(200).json(allRecepies)
   } catch (error) {
     console.error(error)

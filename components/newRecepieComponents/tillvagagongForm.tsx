@@ -16,7 +16,7 @@ const TillvagagongForm = ({
   return (
     <div className="flex w-full items-center pt-4">
       <div className=" pl-2 pr-3">
-        <button className=" pb-10" onClick={onClick}>
+        <button type="button" className=" pb-10" onClick={onClick}>
           <svg
             width="24"
             height="24"
