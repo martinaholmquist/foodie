@@ -247,7 +247,7 @@ const RecepieModule = ({}) => {
           <div className="flex w-full items-center">
             <KuriosaForm
               placeholderProp={
-                "Dela med dig av ett minne eller historia koppla till din rätt. Exempelvis: ''Min faster gjorde världens bästa morotskaka som dessutom vann pris i Småland''"
+                "Dela med dig av ett minne eller historia           koppla till din rätt.                                         Exempelvis: ''Min faster gjorde världens bästa morotskaka som dessutom vann pris i        Småland''"
               }
               value={recepie.kuriosa}
               onChange={(e) =>
