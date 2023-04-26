@@ -1,18 +1,22 @@
-interface Props {}
+interface Props {
+  placeholderProp: string
+  value?: string
+  onChange?: (...args: any) => any
+}
 
-const KuriosaForm = ({}) => {
+const KuriosaForm = ({ placeholderProp, value, onChange }: Props) => {
   return (
     <div className="flex justify-center pt-[10px]">
-      <label htmlFor="">
-        <textarea
-          name=""
-          id=""
-          cols={41}
-          rows={5}
-          placeholder="Vad vill du berätta?"
-          className="rounded-sm shadow-lg placeholder: pt-2 pl-2"
-        ></textarea>
-      </label>
+      <textarea
+        name=""
+        id=""
+        cols={41}
+        rows={5}
+        placeholder={placeholderProp}
+        value={value}
+        onChange={onChange}
+        className="rounded-sm shadow-lg placeholder: pt-2 pl-2"
+      ></textarea>
     </div>
   )
 }

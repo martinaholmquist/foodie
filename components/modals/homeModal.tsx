@@ -86,15 +86,7 @@ type recepieProps = {
   id?: string
   name?: string
   profileImage?: string
-  recepies?: [
-    {
-      title: string
-      image: string
-      time: string
-      id: string
-      createdAt: string
-    }
-  ]
+  recepies?: [{ title: string; image: string; time: string; id: string }]
 }
 
 const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
@@ -142,7 +134,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
                   <div>
                     <img src="/klocka.png" alt="klocka" />
                   </div>
-                  <p className="pl-4 font-sans text-1xl"> {items.time} min</p>
+                  <p className="pl-4 font-sans text-1xl"> {items.time}</p>
                 </div>
               </div>
             ))}
@@ -153,4 +145,4 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   )
 }
 
-export default RenderOutRecepiesModals*/
+export default RenderOutRecepiesModals
