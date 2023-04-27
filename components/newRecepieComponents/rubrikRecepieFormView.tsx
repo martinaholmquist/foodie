@@ -26,7 +26,7 @@ const RubrikRecepieFormView = (props: Props) => {
             Utforska
           </button>
           <div
-            className={`bg-secondaryPurple h-[5px] w-full ${props.displayExpl}  bottom-1 rounded-md`}
+            className={`bg-crimsonRed h-[5px] w-full ${props.displayExpl}  bottom-1 rounded-md`}
           ></div>
         </div>
         <div className="text-[35px]">
@@ -40,7 +40,7 @@ const RubrikRecepieFormView = (props: Props) => {
             Publicera
           </button>
           <div
-            className={`bg-secondaryPurple h-[5px] w-full  ${props.displayPub}  bottom-1 rounded-md `}
+            className={`bg-crimsonRed h-[5px] w-full  ${props.displayPub}  bottom-1 rounded-md `}
           ></div>
         </div>
       </div>
