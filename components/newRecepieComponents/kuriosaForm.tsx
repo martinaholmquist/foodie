@@ -6,7 +6,7 @@ interface Props {
 
 const KuriosaForm = ({ placeholderProp, value, onChange }: Props) => {
   return (
-    <div className="flex justify-center pt-[10px]">
+    <div className="flex justify-center pt-[10px] w-full">
       <textarea
         name=""
         id=""

@@ -111,7 +111,6 @@ const RecepieModule = ({}) => {
   }
 
   const onSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault()
     console.log(recepie.image)
 
     const data = await fetch(
@@ -146,10 +145,10 @@ const RecepieModule = ({}) => {
           </div>
           {/* Bild */}
           <div className="flex items-center justify-center pt-5">
-            <div className="relative">
+            <div className="relative h-52 w-full">
               <label
                 htmlFor="dropzone-file"
-                className="flex justify-center w-96 h-52 bg-white rounded-md shadow-lg"
+                className="flex justify-center w-full h-full bg-white rounded-md shadow-lg"
               >
                 <div className="flex flex-col items-center justify-center">
                   <img src="image 60.svg" alt="foto link" />
@@ -239,10 +238,10 @@ const RecepieModule = ({}) => {
               }
             />
           ))}
-            <AddfieldForm
-              placeholderProp={"Lägg till steg"}
-              onClick={handleAddInputInstructions}
-            />
+          <AddfieldForm
+            placeholderProp={"Lägg till steg"}
+            onClick={handleAddInputInstructions}
+          />
 
           {/* Kuriosa */}
           <div className=" pt-12">
@@ -267,11 +266,11 @@ const RecepieModule = ({}) => {
             <h2 className="  font-title font-bold text-2xl pb-[10px]">
               Kategorier
             </h2>
-            <div className="px-[21px]  bg-white h-[186px] w-[385px] p-[25px] rounded-md shadow-lg">
+            <div className=" py-5 bg-white  rounded-md shadow-lg">
               <button
                 type="button"
                 value={"Fisk och skaldjur"}
-                className=" bg-white p-1 px-5 rounded-full mr-[15px] shadow-lg outline-none focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                className=" bg-white p-1 px-4 ml-3 rounded-full mr-[15px] shadow-lg outline-none focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
                 onClick={() => {
                   setRecepie({ ...recepie, category: "Fisk och skaldjur" })
                 }}
@@ -292,7 +291,7 @@ const RecepieModule = ({}) => {
               <button
                 value={"Vegetariskt"}
                 type="button"
-                className=" bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                className=" bg-white p-1 ml-3 px-5 rounded-full mt-[20px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
                 onClick={() => {
                   setRecepie({ ...recepie, category: "Fisk och skaldjur" })
                 }}
@@ -322,7 +321,7 @@ const RecepieModule = ({}) => {
               <button
                 value={"Bakning"}
                 type="button"
-                className=" bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                className=" bg-white p-1 px-5 ml-3 rounded-full mt-[20px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
                 onClick={() => {
                   setRecepie({ ...recepie, category: "Bakning" })
                 }}
