@@ -255,8 +255,9 @@ const RecepieModule = ({}) => {
 
           {/* <div className=" pt-12">
             <h2 className="  font-title font-bold text-2xl">Kategori</h2>
+            <input type="checkbox" name="test" id="" />
+            <label htmlFor="test">Hi</label>
           </div>
-          <AddfieldForm placeholderProp={"Lägg till tagg"} /> */}
 
           <div className=" mt-14 bg-red-200">
             <h2 className="  font-title font-bold text-2xl">Kategori</h2>

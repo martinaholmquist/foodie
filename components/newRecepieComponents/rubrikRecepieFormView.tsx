@@ -1,3 +1,5 @@
+import { Logo } from "../hero-components/logo"
+
 interface Props {
   onExploreClick: () => void
   onPublishClick: () => void
@@ -12,7 +14,7 @@ const RubrikRecepieFormView = (props: Props) => {
     <div className="">
       {/* bild / exit */}
       <div className="h-[75px] pl-5 pt-8 ">
-        <img src="Logo Foodie Black 1 (1).svg" alt="Foodie.logo" />
+        <Logo foodieLogo={"/Loggo_B&W.png"} height={75} width={100} />
       </div>
       {/* rubrik */}
       <div className="flex justify-center space-x-10 text-[30px] mt-14 mb-2">
