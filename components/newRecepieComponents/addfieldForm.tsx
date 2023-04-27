@@ -6,12 +6,17 @@ interface Props {
 const AddfieldForm = ({ onClick, placeholderProp }: Props) => {
   return (
     <div className="text-center">
-      <div className="relative pt-4">
+      <div className="pt-4">
         <button
           type="button"
-          className=" relative border rounded-md w-full h-12 px-2 font-sans shadow-lg text-center bg-white"
+          className=" reletive border rounded-md w-full h-12 font-sans shadow-lg text-center bg-white"
           onClick={onClick}
         >
+          <img
+            src="/plustecken.png"
+            alt="plustecken"
+            className="absolute px-3 py-[2px]"
+          />
           {placeholderProp}
         </button>
       </div>

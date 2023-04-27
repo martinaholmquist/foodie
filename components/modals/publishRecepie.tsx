@@ -8,7 +8,6 @@ import useCurrentUser from "@/hooks/useCurrentUser"
 import { ImageUpload } from "./imageUpload"
 import handleUpload from "@/libs/testUpload"
 import KuriosaForm from "../newRecepieComponents/kuriosaForm"
-import CategoriForm from "../newRecepieComponents/categoriForm"
 
 type Recepie = {
   title: string
@@ -127,10 +126,13 @@ const RecepieModule = ({}) => {
     console.log(res)
   }
 
+  /* start */
+
   return (
     <>
       <form onSubmit={onSubmit} className="">
-        <div className=" pt-8  px-6">
+        {/* title */}
+        <div className=" pt-8  px-[22px]">
           <div>
             <input
               type="text"
@@ -142,34 +144,35 @@ const RecepieModule = ({}) => {
               }
             />
           </div>
+          {/* Bild */}
           <div className="flex items-center justify-center pt-5">
-            <label
-              htmlFor="dropzone-file"
-              className="flex justify-center w-96 h-52 bg-secondarypink rounded-md shadow-lg"
-            >
-              <div className="flex flex-col items-center justify-center ">
-                <img src="image 60.svg" alt="foto link" />
-                <p className="text-xl">Lägg till en bild</p>
-                <button
-                  className="p-2 bg-slate-600 mt-5"
-                  type="button"
-                  onClick={() => upload()}
-                >
-                  Upload Image
-                </button>
-                <br />
-              </div>
-              <input
-                id="dropzone-file"
-                type="file"
-                className="hidden"
-                onChange={(e: any) => {
-                  setImage(e.target.files[0])
-                }}
-              />
-            </label>
+            <div className="relative">
+              <label
+                htmlFor="dropzone-file"
+                className="flex justify-center w-96 h-52 bg-white rounded-md shadow-lg"
+              >
+                <div className="flex flex-col items-center justify-center">
+                  <img src="image 60.svg" alt="foto link" />
+                  <button
+                    className="w-7  bg-secondaryPurple mt-5 rounded-full absolute bottom-2 right-2 shadow-lg"
+                    type="button"
+                    onClick={() => upload()}
+                  >
+                    <span className="text-white text-xl">+</span>
+                  </button>
+                </div>
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  className="hidden"
+                  onChange={(e: any) => {
+                    setImage(e.target.files[0])
+                  }}
+                />
+              </label>
+            </div>
           </div>
-          <h2>{url}</h2>
+          {/* Portioner */}
           <NewRecepiePopUpTableOption
             name="Antal portioner"
             a={"2"}
@@ -182,6 +185,7 @@ const RecepieModule = ({}) => {
             }
           />
 
+          {/* Tid */}
           <NewRecepiePopUpTableOption
             name="Tid"
             a={"5"}
@@ -192,10 +196,10 @@ const RecepieModule = ({}) => {
             onChange={(e) => setRecepie({ ...recepie, time: e.target.value })}
           />
 
+          {/* Ingredienser */}
           <div className=" pt-12">
             <h2 className="  font-title font-bold text-2xl">Ingredienser</h2>
           </div>
-
           {inputs.map((inputs) => (
             <IngredienserRecepieFrom
               placeholderProp={"Ingrediens"}
@@ -220,6 +224,7 @@ const RecepieModule = ({}) => {
             </h2>
           </div>
 
+          {/* Tillvägagång */}
           {instructionInputs.map((inputs) => (
             <TillvagagongForm
               placeholderProp={"Steg"}
@@ -234,18 +239,22 @@ const RecepieModule = ({}) => {
               }
             />
           ))}
+            <AddfieldForm
+              placeholderProp={"Lägg till steg"}
+              onClick={handleAddInputInstructions}
+            />
 
-          <AddfieldForm
-            placeholderProp={"Lägg till steg"}
-            onClick={handleAddInputInstructions}
-          />
-
+          {/* Kuriosa */}
           <div className=" pt-12">
             <h2 className="  font-title font-bold text-2xl">Kuriosa</h2>
           </div>
-          <div className="flex w-full items-center pt-4">
+          <div className="flex w-full items-center">
             <KuriosaForm
-              placeholderProp={"Vad vill du berätta?"}
+              placeholderProp={
+                "Dela med dig av ett minne, tips eller historia" +
+                `${" "}` +
+                "kopplat till din rätt."
+              }
               value={recepie.kuriosa}
               onChange={(e) =>
                 setRecepie({ ...recepie, kuriosa: e.target.value })
@@ -253,30 +262,102 @@ const RecepieModule = ({}) => {
             />
           </div>
 
-          <div className=" mt-14 bg-red-200">
-            <h2 className="  font-title font-bold text-2xl">Kategori</h2>
-            <CategoriForm
-              name={"Lägg till tagg"}
-              a={"1"}
-              b={"2"}
-              c={"3"}
-              d={"4"}
-              e={"5"}
-              f={"6"}
-              value={recepie.category}
-              onChange={(e) =>
-                setRecepie({
-                  ...recepie,
-                  category: e.target.value,
-                })
-              }
-            />
+          {/* Category */}
+          <div className=" mt-14">
+            <h2 className="  font-title font-bold text-2xl pb-[10px]">
+              Kategorier
+            </h2>
+            <div className="px-[21px]  bg-white h-[186px] w-[385px] p-[25px] rounded-md shadow-lg">
+              <button
+                type="button"
+                value={"Fisk och skaldjur"}
+                className=" bg-white p-1 px-5 rounded-full mr-[15px] shadow-lg outline-none focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                onClick={() => {
+                  setRecepie({ ...recepie, category: "Fisk och skaldjur" })
+                }}
+              >
+                Fisk och skaldjur
+              </button>
+
+              <button
+                value={"Kött och chark"}
+                type="button"
+                className=" bg-white p-1 px-5 rounded-full shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                onClick={() => {
+                  setRecepie({ ...recepie, category: "Fisk och skaldjur" })
+                }}
+              >
+                Kött och chark
+              </button>
+              <button
+                value={"Vegetariskt"}
+                type="button"
+                className=" bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                onClick={() => {
+                  setRecepie({ ...recepie, category: "Fisk och skaldjur" })
+                }}
+              >
+                Vegetariskt
+              </button>
+              <button
+                value={"Fågel"}
+                type="button"
+                className=" bg-white p-1 px-5 rounded-full mt-[20px] ml-[15px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                onClick={() => {
+                  setRecepie({ ...recepie, category: "Fågel" })
+                }}
+              >
+                Fågel
+              </button>
+              <button
+                value={"Pasta"}
+                type="button"
+                className=" bg-white p-1 px-5 rounded-full mt-[20px] ml-[15px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                onClick={() => {
+                  setRecepie({ ...recepie, category: "Pasta" })
+                }}
+              >
+                Pasta
+              </button>
+              <button
+                value={"Bakning"}
+                type="button"
+                className=" bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                onClick={() => {
+                  setRecepie({ ...recepie, category: "Bakning" })
+                }}
+              >
+                Bakning
+              </button>
+              <button
+                value={"Dessert"}
+                type="button"
+                className=" bg-white p-1 px-5 rounded-full mt-[20px] ml-[15px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                onClick={() => {
+                  setRecepie({ ...recepie, category: "Dessert" })
+                }}
+              >
+                Dessert
+              </button>
+              <button
+                value={"Dryck"}
+                type="button"
+                className=" bg-white p-1 px-5 rounded-full mt-[20px] ml-[15px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+                onClick={() => {
+                  setRecepie({ ...recepie, category: "Dryck" })
+                }}
+              >
+                Dryck
+              </button>
+            </div>
           </div>
+
+          {/* publicera knapp */}
           <div className="w-full text-center">
             <FormButton
               value={"Publicera"}
               type={"submit"}
-              className="rounded-md mt-10 h-12 border bg-secondaryRed text-white"
+              className="rounded-full mt-[82px] mb-1 w-[127px] h-[56px] border bg-secondaryPurple text-white font-sans text-[17px]"
             />
           </div>
         </div>

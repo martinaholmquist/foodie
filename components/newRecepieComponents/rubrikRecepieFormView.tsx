@@ -12,7 +12,7 @@ interface Props {
 
 const RubrikRecepieFormView = (props: Props) => {
   return (
-    <div className="">
+    <div className="bg-anotherpink">
       {/* bild / exit */}
       <div className="h-[75px] pl-5 pt-8 ">
         <Logo foodieLogo={"/Loggo_B&W.png"} height={75} width={100} />
@@ -34,7 +34,7 @@ const RubrikRecepieFormView = (props: Props) => {
         <div className="text-[35px]">
           <p>|</p>
         </div>
-        <div className="font-title relative">
+        <div className="font-title relative ">
           <button
             onClick={props.onPublishClick}
             disabled={props.publishDisabled}
