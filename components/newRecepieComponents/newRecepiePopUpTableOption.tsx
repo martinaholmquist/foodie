@@ -20,11 +20,12 @@ const NewRecepiePopUpTableOption = ({
   onChange,
 }: Props) => {
   return (
-    <div className="h-auto text-center pt-4">
+    <div className="h-auto text-center pt-4 relative">
+      <img src="/pil.png" alt="pil dowm" className="absolute right-[15px] bottom-[18px]" />
       <select
         name=""
         id=""
-        className="border rounded-md w-full h-12 px-2 font-sans shadow-lg bg-white"
+        className="border rounded-md w-full h-12 px-2 font-sans shadow-lg bg-white appearance-none"
         value={value}
         onChange={onChange}
       >

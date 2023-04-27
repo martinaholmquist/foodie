@@ -131,7 +131,8 @@ const RecepieModule = ({}) => {
   return (
     <>
       <form onSubmit={onSubmit} className="">
-        <div className=" pt-8  px-6">
+        {/* title */}
+        <div className=" pt-8  px-[22px]">
           <div>
             <input
               type="text"
@@ -143,6 +144,7 @@ const RecepieModule = ({}) => {
               }
             />
           </div>
+          {/* Bild */}
           <div className="flex items-center justify-center pt-5">
             <div className="relative">
               <label
@@ -152,7 +154,7 @@ const RecepieModule = ({}) => {
                 <div className="flex flex-col items-center justify-center">
                   <img src="image 60.svg" alt="foto link" />
                   <button
-                    className="w-7  bg-secondaryPurple mt-5 rounded-full absolute bottom-2 right-2 "
+                    className="w-7  bg-secondaryPurple mt-5 rounded-full absolute bottom-2 right-2 shadow-lg"
                     type="button"
                     onClick={() => upload()}
                   >
@@ -170,7 +172,7 @@ const RecepieModule = ({}) => {
               </label>
             </div>
           </div>
-          <h2>{url}</h2>
+          {/* Portioner */}
           <NewRecepiePopUpTableOption
             name="Antal portioner"
             a={"2"}
@@ -183,6 +185,7 @@ const RecepieModule = ({}) => {
             }
           />
 
+          {/* Tid */}
           <NewRecepiePopUpTableOption
             name="Tid"
             a={"5"}
@@ -193,10 +196,10 @@ const RecepieModule = ({}) => {
             onChange={(e) => setRecepie({ ...recepie, time: e.target.value })}
           />
 
+          {/* Ingredienser */}
           <div className=" pt-12">
             <h2 className="  font-title font-bold text-2xl">Ingredienser</h2>
           </div>
-
           {inputs.map((inputs) => (
             <IngredienserRecepieFrom
               placeholderProp={"Ingrediens"}
@@ -221,6 +224,7 @@ const RecepieModule = ({}) => {
             </h2>
           </div>
 
+          {/* Tillvägagång */}
           {instructionInputs.map((inputs) => (
             <TillvagagongForm
               placeholderProp={"Steg"}
@@ -235,19 +239,21 @@ const RecepieModule = ({}) => {
               }
             />
           ))}
+            <AddfieldForm
+              placeholderProp={"Lägg till steg"}
+              onClick={handleAddInputInstructions}
+            />
 
-          <AddfieldForm
-            placeholderProp={"Lägg till steg"}
-            onClick={handleAddInputInstructions}
-          />
-
+          {/* Kuriosa */}
           <div className=" pt-12">
             <h2 className="  font-title font-bold text-2xl">Kuriosa</h2>
           </div>
           <div className="flex w-full items-center">
             <KuriosaForm
               placeholderProp={
-                "Dela med dig av ett minne eller historia           koppla till din rätt.                                         Exempelvis: ''Min faster gjorde världens bästa morotskaka som dessutom vann pris i        Småland''"
+                "Dela med dig av ett minne, tips eller historia" +
+                `${" "}` +
+                "kopplat till din rätt."
               }
               value={recepie.kuriosa}
               onChange={(e) =>
@@ -261,7 +267,7 @@ const RecepieModule = ({}) => {
             <h2 className="  font-title font-bold text-2xl pb-[10px]">
               Kategorier
             </h2>
-            <div className="px-[21px]  bg-white h-auto p-[25px] rounded-md shadow-lg">
+            <div className="px-[21px]  bg-white h-[186px] w-[385px] p-[25px] rounded-md shadow-lg">
               <button
                 type="button"
                 value={"Fisk och skaldjur"}
