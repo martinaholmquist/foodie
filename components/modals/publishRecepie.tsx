@@ -154,7 +154,7 @@ const RecepieModule = ({}) => {
                 <div className="flex flex-col items-center justify-center">
                   <img src="image 60.svg" alt="foto link" />
                   <button
-                    className="w-7  bg-secondaryPurple mt-5 rounded-full absolute bottom-2 right-2 shadow-lg"
+                    className="w-7  bg-crimsonRed mt-5 rounded-full absolute bottom-2 right-2 shadow-lg"
                     type="button"
                     onClick={() => upload()}
                   >
