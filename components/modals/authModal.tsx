@@ -49,7 +49,7 @@ const AuthModal = () => {
   }
 
   return (
-    <Layout bg="bg-white">
+    <Layout>
       <NavBar />
       <Heading headingContent="Skapa konto eller logga in" />
       <form onSubmit={action == "login" ? handleSubmit : submitRegistration}>
@@ -85,7 +85,7 @@ const AuthModal = () => {
           <FormButton
             value={action == "register" ? "Skapa konto" : "Logga in"}
             type={"submit"}
-            className="rounded-md  w-full h-12 bg-primaryPink  text-black  font-semibold "
+            className="rounded-md  w-full h-12 bg-secondaryRed  text-black  font-semibold "
           />
           <FormButton
             value={action == "register" ? "Logga in" : "Skapa konto"}

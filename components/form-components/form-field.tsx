@@ -26,7 +26,7 @@ export const FormFielld = ({
         </label>
         <div className="w-full h-full flex items-center pt-3 pl-4">
           <input
-            className="  text-black focus:outline-none w-full font-bold text-lg font-sans"
+            className="  text-black focus:outline-none w-full font-bold text-lg font-sans bg-transparent"
             type={type}
             name={htmlFor}
             onChange={onChange}
