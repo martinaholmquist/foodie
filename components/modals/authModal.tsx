@@ -50,7 +50,6 @@ const AuthModal = () => {
 
   return (
     <Layout>
-    <Layout>
       <NavBar />
       <Heading headingContent="Skapa konto eller logga in" />
       <form onSubmit={action == "login" ? handleSubmit : submitRegistration}>
