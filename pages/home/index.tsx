@@ -11,23 +11,22 @@ interface Props {}
 
 const Index: NextPage<Props> = ({}) => {
   const [action, setAction] = useState("explore")
-  const [background, setBackground] = useState("bg-white")
+
   const { data: session, status } = useSession()
 
   const handleExploreClick = () => {
     setAction("explore")
-    setBackground("bg-anotherpink")
   }
   const handlePublishClick = () => {
     setAction("publish")
-    setBackground("bg-primaryPink")
   }
 
   return (
     <>
-      <Layout bg={background}>
-        <div>Inloggad som {session?.user?.email}</div>
+      <Layout>
         <RubrikRecepieFormView
+          displayExpl={action === "explore" ? "absolute" : "hidden"}
+          displayPub={action === "publish" ? "absolute" : "hidden"}
           onExploreClick={handleExploreClick}
           onPublishClick={handlePublishClick}
           exploreDisabled={action === "explore"}

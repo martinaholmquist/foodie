@@ -7,7 +7,14 @@ interface Props {}
 const Index: NextPage<Props> = ({}) => {
   return (
     <div className="">
-      <Logo foodieLogo={"/Loggo_B&W.png"} className={"w-52 md:w-80"} />
+      <div className=" flex justify-center ">
+        <Logo
+          height={200}
+          width={200}
+          foodieLogo={"/Loggo_B&W.png"}
+          className={"w-56 md:w-80 "}
+        />
+      </div>
       <Hero
         heroTitle="Dela, smaka och utvecklas!"
         heroText="Foodie skapades av ett gäng matälskare

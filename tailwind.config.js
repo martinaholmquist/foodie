@@ -24,17 +24,19 @@ module.exports = {
       "2xl": "1536px",
       // => @media (min-width: 1536px) { ... }
     },
+
     extend: {
       colors: {
         primaryPink: "#F1C6D4",
         secondarypink: "#F6E5EB",
-        anotherpink: "#F5F5F5",
+        anotherpink: "#FCF4F6",
         primaryYellow: "#FFD966",
         primaryGreen: "#AEDF6F",
         secondaryWhite: "#FFFFFF",
         secondaryRed: "#6C2323",
         secondaryBrown: "#453C3C",
         secondaryBlack: "#000",
+        crimsonRed: "#89023E",
       },
       fontFamily: {
         sans: ["var(----font-publicSans)"],

@@ -49,7 +49,7 @@ const AuthModal = () => {
   }
 
   return (
-    <Layout bg="bg-white">
+    <Layout>
       <NavBar />
       <Heading headingContent="Skapa konto eller logga in" />
       <form onSubmit={action == "login" ? handleSubmit : submitRegistration}>
@@ -85,12 +85,12 @@ const AuthModal = () => {
           <FormButton
             value={action == "register" ? "Skapa konto" : "Logga in"}
             type={"submit"}
-            className="rounded-md  w-full h-12 bg-primaryPink  text-black  font-semibold "
+            className="rounded-full  w-full h-12 bg-crimsonRed text-white shadow-md shadow-black/25  font-semibold "
           />
           <FormButton
             value={action == "register" ? "Logga in" : "Skapa konto"}
             type={"button"}
-            className="rounded-md border-black border-[1px] w-full h-12   text-black  font-semibold"
+            className="rounded-full bg-white shadow-md shadow-black/25 w-full h-12   text-black  font-semibold"
             onClick={() =>
               setAction(action == "register" ? "login" : "register")
             }
@@ -98,7 +98,7 @@ const AuthModal = () => {
           <GoogleButton
             value={"Fortsätt med Google"}
             type={"button"}
-            className="rounded-md w-full h-12   text-black  font-semibold"
+            className="rounded-full bg-white w-full h-12   text-black  font-semibold shadow-md shadow-black/25"
             onClick={() => signIn("google")}
           />
         </div>

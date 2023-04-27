@@ -15,7 +15,7 @@ export const GoogleButton = ({
   className,
 }: ButtonProps) => {
   return (
-    <div className="mx-6 mt-12 relative shadow-sm shadow-gray-400 rounded-md">
+    <div className="mx-6 mt-12 relative ">
       <button onClick={onClick} name={name} type={type} className={className}>
         <Image
           src={"/google_icon.png"}
