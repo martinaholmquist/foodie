@@ -79,7 +79,7 @@ const RecepieView = ({}) => {
 
             <div className="flex items-center justify-between pt-[13px] ">
               <div className=" pl-2 flex  items-center">
-                <div className="h-4 w-4 bg-secondaryRed rounded-full"></div>
+                <div className="h-4 w-4 bg-crimsonRed rounded-full"></div>
                 <p className="pl-2 font-sans text-1xl font-medium">
                   {data?.author?.name}
                 </p>
