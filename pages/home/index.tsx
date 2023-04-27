@@ -31,7 +31,7 @@ const Index: NextPage<Props> = ({}) => {
           onPublishClick={handlePublishClick}
           exploreDisabled={action === "explore"}
           publishDisabled={action === "publish"}
-          col="bg-secondaryRed"
+          col="bg-crimsonRed"
         />
         {action == "explore" ? <RenderOutRecepiesModals /> : <RecepieModule />}
       </Layout>

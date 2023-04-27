@@ -32,7 +32,7 @@ module.exports = {
         primaryYellow: "#FFD966",
         primaryGreen: "#AEDF6F",
         secondaryWhite: "#FFFFFF",
-        secondaryRed: "#89023E",
+        crimsonRed: "#89023E",
         secondaryBrown: "#453C3C",
         secondaryBlack: "#000",
       },

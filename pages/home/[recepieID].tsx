@@ -98,7 +98,7 @@ const RecepieView = ({}) => {
           </div>
 
           <SingleRecepieModule
-            col="bg-secondaryRed"
+            col="bg-crimsonRed"
             displayExpl={action === "Ingredienser" ? "absolute" : "hidden"}
             displayPub={action === "DoLikeThis" ? "absolute" : "hidden"}
             onExploreClick={handleIngredienserClick}
