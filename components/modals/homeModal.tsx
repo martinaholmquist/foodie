@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 import RubrikRecepieFormView from "../newRecepieComponents/rubrikRecepieFormView"
+//import RecepieView from "../modals/[singleRecepieModule]"
 import { NextPage } from "next"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/router"
+import { Layout } from "../layout"
 
 type recepieProps = {
   title?: string
@@ -36,7 +38,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   }, [])
 
   return (
-    <div className="bg-anotherpink flex flex-col justify-center space-y-4">
+    <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4">
       <div className="">
         {data.map((item) => (
           <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4">
@@ -49,13 +51,13 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
                 alt="image"
                 width={550}
                 height={100}
-                className="object-cover rounded-lg w-100 h-60"
+                className="object-cover rounded-lg w-100 h-52"
               />
               <p className="font-title font-medium text-2xl pl-2 pt-2 ">
                 {item.title}
               </p>
               <div className=" pl-2 pt-1 flex  items-center">
-                <div className="h-4 w-4 bg-primaryRed rounded-full"></div>
+                <div className="h-4 w-4 bg-crimsonRed rounded-full"></div>
                 <p className="pl-4 font-sans text-1xl font-medium">
                   {item.author?.name}
                 </p>

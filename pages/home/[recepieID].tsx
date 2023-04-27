@@ -1,3 +1,6 @@
+import SingleRecepieModule from "@/components/modals/singleRecepieModule"
+import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecepieFormView"
+
 import Link from "next/link"
 import { useRouter } from "next/router"
 import React, { useEffect, useState } from "react"
@@ -11,10 +14,16 @@ type recpieData = {
   kuriosa: string
   image: string
   id: any
+  author: {
+    name: string
+    profileImage: string
+  }
 }
 
 const RecepieView = ({}) => {
   const [data, setData] = useState<recpieData>()
+  const [action, setAction] = useState("Ingredienser")
+
   const router = useRouter()
   const id = router.query.recepieID
 
@@ -24,32 +33,131 @@ const RecepieView = ({}) => {
     setData(recepies)
   }
 
+  const handleIngredienserClick = () => {
+    setAction("Ingredienser")
+  }
+  const handleDoLikeThisClick = () => {
+    setAction("DoLikeThis")
+  }
+
   useEffect(() => {
     recepieData()
   }, [])
 
   return (
     <div className="" key={data?.id}>
-      <div>
-        <img src={data?.image} alt="image" height={400} width={400} />
+      <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="bg-primaryPink relative pb-[22px] rounded-md">
+            <Link className="absolute top-2 left-2" href={"/home"}>
+              {" "}
+              <img src="/Vector.png" alt="tillbakaknapp" />{" "}
+            </Link>
+
+            <img
+              src={data?.image}
+              alt="image"
+              width={550}
+              height={100}
+              className="object-cover rounded-lg w-100 h-52"
+            />
+
+            <div className="flex items-center justify-between pt-2 ">
+              <p className="font-title font-medium text-2xl pl-2 ">
+                {data?.title}
+              </p>
+              <div className="flex items-center pr-3">
+                <div>
+                  <img src="/klocka.png" alt="klocka" />
+                </div>
+                <p className="pl-2 font-sans font-medium text-1xl ">
+                  {" "}
+                  {data?.time} min
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-[13px] ">
+              <div className=" pl-2 flex  items-center">
+                <div className="h-4 w-4 bg-secondaryRed rounded-full"></div>
+                <p className="pl-2 font-sans text-1xl font-medium">
+                  {data?.author?.name}
+                </p>
+              </div>
+
+              <div className="flex items-center pr-3">
+                <div>
+                  <img src="/bestikikon 1.png" alt="bestick" />
+                </div>
+                <p className="pl-4 font-sans font-medium text-1xl">
+                  {""}
+                  {data?.servings} port
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <SingleRecepieModule
+            col="bg-crimsonRed"
+            displayExpl={action === "Ingredienser" ? "absolute" : "hidden"}
+            displayPub={action === "DoLikeThis" ? "absolute" : "hidden"}
+            onExploreClick={handleIngredienserClick}
+            onPublishClick={handleDoLikeThisClick}
+            exploreDisabled={action === "Ingredienser"}
+            publishDisabled={action === "DoLikeThis"}
+            amount={data?.ingredients.length}
+          />
+          <div>
+            {action === "Ingredienser" ? (
+              <div>
+                {data?.ingredients.map((item) => (
+                  <ul className="pl-6 flex items-center pb-5">
+                    <div className="h-4 w-4 rounded-full border-[1px] border-black bg-white"></div>
+                    <li className="pl-4">{item}</li>
+                  </ul>
+                ))}
+
+                <div className="flex items-center pt-6 ">
+                  <p className="font-title font-medium text-2xl pl-6 ">
+                    {data?.kuriosa && (
+                      <>
+                        <div className="flex">
+                          <img src="/icons8-chef-hat-100 1.png" alt="" />
+                          <h2 className="pl-4 font-title">
+                            {" "}
+                            {data?.author?.name}s kuriosa
+                          </h2>
+                        </div>
+                        <div className="mt-4 font-sans bg-white">
+                          <p>{data?.kuriosa}</p>
+                        </div>
+                      </>
+                    )}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div>
+                {data?.intructions.map((item) => (
+                  <>
+                    <ul className="pl-6 flex items-center pb-5">
+                      <div className="flex justify-center h-6 w-6 rounded-full border-[1px] border-black bg-white ">
+                        <span>{data.intructions.indexOf(item)}</span>
+                      </div>
+                      <li className="pl-4 ">{item}</li>
+                    </ul>
+                  </>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-      <h1>{data?.title}</h1>
-      <h1>{data?.time} min</h1>
-      <h1>{data?.servings} personer</h1>
-      <ul>
-        <br />
-        <h1>Ingredienser</h1>
-        {data?.ingredients.map((item) => (
-          <li>{item}</li>
-        ))}
-        <br />
-        <h1>Instruktioner</h1>
-        {data?.intructions.map((item) => (
-          <li>{item}</li>
-        ))}
-      </ul>
-      <Link href={"/home"}> Back </Link>
     </div>
   )
 }
 export default RecepieView
+// <li className="pl-4 ">{item}</li>
+// <li className="items-left pl-64">{item}</li>
+
+//<div className="h-4 w-4 rounded-full border-2 border-black bg-white"></div>

@@ -1,4 +1,4 @@
-import { Logo } from "../hero-components/logo"
+import { Layout } from "../layout"
 
 interface Props {
   onExploreClick: () => void
@@ -8,38 +8,34 @@ interface Props {
   displayPub: string
   displayExpl: string
   col: string
+  amount?: number
 }
 
-const RubrikRecepieFormView = (props: Props) => {
+const SingleRecepieModule = (props: Props) => {
   return (
     <div className="">
-      {/* bild / exit */}
-      <div className="h-[75px] pl-5 pt-8 ">
-        <Logo foodieLogo={"/Loggo_B&W.png"} height={75} width={100} />
-      </div>
       {/* rubrik */}
-      <div className="flex justify-center space-x-10 text-[30px] mt-14 mb-2">
+      <div className="flex justify-center space-x-16 text-2xl mb-2  ">
         <div className="font-title relative">
           <button
-            className=""
+            className="pb-2"
+            //className="border-b-[6px] border-black rounded-[3px]"
             onClick={props.onExploreClick}
             disabled={props.exploreDisabled}
           >
-            Utforska
+            Ingredienser ({props.amount})
           </button>
           <div
             className={`${props.col} h-[5px] w-full ${props.displayExpl}  bottom-1 rounded-md`}
           ></div>
         </div>
-        <div className="text-[35px]">
-          <p>|</p>
-        </div>
+
         <div className="font-title relative">
           <button
             onClick={props.onPublishClick}
             disabled={props.publishDisabled}
           >
-            Publicera
+            Gör så här
           </button>
           <div
             className={`${props.col} h-[5px] w-full  ${props.displayPub}  bottom-1 rounded-md`}
@@ -50,4 +46,4 @@ const RubrikRecepieFormView = (props: Props) => {
   )
 }
 
-export default RubrikRecepieFormView
+export default SingleRecepieModule

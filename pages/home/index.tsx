@@ -24,6 +24,7 @@ const Index: NextPage<Props> = ({}) => {
   return (
     <>
       <Layout>
+        <div>Inloggad som {session?.user?.email}</div>
         <RubrikRecepieFormView
           displayExpl={action === "explore" ? "absolute" : "hidden"}
           displayPub={action === "publish" ? "absolute" : "hidden"}
@@ -31,6 +32,7 @@ const Index: NextPage<Props> = ({}) => {
           onPublishClick={handlePublishClick}
           exploreDisabled={action === "explore"}
           publishDisabled={action === "publish"}
+          col="bg-crimsonRed"
         />
         {action == "explore" ? <RenderOutRecepiesModals /> : <RecepieModule />}
       </Layout>

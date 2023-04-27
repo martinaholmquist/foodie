@@ -21,6 +21,14 @@ export default async function handler(
       where: {
         id: String(recepieID),
       },
+      include: {
+        author: {
+          select: {
+            name: true,
+            profileImage: true,
+          },
+        },
+      },
     })
 
     return res.status(200).json(singleRecepie)
