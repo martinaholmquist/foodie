@@ -138,13 +138,13 @@ const RecepieView = ({}) => {
               </div>
             ) : (
               <div>
-                {data?.intructions.map((item) => (
+                {data?.intructions.map((item, index) => (
                   <>
-                    <ul className="pl-6 flex items-center pb-5">
-                      <div className="flex justify-center h-6 w-6 rounded-full border-[1px] border-black bg-white ">
-                        <span>{data.intructions.indexOf(item)}</span>
+                    <ul className="pl-4 flex items-left pb-5 relative">
+                      <div className="mt-1 flex justify-center h-6 w-6 rounded-full border-[1px] border-black bg-white absolute">
+                        <span>{index + 1}</span>
                       </div>
-                      <li className="pl-4 ">{item}</li>
+                      <li className="pl-9">{item}</li>
                     </ul>
                   </>
                 ))}
@@ -157,7 +157,3 @@ const RecepieView = ({}) => {
   )
 }
 export default RecepieView
-// <li className="pl-4 ">{item}</li>
-// <li className="items-left pl-64">{item}</li>
-
-//<div className="h-4 w-4 rounded-full border-2 border-black bg-white"></div>
