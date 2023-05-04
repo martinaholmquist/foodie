@@ -15,7 +15,7 @@ type recpieData = {
   image: string
   id: any
   author: {
-    name: string
+    username: string
     profileImage: string
   }
 }
@@ -81,7 +81,7 @@ const RecepieView = ({}) => {
               <div className=" pl-2 flex  items-center">
                 <div className="h-4 w-4 bg-crimsonRed rounded-full"></div>
                 <p className="pl-2 font-sans text-1xl font-medium">
-                  {data?.author?.name}
+                  {data?.author?.username}
                 </p>
               </div>
 
@@ -125,7 +125,7 @@ const RecepieView = ({}) => {
                           <img src="/icons8-chef-hat-100 1.png" alt="" />
                           <h2 className="pl-4 font-title">
                             {" "}
-                            {data?.author?.name}s kuriosa
+                            {data?.author?.username}s kuriosa
                           </h2>
                         </div>
                         <div className="mt-4 font-sans bg-white">

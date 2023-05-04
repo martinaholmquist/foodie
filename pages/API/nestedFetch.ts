@@ -23,6 +23,7 @@ export default async function handler(
         author: {
           select: {
             name: true,
+            username: true,
             profileImage: true,
             id: true,
           },

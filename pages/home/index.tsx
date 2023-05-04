@@ -3,6 +3,7 @@ import RenderOutRecepiesModals from "@/components/modals/homeModal"
 //import RenderOutRecepiesModals from "@/components/modals/homeModalNew"
 import RecepieModule from "@/components/modals/publishRecepie"
 import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecepieFormView"
+import SearchInput from "@/components/searchInput"
 import { NextPage } from "next"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
@@ -25,6 +26,8 @@ const Index: NextPage<Props> = ({}) => {
     <>
       <Layout>
         <div>Inloggad som {session?.user?.email}</div>
+        <SearchInput />
+
         <RubrikRecepieFormView
           displayExpl={action === "explore" ? "absolute" : "hidden"}
           displayPub={action === "publish" ? "absolute" : "hidden"}
@@ -34,6 +37,7 @@ const Index: NextPage<Props> = ({}) => {
           publishDisabled={action === "publish"}
           col="bg-crimsonRed"
         />
+
         {action == "explore" ? <RenderOutRecepiesModals /> : <RecepieModule />}
       </Layout>
     </>
