@@ -11,6 +11,7 @@ type recepieProps = {
   image?: string
   time?: string
   id?: string
+  category?: string
 
   author?: {
     name: string
@@ -28,24 +29,55 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
     router.push(`/home/${id}`)
   }
 
+  const [category, setCategory] = useState("")
+
+  if (category == "") {
   const recepieData = async () => {
-    const res = await fetch("http://localhost:3000/api/nestedFetch")
-    const recepies = await res.json()
-    setData(recepies)
-  }
-  useEffect(() => {
+  const res = await fetch("http://localhost:3000/api/nestedFetch")
+  const recepies = await res.json()
+  setData(recepies)
+    }
+    useEffect(() => {
     recepieData()
-  }, [])
+    }, [])
+    console.log("no category")
+  }
+  else {
+    const recepieData = async () => {
+      const res = await fetch("http://localhost:3000/api/nestedFetch")
+      const recepiesWithCategory = await res.json()
+      setData(recepiesWithCategory.category)
+    }
+    useEffect(() => {
+      recepieData()
+    }, [])
+    console.log("with category")
+  }
 
   return (
     <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4">
       <div className="">
+        {/* knapp för category filtrering */}
+        <button
+          value={"Pasta"}
+          type="button"
+          className=" bg-white p-1 px-5 rounded-full mt-[20px] ml-[15px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
+          onClick={() => setCategory("Pasta")
+          }
+        >
+          Pasta
+        </button>
+
+        {/* stopp */}
         {data.map((item) => (
           <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4">
             <div
               className="bg-primaryPink rounded-lg"
               onClick={() => handleClick(item.id)}
             >
+              <div>
+                <p>{item.category}</p>
+              </div>
               <img
                 src={item.image}
                 alt="image"
