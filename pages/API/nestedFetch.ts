@@ -1,7 +1,8 @@
 import prismadb from "@/libs/prismadb"
 import type { NextApiRequest, NextApiResponse } from "next"
 
-interface Data {}
+interface Data {
+}
 
 export default async function handler(
   req: NextApiRequest,
