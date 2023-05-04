@@ -284,7 +284,7 @@ const RecepieModule = ({}) => {
                 type="button"
                 className=" bg-white p-1 px-5 rounded-full shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
                 onClick={() => {
-                  setRecepie({ ...recepie, category: "Fisk och skaldjur" })
+                  setRecepie({ ...recepie, category: "Kött och chark" })
                 }}
               >
                 Kött och chark
@@ -294,7 +294,7 @@ const RecepieModule = ({}) => {
                 type="button"
                 className=" bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:bg-primaryPink focus:border-none border-[1px] border-black/20"
                 onClick={() => {
-                  setRecepie({ ...recepie, category: "Fisk och skaldjur" })
+                  setRecepie({ ...recepie, category: "Vegetariskt" })
                 }}
               >
                 Vegetariskt
