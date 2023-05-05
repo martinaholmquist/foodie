@@ -14,11 +14,8 @@ const SearchInput = ({}: Props) => {
   const onSearch = (event: React.FormEvent) => {
     event.preventDefault()
     const encodedSearchQuery = encodeURI(searchQuery)
-    router.push(`/search?q=${encodedSearchQuery}`)
-    {
-      /* 
-    console.log("nuvarande sök", encodedSearchQuery) */
-    }
+    //router.push(`/search?q=${encodedSearchQuery}`)
+    router.push(`/home?q=${encodedSearchQuery}`)
   }
 
   return (

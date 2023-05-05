@@ -100,6 +100,7 @@ export default async function handler(
             },
             {
               ingredients: { hasSome: [query] },
+
               // ingredients: {
               //has?: string | null | undefined;
               //hasEvery?: Enumerable<string> | undefined;
