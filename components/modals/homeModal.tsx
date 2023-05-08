@@ -23,15 +23,21 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   // State för lagra filtrerad recipes baserad på category
   const [filteredData, setFilteredData] = useState<recepieProps[]>([])
 
+  // State för lagra the valda category
+  const [category, setCategory] = useState<string[]>([])
+
+  const [showMoreCategories, setShowMoreCategories] = useState(false)
+
+  const handleToggle = () => {
+    setShowMoreCategories(!showMoreCategories)
+  }
+
   const router = useRouter()
 
   // Handle click event when a recipe is clicked
   const handleClick = (id: any) => {
     router.push(`/home/${id}`)
   }
-
-  // State för lagra the valda category
-  const [category, setCategory] = useState<string[]>([])
 
   // Function to fetch recipe data from the API
   const recepieData = async () => {
@@ -52,7 +58,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
       ? category.filter((category) => category !== selectCategory)
       : [...category, selectCategory]
     setCategory(updatedCategories)
- 
+
     // Om ingen category är vald, vissa alla recept
     if (updatedCategories.length === 0) {
       setFilteredData(data)
@@ -66,39 +72,100 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
     }
   }
 
-
-  
   return (
     <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4">
       <div className="">
-        {/* Button för "Pasta" category */}
-        <button
-          type="button"
-          className={`bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+        <div className="flex justify-center space-x-2">
+          {/* Button för "Pasta" category */}
+          <button
+            type="button"
+            className={`bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
           }`}
-          onClick={() => handleCategoryFilter("Pasta")}
-        >
-          Pasta
-        </button>
+            onClick={() => handleCategoryFilter("Pasta")}
+          >
+            Pasta
+          </button>
 
-        {/* Button för "Vegetariskt" category */}
-        <button
-          type="button"
-          className={`bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg  focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          {/* Button för "Vegetariskt" category */}
+          <button
+            type="button"
+            className={`bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg  focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
           `}
-          onClick={() => handleCategoryFilter("Vegetariskt")}
-        >
-          Vegetariskt
-        </button>
-        {/* Button för "Fågel" category */}
-        <button
-          type="button"
-          className={`bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+            onClick={() => handleCategoryFilter("Vegetariskt")}
+          >
+            Vegetariskt
+          </button>
+          {/* Button för "Fågel" category */}
+          <button
+            type="button"
+            className={`bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
           }`}
-          onClick={() => handleCategoryFilter("Fågel")}
-        >
-          Fågel
-        </button>
+            onClick={() => handleCategoryFilter("Fågel")}
+          >
+            Fågel
+          </button>
+
+          {/* Button för "Extra" category */}
+          <button
+            className="w-9 h-9 bg-white mt-5 rounded-full bottom-2 right-2 shadow-lg focus:border-none border-[1px]"
+            type="button"
+            onClick={handleToggle}
+          >
+            <span className="text-secondaryBlack text-xl">+</span>
+          </button>
+        </div>
+        {/* Extra */}
+
+        {showMoreCategories && (
+          <div className=" top-0 w-full h-auto bg-anotherpink rounded-3xl  flex items-center justify-center z-10">
+            <div className="">
+              <button
+                className={`bg-white p-1 px-5 ml-[16px] mr-[12px]  rounded-full  shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          }`}
+                onClick={() => handleCategoryFilter("Fisk och skaldjur")}
+              >
+                Fisk och skaldjur
+              </button>
+              <button
+                className={`bg-white p-1 px-5 rounded-full  mr-[12px] mt-[16px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          }`}
+                onClick={() => handleCategoryFilter("Kött och chark")}
+              >
+                Kött och chark
+              </button>
+              <button
+                className={`bg-white p-1 px-5 rounded-full mr-[12px] ml-[16px] mt-[16px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          }`}
+                onClick={() => handleCategoryFilter("Bakning")}
+              >
+                Bakning
+              </button>
+              <button
+                className={`bg-white p-1 px-5 rounded-full mr-[12px]  mt-[16px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          }`}
+                onClick={() => handleCategoryFilter("Dessert")}
+              >
+                Dessert
+              </button>
+              <button
+                className={`bg-white p-1 px-5 rounded-full mr-[12px] mt-[16px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          }`}
+                onClick={() => handleCategoryFilter("Dryck")}
+              >
+                Dryck
+              </button>
+              <div className="flex justify-end pr-[16px]">
+                <button
+                  className={`bg-white p-1 px-5 rounded-full mt-[16px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          }`}
+                  onClick={() => setFilteredData(data)}
+                >
+                  Rensa val
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Renderar filtrerad recipes */}
         {filteredData.map((item) => (
