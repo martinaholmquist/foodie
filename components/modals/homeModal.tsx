@@ -27,6 +27,60 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   const [category, setCategory] = useState<string[]>([])
 
   const [showMoreCategories, setShowMoreCategories] = useState(false)
+  
+/* Tillfällig lösning för färg på varje knapp om klickad på och vid Rensa val sätt all värg till default HACK*/
+  const [button1Active, setButton1Active] = useState(false)
+  const [button2Active, setButton2Active] = useState(false)
+  const [button3Active, setButton3Active] = useState(false)
+  const [button4Active, setButton4Active] = useState(false)
+  const [button5Active, setButton5Active] = useState(false)
+  const [button6Active, setButton6Active] = useState(false)
+  const [button7Active, setButton7Active] = useState(false)
+  const [button8Active, setButton8Active] = useState(false)
+
+  const handleButton1Click = () => {
+    setButton1Active(!button1Active)
+  }
+
+  const handleButton2Click = () => {
+    setButton2Active(!button2Active)
+  }
+
+  const handleButton3Click = () => {
+    setButton3Active(!button3Active)
+  }
+
+  const handleButton4Click = () => {
+    setButton4Active(!button4Active)
+  }
+
+  const handleButton5Click = () => {
+    setButton5Active(!button5Active)
+  }
+
+  const handleButton6Click = () => {
+    setButton6Active(!button6Active)
+  }
+
+  const handleButton7Click = () => {
+    setButton7Active(!button7Active)
+  }
+
+  const handleButton8Click = () => {
+    setButton8Active(!button8Active)
+  }
+
+  const colorOffButtons = () => {
+        setButton1Active(false)
+        setButton2Active(false)
+        setButton3Active(false)
+        setButton4Active(false)
+        setButton5Active(false)
+        setButton6Active(false)
+        setButton7Active(false)
+        setButton8Active(false)
+  }
+  /* Fortsättning på vanlig kod */
 
   const handleToggle = () => {
     setShowMoreCategories(!showMoreCategories)
@@ -47,12 +101,12 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
     setFilteredData(recepies)
   }
 
+  // Fetch recipe data när component mounts
   useEffect(() => {
-    // Fetch recipe data when the component mounts
     recepieData()
   }, [])
 
-  // Handle category filter selection
+  // Hantera category filter selection
   const handleCategoryFilter = (selectCategory: any) => {
     const updatedCategories = category.includes(selectCategory)
       ? category.filter((category) => category !== selectCategory)
@@ -63,7 +117,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
     if (updatedCategories.length === 0) {
       setFilteredData(data)
 
-      // filtrerar recepten beroende påi vilken category som är vald
+    // filtrerar recepten beroende på i vilken category som är vald
     } else {
       const filteredRecepies = data.filter((recipe) =>
         updatedCategories.includes(recipe.category)
@@ -73,15 +127,23 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   }
 
   return (
-    <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4">
-      <div className="">
+    <div
+      className={`bg-anotherpink flex items-center flex-col justify-center space-y-4`}
+    >
+      <div className={``}>
         <div className="flex justify-center space-x-2">
           {/* Button för "Pasta" category */}
           <button
             type="button"
-            className={`bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-          }`}
-            onClick={() => handleCategoryFilter("Pasta")}
+            className={` p-1 px-5 rounded-full mt-5 shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+            
+              ${button1Active ? "bg-primaryPink" : "bg-white"}
+
+            `}
+            onClick={() => {
+              handleCategoryFilter("Pasta")
+              handleButton1Click()
+            }}
           >
             Pasta
           </button>
@@ -89,18 +151,26 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
           {/* Button för "Vegetariskt" category */}
           <button
             type="button"
-            className={`bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg  focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-          `}
-            onClick={() => handleCategoryFilter("Vegetariskt")}
+            className={`p-1 px-5 rounded-full mt-5 shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+            ${button2Active ? "bg-primaryPink" : "bg-white"}
+            `}
+            onClick={() => {
+              handleCategoryFilter("Vegetariskt")
+              handleButton2Click()
+            }}
           >
             Vegetariskt
           </button>
           {/* Button för "Fågel" category */}
           <button
             type="button"
-            className={`bg-white p-1 px-5 rounded-full mt-[20px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+            className={` p-1 px-5 rounded-full mt-5 shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          ${button3Active ? "bg-primaryPink" : "bg-white"}
           }`}
-            onClick={() => handleCategoryFilter("Fågel")}
+            onClick={() => {
+              handleCategoryFilter("Fågel")
+              handleButton3Click()
+            }}
           >
             Fågel
           </button>
@@ -114,53 +184,133 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
             <span className="text-secondaryBlack text-xl">+</span>
           </button>
         </div>
-        {/* Extra */}
 
+        {/* Extra */}
         {showMoreCategories && (
-          <div className=" top-0 w-full h-auto bg-anotherpink rounded-3xl  flex items-center justify-center z-10">
-            <div className="">
+          <div
+            data-modal
+            className=" top-0 w-full h-auto mt-56 bg-anotherpink rounded-3xl  fixed items-center justify-center z-10 focus:border-none border-[3px] shadow-2xl shadow-black"
+          >
+            <div className="flex justify-end mr-4 mt-4 ">
+              <button onClick={handleToggle}>
+                <img src="/X.png" alt="Kryss knapp" />
+              </button>
+            </div>
+            <div className="flex justify-center  ">
+              <p className="font-sans">Välj dina favoriter!</p>
+            </div>
+
+            <div className="ml-4  mb-3 space-x-3 space-y-4">
               <button
-                className={`bg-white p-1 px-5 ml-[16px] mr-[12px]  rounded-full  shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-          }`}
-                onClick={() => handleCategoryFilter("Fisk och skaldjur")}
+                type="button"
+                className={` ml-4 p-1 px-5 rounded-full  shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          ${button1Active ? "bg-primaryPink" : "bg-white"}
+              }`}
+                onClick={() => {
+                  handleCategoryFilter("Pasta")
+                  handleButton1Click()
+                }}
+              >
+                Pasta
+              </button>
+
+              {/* Button för "Vegetariskt" category */}
+              <button
+                type="button"
+                className={` p-1 px-5 rounded-full  shadow-lg  focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          ${button2Active ? "bg-primaryPink" : "bg-white"}
+                `}
+                onClick={() => {
+                  handleCategoryFilter("Vegetariskt")
+                  handleButton2Click()
+                }}
+              >
+                Vegetariskt
+              </button>
+              {/* Button för "Fågel" category */}
+              <button
+                type="button"
+                className={`p-1 px-5 rounded-full shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+         ${button3Active ? "bg-primaryPink" : "bg-white"}
+              }`}
+                onClick={() => {
+                  handleCategoryFilter("Fågel")
+                  handleButton3Click()
+                }}
+              >
+                Fågel
+              </button>
+              <button
+                className={` p-1 px-5 rounded-full  shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          ${button4Active ? "bg-primaryPink" : "bg-white"}
+              }`}
+                onClick={() => {
+                  handleCategoryFilter("Fisk och skaldjur")
+                  handleButton4Click()
+                }}
               >
                 Fisk och skaldjur
               </button>
               <button
-                className={`bg-white p-1 px-5 rounded-full  mr-[12px] mt-[16px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-          }`}
-                onClick={() => handleCategoryFilter("Kött och chark")}
+                className={` p-1 px-5 rounded-full shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+         ${button5Active ? "bg-primaryPink" : "bg-white"}
+              }`}
+                onClick={() => {
+                  handleCategoryFilter("Kött och chark")
+                  handleButton5Click()
+                }}
               >
                 Kött och chark
               </button>
               <button
-                className={`bg-white p-1 px-5 rounded-full mr-[12px] ml-[16px] mt-[16px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-          }`}
-                onClick={() => handleCategoryFilter("Bakning")}
+                className={` p-1 px-5 rounded-full shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+         ${button6Active ? "bg-primaryPink" : "bg-white"}
+              }`}
+                onClick={() => {
+                  handleCategoryFilter("Bakning")
+                  handleButton6Click()
+                }}
               >
                 Bakning
               </button>
               <button
-                className={`bg-white p-1 px-5 rounded-full mr-[12px]  mt-[16px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-          }`}
-                onClick={() => handleCategoryFilter("Dessert")}
+                className={` p-1 px-5 rounded-full shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+         ${button7Active ? "bg-primaryPink" : "bg-white"}
+              }`}
+                onClick={() => {
+                  handleCategoryFilter("Dessert")
+                  handleButton7Click()
+                }}
               >
                 Dessert
               </button>
               <button
-                className={`bg-white p-1 px-5 rounded-full mr-[12px] mt-[16px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-          }`}
-                onClick={() => handleCategoryFilter("Dryck")}
+                className={` p-1 px-5 rounded-full shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          ${button8Active ? "bg-primaryPink" : "bg-white"}
+              }`}
+                onClick={() => {
+                  handleCategoryFilter("Dryck")
+                  handleButton8Click()
+                }}
               >
                 Dryck
               </button>
               <div className="flex justify-end pr-[16px]">
                 <button
-                  className={`bg-white p-1 px-5 rounded-full mt-[16px] shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-          }`}
-                  onClick={() => setFilteredData(data)}
+                  className={`bg-white p-1 px-3 rounded-full shadow-2xl focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+                }`}
+                  onClick={() => {
+                    setCategory([])
+                    setFilteredData(data)
+                    colorOffButtons()
+                  }}
                 >
-                  Rensa val
+                  <p className="flex">
+                    Rensa val
+                    <span className="mt-1 ml-1">
+                      <img src="/Trash.png" alt="Rensa val" />
+                    </span>
+                  </p>
                 </button>
               </div>
             </div>
@@ -174,7 +324,6 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
               className="bg-primaryPink rounded-lg"
               onClick={() => handleClick(item.id)}
             >
-              Category: {item.category}
               {/* Vissar recipe bild */}
               <img
                 src={item.image}
