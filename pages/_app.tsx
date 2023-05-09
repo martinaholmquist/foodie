@@ -12,10 +12,8 @@ const publicSans = Public_Sans({
 //weight: ["300", "400", "500"],
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <SessionProvider session={pageProps.session}>
-      <main className={publicSans.className}>
-        <Component {...pageProps} />
-      </main>
-    </SessionProvider>
+    <main className={publicSans.className}>
+      <Component {...pageProps} />
+    </main>
   )
 }
