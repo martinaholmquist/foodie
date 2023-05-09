@@ -14,6 +14,8 @@ interface Props {}
 const Index: NextPage<Props> = ({}) => {
   const [action, setAction] = useState("explore")
 
+  const [isSearchSubmitted, setIsSearchSubmitted] = useState(false)
+
   const { data: session, status } = useSession()
 
   const handleExploreClick = () => {
@@ -38,11 +40,15 @@ const Index: NextPage<Props> = ({}) => {
           exploreDisabled={action === "explore"}
           publishDisabled={action === "publish"}
           displaySearchDisabled={action === "explore"}
-          //isSearchSubmitted={action === "searchResult"}
+          isSearchSubmitted={isSearchSubmitted}
+          setIsSearchSubmitted={setIsSearchSubmitted}
           col="bg-crimsonRed"
         />
 
-        {action == "explore" ? <RenderOutRecepiesModals /> : <RecepieModule />}
+        {action == "explore" && !isSearchSubmitted && (
+          <RenderOutRecepiesModals />
+        )}
+        {action == "publish" && <RecepieModule />}
       </Layout>
     </>
   )

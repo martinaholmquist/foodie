@@ -100,23 +100,9 @@ export default async function handler(
             },
             {
               ingredients: { hasSome: [query] },
-
               // ingredients: {
-              //has?: string | null | undefined;
-              //hasEvery?: Enumerable<string> | undefined;
-              //hasSome?: Enumerable<string> | undefined;
-              //isEmpty?: boolean | undefined;
-
-              //  hasSome: query,
-              // mode: "insensitive",
-              // $regex: `.*${query}.*`,
-              //$options: 'i',
-              //},
-
-              // ingredients: {
-              //   contains: [query],
-              //   mode: "insensitive",
-              //  } as Prisma.StringNullableListFilter,
+              //  contains: [query],
+              //  mode: "insensitive",
             },
 
             {

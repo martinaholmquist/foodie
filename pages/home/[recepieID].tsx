@@ -40,6 +40,10 @@ const RecepieView = ({}) => {
     setAction("DoLikeThis")
   }
 
+  const handleClick = () => {
+    router.push("/home")
+  }
+
   useEffect(() => {
     recepieData()
   }, [])
@@ -49,10 +53,14 @@ const RecepieView = ({}) => {
       <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4 ">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-primaryPink relative pb-[22px] rounded-md">
-            <Link className="absolute top-2 left-2" href={"/home"}>
+            <button
+              type="button"
+              className="absolute top-2 left-2"
+              onClick={handleClick}
+            >
               {" "}
               <img src="/Vector.png" alt="tillbakaknapp" />{" "}
-            </Link>
+            </button>
 
             <img
               src={data?.image}

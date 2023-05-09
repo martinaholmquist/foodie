@@ -1,7 +1,7 @@
 import { Logo } from "../hero-components/logo"
 
 import { useRouter } from "next/router" //tina
-import { useState } from "react" //tina
+import { useEffect, useState } from "react" //tina
 import RenderOutRecepiesModals from "../modals/homeModal"
 import SearchResultModal from "../modals/searchResultModal"
 
@@ -12,6 +12,9 @@ interface Props {
   exploreDisabled: boolean
   publishDisabled: boolean
   displaySearchDisabled: boolean
+
+  isSearchSubmitted: boolean
+  setIsSearchSubmitted: (value: boolean) => void
 
   displayPub: string
   displaySearchBar: string
@@ -25,7 +28,7 @@ const RubrikRecepieFormView = (props: Props) => {
     /*ta in vad användaren skriver i sökrutan och skriva det i url:en */
   }
   const [searchQuery, setSearchQuery] = useState("") //tina
-  const [isSearchSubmitted, setIsSearchSubmitted] = useState(false) //tina sista kollen
+  //const [isSearchSubmitted, setIsSearchSubmitted] = useState(false) //tina sista kollen
 
   const router = useRouter()
 
@@ -34,7 +37,8 @@ const RubrikRecepieFormView = (props: Props) => {
     const encodedSearchQuery = encodeURI(searchQuery)
     //router.push(`/search?q=${encodedSearchQuery}`)
     router.push(`/home?q=${encodedSearchQuery}`)
-    setIsSearchSubmitted(true) //tina sista kollen
+    props.setIsSearchSubmitted(true) //tina sista kollen
+    //sessionStorage.setItem("searchValue", encodedSearchQuery)
   }
 
   /* onSearchSubmit = () => {
@@ -81,16 +85,21 @@ const RubrikRecepieFormView = (props: Props) => {
         </div>
       </div>
 
-      {/* search field */}
+      {/* search field SEARCH BAR */}
       <div
         className={`relative flex flex-col gap-10 items-center p-4 ${props.displaySearchBar} `}
       >
-        <form className="flex justify-center w-2/3" onSubmit={onSearch}>
+        <img
+          src="\Frame 27.png"
+          alt="search"
+          className="absolute left-12 py-[7px]"
+        />
+
+        <form className="flex justify-center w-80" onSubmit={onSearch}>
           <input
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
-            className="px-5 py-1 w-2/3 sm:px-5 sm:py-3 flex-1 text-black bg-primaryPink rounded-full"
-            placeholder="vad söker du efter?"
+            className="px-10 py-1 flex-1 bg-primaryPink rounded-full"
           />
         </form>
       </div>
@@ -98,10 +107,15 @@ const RubrikRecepieFormView = (props: Props) => {
         className={`relative flex flex-col gap-10 items-center p-4 ${props.displaySearch} ${props.displaySearchDisabled}`}
       >
         {""}
-        {isSearchSubmitted && <SearchResultModal />}{" "}
+        {props.isSearchSubmitted && <SearchResultModal />}{" "}
       </div>
     </div>
   )
 }
 
 export default RubrikRecepieFormView
+/*
+<div className="flex items-center pr-3">
+                <div>
+                  <img src="/klocka.png" alt="klocka" />
+                </div>*/
