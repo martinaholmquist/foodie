@@ -29,7 +29,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   }
 
   const recepieData = async () => {
-    const res = await fetch("http://localhost:3000/api/nestedFetch")
+    const res = await fetch("/api/nestedFetch")
     const recepies = await res.json()
     setData(recepies)
   }
