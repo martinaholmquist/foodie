@@ -19,6 +19,10 @@ type allRecepies = {
   }
 }
 
+interface Props {
+  setencodedSearchQuery: (value: string) => void
+}
+
 //fetchar värdet som användaren skriver in i url:en
 const fetchResult = async (url: string) => {
   const response = await fetch(url)
@@ -33,10 +37,12 @@ const fetchResult = async (url: string) => {
 
 //tar in värdet och kodar om stringen så den kan använas att söka med i databasen
 
-const SearchResultModal = ({}) => {
+const SearchResultModal = () => {
   const search = useSearchParams()
   const searchQuery = search ? search.get("q") : null
   const encodedSearchQuery = encodeURI(searchQuery || "")
+
+  console.log("detta är värdet av encodedSearchQuery ", encodedSearchQuery)
 
   const { data, isLoading } = useSWR(
     `/api/searchAll?q=${encodedSearchQuery}`,
@@ -57,8 +63,11 @@ const SearchResultModal = ({}) => {
   }
 
   const router = useRouter()
-  const handleClick = (id: any) => {
-    router.push(`/home/${id}`)
+
+  const handleClick = (id: any, encodedSearchQuery: string) => {
+    console.log("vad händer i klicken ", encodedSearchQuery) //tina *
+    //tina*
+    router.push(`/home/${id}?q=${encodedSearchQuery}`)
   }
 
   console.log("HERE IS DATA", data)
@@ -72,7 +81,8 @@ const SearchResultModal = ({}) => {
             <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4">
               <div
                 className="bg-primaryPink rounded-lg"
-                onClick={() => handleClick(item.id)}
+                //onClick={() => handleClick(item.id)}  original
+                onClick={() => handleClick(item.id, encodedSearchQuery)} //tina*****
               >
                 <img
                   src={item.image}
@@ -102,10 +112,6 @@ const SearchResultModal = ({}) => {
               </div>
             </div>
           ))}
-        </div>
-        <div>
-          Det var alla sökresultat, lycka till med matlagningen! ...pssst, om
-          inget passar så kika nedan.
         </div>
       </div>
     </>

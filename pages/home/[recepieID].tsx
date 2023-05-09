@@ -1,3 +1,4 @@
+import SearchResultModal from "@/components/modals/searchResultModal"
 import SingleRecepieModule from "@/components/modals/singleRecepieModule"
 import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecepieFormView"
 
@@ -40,8 +41,18 @@ const RecepieView = ({}) => {
     setAction("DoLikeThis")
   }
 
-  const handleClick = () => {
-    router.push("/home")
+  const { q } = router.query //tina**
+  const [encodedSearchQuery, setEncodedSearchQuery] = useState<string>(
+    q ? q.toString() : ""
+  )
+
+  const handleClick = (id: any) => {
+    console.log("detta händer när jag klickar tillbaka", encodedSearchQuery)
+    if (encodedSearchQuery) {
+      router.push(`/home?q=${encodedSearchQuery}`)
+    } else {
+      router.push("/home/")
+    }
   }
 
   useEffect(() => {

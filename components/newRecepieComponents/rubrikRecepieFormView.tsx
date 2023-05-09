@@ -35,19 +35,16 @@ const RubrikRecepieFormView = (props: Props) => {
   const onSearch = (event: React.FormEvent) => {
     event.preventDefault()
     const encodedSearchQuery = encodeURI(searchQuery)
-    //router.push(`/search?q=${encodedSearchQuery}`)
     router.push(`/home?q=${encodedSearchQuery}`)
     props.setIsSearchSubmitted(true) //tina sista kollen
-    //sessionStorage.setItem("searchValue", encodedSearchQuery)
   }
 
-  /* onSearchSubmit = () => {
-    //tina sista kollen
-    setIsSearchSubmitted(true)
-    {
-      ;`${props.setIsSearchSubmitted}`
-    }
-  }*/
+  //when press exit  onClick={() => handleClick()}
+  const handleClick = () => {
+    props.setIsSearchSubmitted(false)
+    router.push(`/home`)
+    setSearchQuery("")
+  }
 
   return (
     <div className="bg-anotherpink">
@@ -92,7 +89,14 @@ const RubrikRecepieFormView = (props: Props) => {
         <img
           src="\Frame 27.png"
           alt="search"
-          className="absolute left-12 py-[7px]"
+          className="absolute left-14 py-[8px]"
+        />
+
+        <img
+          onClick={() => handleClick()}
+          src="\extitSearch.png"
+          alt="search"
+          className="absolute right-14 py-[9px]"
         />
 
         <form className="flex justify-center w-80" onSubmit={onSearch}>
@@ -114,8 +118,3 @@ const RubrikRecepieFormView = (props: Props) => {
 }
 
 export default RubrikRecepieFormView
-/*
-<div className="flex items-center pr-3">
-                <div>
-                  <img src="/klocka.png" alt="klocka" />
-                </div>*/
