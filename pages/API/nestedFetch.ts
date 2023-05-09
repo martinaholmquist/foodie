@@ -31,7 +31,7 @@ export default async function handler(
           {
             createdAt: "desc",
           },
-        ], 
+        ],
         include: {
           author: {
             select: {

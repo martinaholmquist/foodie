@@ -10,7 +10,7 @@ type recepieProps = {
   category?: string
 
   author?: {
-    name: string
+    username: string
     profileImage: string
     id: string
   }
@@ -27,8 +27,8 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   const [category, setCategory] = useState<string[]>([])
 
   const [showMoreCategories, setShowMoreCategories] = useState(false)
-  
-/* Tillfällig lösning för färg på varje knapp om klickad på och vid Rensa val sätt all värg till default HACK*/
+
+  /* Tillfällig lösning för färg på varje knapp om klickad på och vid Rensa val sätt all värg till default HACK*/
   const [button1Active, setButton1Active] = useState(false)
   const [button2Active, setButton2Active] = useState(false)
   const [button3Active, setButton3Active] = useState(false)
@@ -71,14 +71,14 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   }
 
   const colorOffButtons = () => {
-        setButton1Active(false)
-        setButton2Active(false)
-        setButton3Active(false)
-        setButton4Active(false)
-        setButton5Active(false)
-        setButton6Active(false)
-        setButton7Active(false)
-        setButton8Active(false)
+    setButton1Active(false)
+    setButton2Active(false)
+    setButton3Active(false)
+    setButton4Active(false)
+    setButton5Active(false)
+    setButton6Active(false)
+    setButton7Active(false)
+    setButton8Active(false)
   }
   /* Fortsättning på vanlig kod */
 
@@ -117,7 +117,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
     if (updatedCategories.length === 0) {
       setFilteredData(data)
 
-    // filtrerar recepten beroende på i vilken category som är vald
+      // filtrerar recepten beroende på i vilken category som är vald
     } else {
       const filteredRecepies = data.filter((recipe) =>
         updatedCategories.includes(recipe.category)
@@ -341,7 +341,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
 
                 {/* Vissar author namn */}
                 <p className="pl-4 font-sans text-1xl font-medium">
-                  {item.author?.name}
+                  {item.author?.username}
                 </p>
               </div>
               <div className=" pl-2 pt-1 pb-2 flex  items-center">
