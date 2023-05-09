@@ -1,7 +1,9 @@
 import prismadb from "@/libs/prismadb"
 import type { NextApiRequest, NextApiResponse } from "next"
 
-interface Data {}
+interface Data {
+  // Define your response data structure here if needed
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,25 +14,55 @@ export default async function handler(
   }
 
   try {
-    const allRecepies = await prismadb.recepie.findMany({
-      orderBy: [
-        {
-          createdAt: "desc",
-        },
-      ],
+    const category =
+      typeof req.query.category === "string" ? req.query.category : undefined
 
-      include: {
-        author: {
-          select: {
-            name: true,
-            profileImage: true,
-            id: true,
+    let allRecipes
+
+    if (category) {
+      // Filter recipes by category if provided
+      allRecipes = await prismadb.recepie.findMany({
+        where: {
+          category: {
+            equals: category,
           },
         },
-      },
-    })
+        orderBy: [
+          {
+            createdAt: "desc",
+          },
+        ], 
+        include: {
+          author: {
+            select: {
+              name: true,
+              profileImage: true,
+              id: true,
+            },
+          },
+        },
+      })
+    } else {
+      // Fetch all recipes if no category provided
+      allRecipes = await prismadb.recepie.findMany({
+        orderBy: [
+          {
+            createdAt: "desc",
+          },
+        ],
+        include: {
+          author: {
+            select: {
+              name: true,
+              profileImage: true,
+              id: true,
+            },
+          },
+        },
+      })
+    }
 
-    return res.status(200).json(allRecepies)
+    return res.status(200).json(allRecipes)
   } catch (error) {
     console.error(error)
     return res.status(400).end()
