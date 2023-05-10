@@ -1,3 +1,4 @@
+import SearchResultModal from "@/components/modals/searchResultModal"
 import SingleRecepieModule from "@/components/modals/singleRecepieModule"
 import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecepieFormView"
 
@@ -15,7 +16,7 @@ type recpieData = {
   image: string
   id: any
   author: {
-    name: string
+    username: string
     profileImage: string
   }
 }
@@ -40,6 +41,20 @@ const RecepieView = ({}) => {
     setAction("DoLikeThis")
   }
 
+  const { q } = router.query //tina**
+  const [encodedSearchQuery, setEncodedSearchQuery] = useState<string>(
+    q ? q.toString() : ""
+  )
+
+  const handleClick = (id: any) => {
+    console.log("detta händer när jag klickar tillbaka", encodedSearchQuery)
+    if (encodedSearchQuery) {
+      router.push(`/home?q=${encodedSearchQuery}`)
+    } else {
+      router.push("/home/")
+    }
+  }
+
   useEffect(() => {
     recepieData()
   }, [])
@@ -49,10 +64,14 @@ const RecepieView = ({}) => {
       <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4 ">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-primaryPink relative pb-[22px] rounded-md">
-            <Link className="absolute top-2 left-2" href={"/home"}>
+            <button
+              type="button"
+              className="absolute top-2 left-2"
+              onClick={handleClick}
+            >
               {" "}
               <img src="/Vector.png" alt="tillbakaknapp" />{" "}
-            </Link>
+            </button>
 
             <img
               src={data?.image}
@@ -81,7 +100,7 @@ const RecepieView = ({}) => {
               <div className=" pl-2 flex  items-center">
                 <div className="h-4 w-4 bg-crimsonRed rounded-full"></div>
                 <p className="pl-2 font-sans text-1xl font-medium">
-                  {data?.author?.name}
+                  {data?.author?.username}
                 </p>
               </div>
 
@@ -125,7 +144,7 @@ const RecepieView = ({}) => {
                           <img src="/icons8-chef-hat-100 1.png" alt="" />
                           <h2 className="pl-4 font-title">
                             {" "}
-                            {data?.author?.name}s kuriosa
+                            {data?.author?.username}s kuriosa
                           </h2>
                         </div>
                         <div className="mt-4 font-sans bg-white">
