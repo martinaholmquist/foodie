@@ -95,7 +95,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
 
   // Function to fetch recipe data from the API
   const recepieData = async () => {
-    const res = await fetch("http://localhost:3000/api/nestedFetch")
+    const res = await fetch("/api/nestedFetch")
     const recepies = await res.json()
     setData(recepies)
     setFilteredData(recepies)
