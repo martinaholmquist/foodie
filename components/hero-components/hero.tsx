@@ -36,7 +36,7 @@ export const Hero = ({
           <li>{bulletThree}</li>
         </ul>
       </div>
-      <div className="absolute bottom-32 right-0 -z-10">
+      <div className="flex justify-end bottom-32 right-0 -z-10">
         <Image
           src={"/Sparris_tallrik.png"}
           width={200}
@@ -44,7 +44,7 @@ export const Hero = ({
           alt="picture of vegatables"
         ></Image>
       </div>
-      <div className="flex justify-center items-end pb-0 h-72">
+      <div className="flex justify-center items-end ">
         <Link
           className="font-semibold text-md cursor-pointer bg-crimsonRed text-white px-7 py-4 rounded-full shadow-md shadow-black/25"
           href={"/auth"}
