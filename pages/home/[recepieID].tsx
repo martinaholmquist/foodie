@@ -21,7 +21,7 @@ type recpieData = {
   }
 }
 
-const RecepieView = ({}) => {
+const RecepieView = () => {
   const [data, setData] = useState<recpieData>()
   const [action, setAction] = useState("Ingredienser")
 

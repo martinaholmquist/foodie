@@ -74,7 +74,6 @@ const SearchResultModal = () => {
 
   return (
     <>
-      <div>Här kommer recept som matchar ditt sökord:</div>
       <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4">
         <div className="">
           {data.allRecepies.map((item: allRecepies) => (

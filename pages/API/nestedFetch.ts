@@ -35,7 +35,7 @@ export default async function handler(
         include: {
           author: {
             select: {
-              name: true,
+              username: true,
               profileImage: true,
               id: true,
             },
@@ -53,7 +53,7 @@ export default async function handler(
         include: {
           author: {
             select: {
-              name: true,
+              username: true,
               profileImage: true,
               id: true,
             },
