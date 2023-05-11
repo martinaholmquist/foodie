@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { NextPage } from "next"
 import { useRouter } from "next/router"
+import { it } from "node:test"
 
 type recepieProps = {
   title?: string
@@ -8,6 +9,7 @@ type recepieProps = {
   time?: string
   id?: string
   category?: string
+  likes?: [string]
 
   author?: {
     username: string
@@ -27,6 +29,8 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   const [category, setCategory] = useState<string[]>([])
 
   const [showMoreCategories, setShowMoreCategories] = useState(false)
+
+  const [isLiked, setIsliked] = useState(false)
 
   /* Tillfällig lösning för färg på varje knapp om klickad på och vid Rensa val sätt all värg till default HACK*/
   const [button1Active, setButton1Active] = useState(false)
@@ -84,6 +88,10 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
 
   const handleToggle = () => {
     setShowMoreCategories(!showMoreCategories)
+  }
+
+  const handleClickLike = () => {
+    setIsliked(!isLiked)
   }
 
   const router = useRouter()
@@ -319,19 +327,54 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
 
         {/* Renderar filtrerad recipes */}
         {filteredData.map((item) => (
-          <div className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4">
+          <div
+            key={item.id}
+            className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4"
+          >
+            {/* Vissar recipe bild */}
+            <div className="absolute z-50 right-3 mt-[9.6rem] ">
+              {!isLiked ? (
+                <div className="bg-anotherpink/80 bottom-0 right-0 mr-2 mb-10 px-[13px] rounded-full ">
+                  <button onClick={handleClickLike}>
+                    <img
+                      src="/like.png"
+                      alt=""
+                      width={25}
+                      height={25}
+                      className="mt-[5px]"
+                    />
+                    <p className="text-sm">{item.likes?.length}</p>
+                  </button>
+                </div>
+              ) : (
+                <div className="bg-anotherpink/80 bottom-0 right-0 mr-2 mb-2 px-[13px] rounded-full ">
+                  <button onClick={handleClickLike}>
+                    <img
+                      src="/liked.png"
+                      alt=""
+                      width={25}
+                      height={25}
+                      className="mt-[5px]"
+                    />
+                    <p className="text-sm">{item.likes?.length}</p>
+                  </button>
+                </div>
+              )}
+            </div>
             <div
               className="bg-primaryPink rounded-lg"
               onClick={() => handleClick(item.id)}
             >
-              {/* Vissar recipe bild */}
-              <img
-                src={item.image}
-                alt="image"
-                width={550}
-                height={100}
-                className="object-cover rounded-lg w-100 h-52"
-              />
+              <div className="bg-slate-600 ">
+                <img
+                  src={item.image}
+                  alt="image"
+                  width={550}
+                  height={100}
+                  className="object-cover rounded-lg w-100 h-52 relative"
+                />
+              </div>
+
               {/* Vissar recipe title */}
               <p className="font-title font-medium text-2xl pl-2 pt-2 ">
                 {item.title}
