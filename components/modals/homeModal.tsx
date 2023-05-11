@@ -371,8 +371,9 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
                   >
                     <img
                       src={
-                        currentUser.id ==
-                        item.likes?.map((item) => item.authorId)
+                        item.likes
+                          ?.map((item) => item.authorId)
+                          .includes(currentUser.id)
                           ? "/liked.png"
                           : "/like.png"
                       }
@@ -389,8 +390,9 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
                   <button onClick={() => handleClickLike(index)}>
                     <img
                       src={
-                        currentUser.id ==
-                        item.likes?.map((item) => item.authorId)
+                        item.likes
+                          ?.map((item) => item.authorId)
+                          .includes(currentUser.id)
                           ? "/liked.png"
                           : "/like.png"
                       }
