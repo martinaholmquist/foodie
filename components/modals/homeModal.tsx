@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { NextPage } from "next"
 import { useRouter } from "next/router"
 import { it } from "node:test"
+import useCurrentUser from "@/hooks/useCurrentUser"
+import axios from "axios"
 
 type recepieProps = {
   title?: string
@@ -18,10 +20,11 @@ type recepieProps = {
   }
 }
 
-const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
+const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
   // State för lagra all recipes
   const [data, setData] = useState<recepieProps[]>([])
 
+  const { data: currentUser } = useCurrentUser()
   // State för lagra filtrerad recipes baserad på category
   const [filteredData, setFilteredData] = useState<recepieProps[]>([])
 
@@ -30,7 +33,9 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
 
   const [showMoreCategories, setShowMoreCategories] = useState(false)
 
-  const [isLiked, setIsliked] = useState(false)
+  const [isLiked, setIsliked] = useState<boolean[]>(
+    filteredData.map((item) => false)
+  )
 
   /* Tillfällig lösning för färg på varje knapp om klickad på och vid Rensa val sätt all värg till default HACK*/
   const [button1Active, setButton1Active] = useState(false)
@@ -90,8 +95,27 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
     setShowMoreCategories(!showMoreCategories)
   }
 
-  const handleClickLike = () => {
-    setIsliked(!isLiked)
+  const handleClickLike = (index: number) => {
+    setIsliked((prevLikedStates) => {
+      const newLikedStates = [...prevLikedStates]
+      newLikedStates[index] = !prevLikedStates[index]
+      return newLikedStates
+    })
+  }
+
+  const likeRecepie = async (recepieId: any) => {
+    const body = {
+      recepieId: "6442527633ab645253e909fe",
+
+      authorId: "644b7d9abb7664c91411804c",
+    }
+
+    await axios.post("/api/recepies/likeRecepie", {
+      recepieId: recepieId,
+      authorId: currentUser?.id,
+    })
+    console.log(recepieId)
+    console.log(currentUser?.id)
   }
 
   const router = useRouter()
@@ -112,7 +136,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   // Fetch recipe data när component mounts
   useEffect(() => {
     recepieData()
-  }, [])
+  }, [recepieData])
 
   // Hantera category filter selection
   const handleCategoryFilter = (selectCategory: any) => {
@@ -326,16 +350,21 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
         )}
 
         {/* Renderar filtrerad recipes */}
-        {filteredData.map((item) => (
+        {filteredData.map((item, index) => (
           <div
             key={item.id}
             className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4"
           >
             {/* Vissar recipe bild */}
             <div className="absolute z-50 right-3 mt-[9.6rem] ">
-              {!isLiked ? (
+              {!isLiked[index] ? (
                 <div className="bg-anotherpink/80 bottom-0 right-0 mr-2 mb-10 px-[13px] rounded-full ">
-                  <button onClick={handleClickLike}>
+                  <button
+                    onClick={() => {
+                      handleClickLike(index)
+                      likeRecepie(item.id)
+                    }}
+                  >
                     <img
                       src="/like.png"
                       alt=""
@@ -348,7 +377,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
                 </div>
               ) : (
                 <div className="bg-anotherpink/80 bottom-0 right-0 mr-2 mb-2 px-[13px] rounded-full ">
-                  <button onClick={handleClickLike}>
+                  <button onClick={() => handleClickLike(index)}>
                     <img
                       src="/liked.png"
                       alt=""
@@ -365,7 +394,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
               className="bg-primaryPink rounded-lg"
               onClick={() => handleClick(item.id)}
             >
-              <div className="bg-slate-600 ">
+              <div className="">
                 <img
                   src={item.image}
                   alt="image"

@@ -76,6 +76,7 @@ model Like {
   authorId           String     @db.ObjectId
   recepieId          String @db.ObjectId
   recepie            Recepie @relation(fields: [recepieId], references: [id])
-  
-  @@unique([authorId])
+
+  @@unique([authorId, recepieId ])
+
 }
