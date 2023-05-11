@@ -21,6 +21,7 @@ model User {
   recepies        Recepie[]
   comments        Comment[]
   accounts        Account[]
+  likes              Like[]
 }
 
 model Account {
@@ -56,7 +57,7 @@ model Recepie {
   comments           Comment[]
   createdAt          DateTime @default(now())
   category           String
-  
+  likes              Like[]
 }
 
 model Comment {
@@ -67,4 +68,14 @@ model Comment {
   recepieId          String @db.ObjectId
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   recepie Recepie @relation(fields: [recepieId], references: [id], onDelete: Cascade)
+}
+
+model Like {
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
+  author             User @relation(fields: [authorId], references: [id])
+  authorId           String     @db.ObjectId
+  recepieId          String @db.ObjectId
+  recepie            Recepie @relation(fields: [recepieId], references: [id])
+  
+  @@unique([authorId])
 }
