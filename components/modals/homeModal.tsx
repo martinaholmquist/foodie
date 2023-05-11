@@ -11,7 +11,11 @@ type recepieProps = {
   time?: string
   id?: string
   category?: string
-  likes?: [string]
+  likes?: [
+    {
+      authorId: string
+    }
+  ]
 
   author?: {
     username: string
@@ -32,6 +36,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
   const [category, setCategory] = useState<string[]>([])
 
   const [showMoreCategories, setShowMoreCategories] = useState(false)
+  const [likedRecipes, setLikedRecipes] = useState<string[]>([])
 
   const [isLiked, setIsliked] = useState<boolean[]>(
     filteredData.map((item) => false)
@@ -104,18 +109,17 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
   }
 
   const likeRecepie = async (recepieId: any) => {
-    const body = {
-      recepieId: "6442527633ab645253e909fe",
-
-      authorId: "644b7d9abb7664c91411804c",
-    }
-
     await axios.post("/api/recepies/likeRecepie", {
       recepieId: recepieId,
       authorId: currentUser?.id,
     })
     console.log(recepieId)
     console.log(currentUser?.id)
+    setLikedRecipes((prevLikedRecipes) => [...prevLikedRecipes, recepieId])
+    localStorage.setItem(
+      "likedRecipes",
+      JSON.stringify([...likedRecipes, recepieId])
+    )
   }
 
   const router = useRouter()
@@ -366,7 +370,12 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
                     }}
                   >
                     <img
-                      src="/like.png"
+                      src={
+                        currentUser.id ==
+                        item.likes?.map((item) => item.authorId)
+                          ? "/liked.png"
+                          : "/like.png"
+                      }
                       alt=""
                       width={25}
                       height={25}
@@ -379,7 +388,12 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
                 <div className="bg-anotherpink/80 bottom-0 right-0 mr-2 mb-2 px-[13px] rounded-full ">
                   <button onClick={() => handleClickLike(index)}>
                     <img
-                      src="/liked.png"
+                      src={
+                        currentUser.id ==
+                        item.likes?.map((item) => item.authorId)
+                          ? "/liked.png"
+                          : "/like.png"
+                      }
                       alt=""
                       width={25}
                       height={25}
