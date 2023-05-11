@@ -113,14 +113,11 @@ const RecepieModule = ({}) => {
   const onSubmit = async (e: SyntheticEvent) => {
     console.log(recepie.image)
 
-    const data = await fetch(
-      "http://localhost:3000/api/recepies/createrecepie",
-      {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json" },
-      }
-    )
+    const data = await fetch("/api/recepies/createrecepie", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+    })
     const res = await data.json()
     console.log(res)
   }
@@ -152,13 +149,17 @@ const RecepieModule = ({}) => {
               >
                 <div className="flex flex-col items-center justify-center">
                   <img src="image 60.svg" alt="foto link" />
-                  <button
-                    className="w-7  bg-crimsonRed mt-5 rounded-full absolute bottom-2 right-2 shadow-lg"
-                    type="button"
-                    onClick={() => upload()}
-                  >
-                    <span className="text-white text-xl">+</span>
-                  </button>
+                  {!image && <p>Click to select an image</p>}
+                  <div>{image?.name}</div>
+                  {image && (
+                    <button
+                      className="px-7 py-3 bg-crimsonRed mt-5 rounded-full absolute bottom-2 right-2 shadow-lg"
+                      type="button"
+                      onClick={() => upload()}
+                    >
+                      <span className="text-white">Upload </span>
+                    </button>
+                  )}
                 </div>
                 <input
                   id="dropzone-file"
