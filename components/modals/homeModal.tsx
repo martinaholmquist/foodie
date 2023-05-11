@@ -11,7 +11,6 @@ type recepieProps = {
   image?: string
   time?: string
   id?: string
-
   author?: {
     name: string
     profileImage: string
