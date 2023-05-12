@@ -22,7 +22,7 @@ export const GoogleButton = ({
           width={22}
           height={22}
           alt="Google Icon"
-          className=" absolute left-16 top-3"
+          className=" absolute left-14 top-3"
         ></Image>
         {value}
       </button>
