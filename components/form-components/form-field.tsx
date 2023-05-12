@@ -17,7 +17,7 @@ export const FormFielld = ({
 }: FormFielldProps) => {
   return (
     <>
-      <div className="border-black border-[1px] mx-6 rounded-xl mb-3  h-16 relative">
+      <div className="border-black border-[1px] mx-6 rounded-xl mb-4  h-16 relative">
         <label
           className=" font-medium text-xs absolute top-2 left-4 "
           htmlFor={htmlFor}

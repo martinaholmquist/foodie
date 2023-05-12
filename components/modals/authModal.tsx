@@ -81,7 +81,7 @@ const AuthModal = () => {
           }
         />
 
-        <div className="mt-11">
+        <div className="mt-8">
           <FormButton
             value={action == "register" ? "Skapa konto" : "Logga in"}
             type={"submit"}

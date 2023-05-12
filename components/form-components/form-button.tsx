@@ -13,7 +13,7 @@ export const FormButton = ({
   className,
 }: ButtonProps) => {
   return (
-    <div className="mx-6 mb-5">
+    <div className="mx-6 mb-4">
       <button onClick={onClick} name={name} type={type} className={className}>
         {value}
       </button>
