@@ -131,11 +131,11 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
       className={`bg-anotherpink flex items-center flex-col justify-center space-y-4`}
     >
       <div className="">
-        <div className="flex justify-center space-x-4 mx-4 ">
+        <div className="flex justify-center space-x-2 ">
           {/* Button för "Pasta" category */}
           <button
             type="button"
-            className={` p-1 px-5 rounded-full mt-5 shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+            className={` p-1 px-5 rounded-full mt-5 shadow-lg focus:border-none border-[1px]  
             
               ${button1Active ? "bg-primaryPink" : "bg-white"}
 
@@ -203,7 +203,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
             <div className="ml-4  mb-3 space-x-3 space-y-4">
               <button
                 type="button"
-                className={` ml-4 p-1 px-5 rounded-full  shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+                className={`  ml-4 p-1 px-5 rounded-full  shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
           ${button1Active ? "bg-primaryPink" : "bg-white"}
               }`}
                 onClick={() => {
@@ -320,7 +320,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
         {/* Renderar filtrerad recipes */}
         {filteredData.map((item) => (
           <div
-            className=" mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 m-4"
+            className=" my-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-6"
             key={item.id}
           >
             <div
