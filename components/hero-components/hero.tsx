@@ -20,25 +20,25 @@ export const Hero = ({
 }: HeroProps) => {
   return (
     <div className="">
-      <div className="absolute bottom-0 -z-20"></div>
-      <div className="mx-5 pt-10">
-        <h1 className="text-center text-3xl font-title font-bold ">
+      <div className="absolute bottom-0 "></div>
+      <div className=" pt-10 pl-12">
+        <h1 className="text-left text-[1.6rem] font-title font-bold ">
           {heroTitle}
         </h1>
       </div>
-      <div className="flex justify-center px-2 pt-4  mx-2">
-        <p className="text-center font-normal text-lg w-6/6">{heroText}</p>
+      <div className="flex justify-center pl-12 pr-10 pt-4  ">
+        <p className="text-left font-normal text-base w-full ">{heroText}</p>
       </div>
-      <div className="flex pl-3 pt-9">
-        <ul className="list-disc pl-10 space-y-3 text-lg w-full">
+      <div className="flex pl-3 pt-9 w-full ">
+        <ul className="list-disc pl-[3.3rem] space-y-3 text-xl w-[25rem] font-semibold ">
           <li className="">{bulletOne}</li>
           <li>{bulletTwo}</li>
           <li>{bulletThree}</li>
         </ul>
-        <div className="flex w-full justify-end bottom-32  right-0 -z-10">
+        <div className="flex w-full justify-end mt-10">
           <Image
             src={"/Sparris_tallrik.png"}
-            width={200}
+            width={175}
             height={0}
             alt="picture of vegatables"
           ></Image>
