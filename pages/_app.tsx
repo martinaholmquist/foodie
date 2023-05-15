@@ -2,6 +2,7 @@ import "@/styles/globals.css"
 import type { AppProps } from "next/app"
 import { Public_Sans } from "@next/font/google"
 import { SessionProvider } from "next-auth/react"
+import Head from "next/head"
 
 const publicSans = Public_Sans({
   subsets: ["latin"],
@@ -14,6 +15,9 @@ const publicSans = Public_Sans({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider session={pageProps.session}>
+      <Head>
+        <title>Foodie</title>
+      </Head>
       <main className={publicSans.className}>
         <Component {...pageProps} />
       </main>

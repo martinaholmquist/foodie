@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { NextPage } from "next"
 import { useRouter } from "next/router"
+import useCurrentUser from "@/hooks/useCurrentUser"
+import axios from "axios"
 
 type recepieProps = {
   title?: string
@@ -8,6 +10,11 @@ type recepieProps = {
   time?: string
   id?: string
   category?: string
+  likes?: [
+    {
+      authorId: string
+    }
+  ]
 
   author?: {
     username: string
@@ -16,10 +23,11 @@ type recepieProps = {
   }
 }
 
-const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
+const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
   // State för lagra all recipes
   const [data, setData] = useState<recepieProps[]>([])
 
+  const { data: currentUser } = useCurrentUser()
   // State för lagra filtrerad recipes baserad på category
   const [filteredData, setFilteredData] = useState<recepieProps[]>([])
 
@@ -27,6 +35,8 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   const [category, setCategory] = useState<string[]>([])
 
   const [showMoreCategories, setShowMoreCategories] = useState(false)
+
+  const [isLiked, setIsliked] = useState<boolean[]>(data.map((item) => false))
 
   /* Tillfällig lösning för färg på varje knapp om klickad på och vid Rensa val sätt all värg till default HACK*/
   const [button1Active, setButton1Active] = useState(false)
@@ -86,6 +96,23 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
     setShowMoreCategories(!showMoreCategories)
   }
 
+  const handleClickLike = (index: number) => {
+    setIsliked((prevLikedStates) => {
+      const newLikedStates = [...prevLikedStates]
+      newLikedStates[index] = !prevLikedStates[index]
+      return newLikedStates
+    })
+  }
+
+  const likeRecepie = async (recepieId: any) => {
+    await axios.post("/api/recepies/likeRecepie", {
+      recepieId: recepieId,
+      authorId: currentUser?.id,
+    })
+    console.log(recepieId)
+    console.log(currentUser?.id)
+  }
+
   const router = useRouter()
 
   // Handle click event when a recipe is clicked
@@ -104,7 +131,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
   // Fetch recipe data när component mounts
   useEffect(() => {
     recepieData()
-  }, [])
+  }, [isLiked])
 
   // Hantera category filter selection
   const handleCategoryFilter = (selectCategory: any) => {
@@ -318,23 +345,51 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = ({}) => {
         )}
 
         {/* Renderar filtrerad recipes */}
-        {filteredData.map((item) => (
+        {filteredData.map((item, index) => (
           <div
             className=" my-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-6"
             key={item.id}
           >
+            {/* Vissar recipe bild */}
+            <div className="absolute z-50 right-3 mt-[9.6rem] ">
+              <div className="bg-anotherpink/80 bottom-0 right-0 mr-2 mb-10 px-[13px] rounded-full ">
+                <button
+                  onClick={() => {
+                    handleClickLike(index)
+                    likeRecepie(item.id)
+                  }}
+                >
+                  <img
+                    src={
+                      item.likes
+                        ?.map((item) => item.authorId)
+                        .includes(currentUser.id)
+                        ? "/liked.png"
+                        : "/like.png"
+                    }
+                    alt=""
+                    width={25}
+                    height={25}
+                    className="mt-[5px]"
+                  />
+                  <p className="text-sm">{item.likes?.length}</p>
+                </button>
+              </div>
+            </div>
             <div
               className="bg-primaryPink rounded-lg"
               onClick={() => handleClick(item.id)}
             >
-              {/* Vissar recipe bild */}
-              <img
-                src={item.image}
-                alt="image"
-                width={550}
-                height={100}
-                className="object-cover rounded-lg w-100 h-52"
-              />
+              <div className="">
+                <img
+                  src={item.image}
+                  alt="image"
+                  width={550}
+                  height={100}
+                  className="object-cover rounded-lg w-100 h-52 relative"
+                />
+              </div>
+
               {/* Vissar recipe title */}
               <p className="font-title font-medium text-2xl pl-2 pt-2 ">
                 {item.title}

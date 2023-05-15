@@ -14,10 +14,7 @@ export default async function handler(
   }
 
   try {
-    const category =
-      typeof req.query.category === "string" ? req.query.category : undefined
-
-    // Fetch all recipes if no category provided
+    // fetch all recipes
     const allRecipes = await prismadb.recepie.findMany({
       orderBy: [
         {
@@ -30,6 +27,12 @@ export default async function handler(
             username: true,
             profileImage: true,
             id: true,
+          },
+        },
+        likes: {
+          select: {
+            id: true,
+            authorId: true,
           },
         },
       },
