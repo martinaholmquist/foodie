@@ -95,7 +95,7 @@ const RubrikRecepieFormView = (props: Props) => {
                     type="button"
                     onClick={() =>
                       signOut({
-                        callbackUrl: `${window.location.origin}`,
+                        callbackUrl: "/auth",
                       })
                     }
                   >
