@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { NextPage } from "next"
 import { useRouter } from "next/router"
-import { it } from "node:test"
 import useCurrentUser from "@/hooks/useCurrentUser"
 import axios from "axios"
 
@@ -132,7 +131,6 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
   // Function to fetch recipe data from the API
   const recepieData = async () => {
     const res = await fetch("/api/nestedFetch")
-    const res = await fetch("/api/nestedFetch")
     const recepies = await res.json()
     setData(recepies)
     setFilteredData(recepies)
@@ -226,7 +224,6 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
         {showMoreCategories && (
           <div
             data-modal
-            className=" top-0 w-full h-auto mt-[17rem] bg-anotherpink rounded-3xl  fixed items-center justify-center z-10 focus:border-none border-[3px] shadow-2xl shadow-black"
             className=" top-0 w-full h-auto mt-[17rem] bg-anotherpink rounded-3xl  fixed items-center justify-center z-10 focus:border-none border-[3px] shadow-2xl shadow-black"
           >
             <div className="flex justify-end mr-4 mt-4 ">
