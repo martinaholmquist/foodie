@@ -5,6 +5,7 @@ import { useEffect, useState } from "react" //tina
 import RenderOutRecepiesModals from "../modals/homeModal"
 import SearchResultModal from "../modals/searchResultModal"
 import { signOut } from "next-auth/react"
+import { link } from "fs"
 
 interface Props {
   onExploreClick: () => void
@@ -45,12 +46,6 @@ const RubrikRecepieFormView = (props: Props) => {
     props.setIsSearchSubmitted(false)
     router.push(`/home`)
     setSearchQuery("")
-  }
-
-  //when press LogOut
-  const handleClickLogOut = () => {
-    signOut()
-    router.push(`/auth`)
   }
 
   const [showModal, setShowModal] = useState(false)
@@ -98,7 +93,11 @@ const RubrikRecepieFormView = (props: Props) => {
                   <button
                     className="bg-white shadow-md shadow-black/40 rounded-full w-28 py-[5px]"
                     type="button"
-                    onClick={() => handleClickLogOut()}
+                    onClick={() =>
+                      signOut({
+                        callbackUrl: `${window.location.origin}`,
+                      })
+                    }
                   >
                     Logga ut
                   </button>
