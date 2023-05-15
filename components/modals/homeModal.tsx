@@ -132,6 +132,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
   // Function to fetch recipe data from the API
   const recepieData = async () => {
     const res = await fetch("/api/nestedFetch")
+    const res = await fetch("/api/nestedFetch")
     const recepies = await res.json()
     setData(recepies)
     setFilteredData(recepies)
@@ -166,8 +167,8 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
     <div
       className={`bg-anotherpink flex items-center flex-col justify-center space-y-4`}
     >
-      <div className={``}>
-        <div className="flex justify-center space-x-2">
+      <div className="">
+        <div className="flex justify-center space-x-4 mx-4 ">
           {/* Button för "Pasta" category */}
           <button
             type="button"
@@ -225,6 +226,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
         {showMoreCategories && (
           <div
             data-modal
+            className=" top-0 w-full h-auto mt-[17rem] bg-anotherpink rounded-3xl  fixed items-center justify-center z-10 focus:border-none border-[3px] shadow-2xl shadow-black"
             className=" top-0 w-full h-auto mt-[17rem] bg-anotherpink rounded-3xl  fixed items-center justify-center z-10 focus:border-none border-[3px] shadow-2xl shadow-black"
           >
             <div className="flex justify-end mr-4 mt-4 ">
@@ -425,7 +427,11 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
                 {item.title}
               </p>
               <div className=" pl-2 pt-1 flex  items-center">
-                <div className="h-4 w-4 bg-crimsonRed rounded-full"></div>
+                <img
+                  src="/Profil icon.png"
+                  alt="profil icon"
+                  className=" h-4 w-4"
+                />
 
                 {/* Vissar author namn */}
                 <p className="pl-4 font-sans text-1xl font-medium">
