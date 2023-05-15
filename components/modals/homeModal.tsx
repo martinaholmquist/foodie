@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { NextPage } from "next"
 import { useRouter } from "next/router"
-import { it } from "node:test"
 import useCurrentUser from "@/hooks/useCurrentUser"
 import axios from "axios"
 
