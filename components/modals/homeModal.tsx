@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react"
 import { NextPage } from "next"
 import { useRouter } from "next/router"
-import { it } from "node:test"
 import useCurrentUser from "@/hooks/useCurrentUser"
 import axios from "axios"
 
@@ -158,8 +157,8 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
     <div
       className={`bg-anotherpink flex items-center flex-col justify-center space-y-4`}
     >
-      <div className={``}>
-        <div className="flex justify-center space-x-2">
+      <div className="">
+        <div className="flex justify-center space-x-4 mx-4 ">
           {/* Button för "Pasta" category */}
           <button
             type="button"
@@ -396,7 +395,11 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
                 {item.title}
               </p>
               <div className=" pl-2 pt-1 flex  items-center">
-                <div className="h-4 w-4 bg-crimsonRed rounded-full"></div>
+                <img
+                  src="/Profil icon.png"
+                  alt="profil icon"
+                  className=" h-4 w-4"
+                />
 
                 {/* Vissar author namn */}
                 <p className="pl-4 font-sans text-1xl font-medium">

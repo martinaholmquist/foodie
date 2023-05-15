@@ -21,7 +21,7 @@ type recpieData = {
   }
 }
 
-const RecepieView = ({}) => {
+const RecepieView = () => {
   const [data, setData] = useState<recpieData>()
   const [action, setAction] = useState("Ingredienser")
 
@@ -70,7 +70,7 @@ const RecepieView = ({}) => {
               onClick={handleClick}
             >
               {" "}
-              <img src="/Vector.png" alt="tillbakaknapp" />{" "}
+              <img src="/Tillbaka-pil.png" alt="tillbakaknapp" />{" "}
             </button>
 
             <img
