@@ -133,6 +133,8 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
     recepieData()
   }, [isLiked])
 
+  const myFavorites = () => {}
+
   // Hantera category filter selection
   const handleCategoryFilter = (selectCategory: any) => {
     const updatedCategories = category.includes(selectCategory)
@@ -168,11 +170,11 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
 
             `}
             onClick={() => {
-              handleCategoryFilter("Pasta")
+              myFavorites()
               handleButton1Click()
             }}
           >
-            Pasta
+            Favoriter
           </button>
 
           {/* Button för "Vegetariskt" category */}
@@ -186,20 +188,20 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
               handleButton2Click()
             }}
           >
-            Vegetariskt
+            Vego
           </button>
-          {/* Button för "Fågel" category */}
+          {/* Button för "Pasta" category */}
           <button
             type="button"
             className={` p-1 px-5 rounded-full mt-5 shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
           ${button3Active ? "bg-primaryPink" : "bg-white"}
           }`}
             onClick={() => {
-              handleCategoryFilter("Fågel")
+              handleCategoryFilter("Pasta")
               handleButton3Click()
             }}
           >
-            Fågel
+            Pasta
           </button>
 
           {/* Button för "Extra" category */}
@@ -351,8 +353,8 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
             key={item.id}
           >
             {/* Vissar recipe bild */}
-            <div className="absolute z-50 right-3 mt-[9.6rem] ">
-              <div className="bg-anotherpink/80 bottom-0 right-0 mr-2 mb-10 px-[13px] rounded-full ">
+            <div className="absolute z-50 right-6  mt-[9.9rem] ">
+              <div className="bg-anotherpink/80  right-0 mr-2 mb-10 px-[13px]  rounded-full ">
                 <button
                   onClick={() => {
                     handleClickLike(index)
@@ -368,8 +370,8 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
                         : "/like.png"
                     }
                     alt=""
-                    width={25}
-                    height={25}
+                    width={18.55}
+                    height={17}
                     className="mt-[5px]"
                   />
                   <p className="text-sm">{item.likes?.length}</p>
