@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { NextPage } from "next"
 import { useRouter } from "next/router"
 import { it } from "node:test"
@@ -36,11 +36,8 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
   const [category, setCategory] = useState<string[]>([])
 
   const [showMoreCategories, setShowMoreCategories] = useState(false)
-  const [likedRecipes, setLikedRecipes] = useState<string[]>([])
 
-  const [isLiked, setIsliked] = useState<boolean[]>(
-    filteredData.map((item) => false)
-  )
+  const [isLiked, setIsliked] = useState<boolean[]>(data.map((item) => false))
 
   /* Tillfällig lösning för färg på varje knapp om klickad på och vid Rensa val sätt all värg till default HACK*/
   const [button1Active, setButton1Active] = useState(false)
@@ -115,11 +112,6 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
     })
     console.log(recepieId)
     console.log(currentUser?.id)
-    setLikedRecipes((prevLikedRecipes) => [...prevLikedRecipes, recepieId])
-    localStorage.setItem(
-      "likedRecipes",
-      JSON.stringify([...likedRecipes, recepieId])
-    )
   }
 
   const router = useRouter()
@@ -140,7 +132,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
   // Fetch recipe data när component mounts
   useEffect(() => {
     recepieData()
-  }, [recepieData])
+  }, [isLiked])
 
   // Hantera category filter selection
   const handleCategoryFilter = (selectCategory: any) => {
@@ -361,50 +353,29 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
           >
             {/* Vissar recipe bild */}
             <div className="absolute z-50 right-3 mt-[9.6rem] ">
-              {!isLiked[index] ? (
-                <div className="bg-anotherpink/80 bottom-0 right-0 mr-2 mb-10 px-[13px] rounded-full ">
-                  <button
-                    onClick={() => {
-                      handleClickLike(index)
-                      likeRecepie(item.id)
-                    }}
-                  >
-                    <img
-                      src={
-                        item.likes
-                          ?.map((item) => item.authorId)
-                          .includes(currentUser.id)
-                          ? "/liked.png"
-                          : "/like.png"
-                      }
-                      alt=""
-                      width={25}
-                      height={25}
-                      className="mt-[5px]"
-                    />
-                    <p className="text-sm">{item.likes?.length}</p>
-                  </button>
-                </div>
-              ) : (
-                <div className="bg-anotherpink/80 bottom-0 right-0 mr-2 mb-2 px-[13px] rounded-full ">
-                  <button onClick={() => handleClickLike(index)}>
-                    <img
-                      src={
-                        item.likes
-                          ?.map((item) => item.authorId)
-                          .includes(currentUser.id)
-                          ? "/liked.png"
-                          : "/like.png"
-                      }
-                      alt=""
-                      width={25}
-                      height={25}
-                      className="mt-[5px]"
-                    />
-                    <p className="text-sm">{item.likes?.length}</p>
-                  </button>
-                </div>
-              )}
+              <div className="bg-anotherpink/80 bottom-0 right-0 mr-2 mb-10 px-[13px] rounded-full ">
+                <button
+                  onClick={() => {
+                    handleClickLike(index)
+                    likeRecepie(item.id)
+                  }}
+                >
+                  <img
+                    src={
+                      item.likes
+                        ?.map((item) => item.authorId)
+                        .includes(currentUser.id)
+                        ? "/liked.png"
+                        : "/like.png"
+                    }
+                    alt=""
+                    width={25}
+                    height={25}
+                    className="mt-[5px]"
+                  />
+                  <p className="text-sm">{item.likes?.length}</p>
+                </button>
+              </div>
             </div>
             <div
               className="bg-primaryPink rounded-lg"

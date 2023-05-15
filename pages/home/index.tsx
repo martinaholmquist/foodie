@@ -6,7 +6,7 @@ import SearchResultModal from "@/components/modals/searchResultModal"
 import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecepieFormView"
 import SearchInput from "@/components/searchInput"
 import { NextPage } from "next"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 
 interface Props {}
@@ -28,8 +28,6 @@ const Index: NextPage<Props> = ({}) => {
   return (
     <>
       <Layout>
-        <div>Inloggad som {session?.user?.email}</div>
-
         <RubrikRecepieFormView
           displayExpl={action === "explore" ? "absolute" : "hidden"}
           displayPub={action === "publish" ? "absolute" : "hidden"}
