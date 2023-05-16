@@ -140,8 +140,8 @@ const RubrikRecepieFormView = (props: Props) => {
       <div
         className={`relative flex flex-col gap-10 items-center pt-3 ${props.displaySearchBar} `}
       >
-        <form className="flex justify-center w-full px-5" onSubmit={onSearch}>
-          <div className=" flex justify-between w-full">
+        <form className="flex justify-center w-full px-5  " onSubmit={onSearch}>
+          <div className=" flex justify-between w-full ">
             <img
               src="\Frame 27.png"
               alt="search"
