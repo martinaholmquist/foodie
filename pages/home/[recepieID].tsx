@@ -61,12 +61,12 @@ const RecepieView = () => {
 
   return (
     <div className="" key={data?.id}>
-      <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4 ">
+      <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-primaryPink relative pb-[22px] rounded-md">
             <button
               type="button"
-              className="absolute top-2 left-2"
+              className="absolute top-2 left-2 z-50"
               onClick={handleClick}
             >
               {" "}
@@ -78,7 +78,7 @@ const RecepieView = () => {
               alt="image"
               width={550}
               height={100}
-              className="object-cover rounded-lg w-100 h-52"
+              className="object-cover rounded-lg w-100 h-52 relative"
             />
 
             <div className="flex items-center justify-between pt-2 ">
@@ -168,14 +168,19 @@ const RecepieView = () => {
             ) : (
               <div>
                 {data?.intructions.map((item, index) => (
-                  <>
-                    <ul className="pl-4 flex items-left pb-5 relative">
-                      <div className=" flex justify-center h-6 w-6 rounded-full border-[1px] border-black bg-white">
-                        <span>{index + 1}</span>
+                  <div className="pb-5">
+                    <ul
+                      className="pl-4 flex items-left
+                    "
+                    >
+                      <div className="pb-6">
+                        <div className="  flex justify-center h-6 w-6 rounded-full border-[1px] border-black bg-white">
+                          <span>{index + 1}</span>
+                        </div>
                       </div>
-                      <li className="pl-9 absolute">{item}</li>
+                      <li className="ml-6 mr-4">{item}</li>
                     </ul>
-                  </>
+                  </div>
                 ))}
               </div>
             )}
