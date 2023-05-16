@@ -25,7 +25,6 @@ export default async function handler(
             profileImage: true,
           },
         },
-        likes: true,
       },
     })
 
