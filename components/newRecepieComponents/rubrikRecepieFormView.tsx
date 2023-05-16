@@ -158,7 +158,7 @@ const RubrikRecepieFormView = (props: Props) => {
             <input
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              className="pt-1 pb-4 flex-1 bg-white shadow-md shadow-black/40 rounded-full  "
+              className="flex-1 bg-white shadow-md shadow-black/40 rounded-full outline-none pl-12 h-12 "
             />
           </div>
         </form>

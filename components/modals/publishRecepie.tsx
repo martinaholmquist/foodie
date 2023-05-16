@@ -148,9 +148,20 @@ const RecepieModule = ({}) => {
                 className="flex justify-center w-full h-full bg-white rounded-md shadow-lg"
               >
                 <div className="flex flex-col items-center justify-center">
-                  <img src="image 60.svg" alt="foto link" />
+                  {!url ? (
+                    <img src="image 60.svg" alt="foto link" />
+                  ) : (
+                    <img
+                      src={url}
+                      width={200}
+                      height={100}
+                      className=" bg-slate-500"
+                      alt=""
+                    />
+                  )}
+
                   {!image && <p>Click to select an image</p>}
-                  <div>{image?.name}</div>
+                  {!url && <div>{image?.name}</div>}
                   {image && (
                     <button
                       className="px-7 py-3 bg-crimsonRed mt-5 rounded-full absolute bottom-2 right-2 shadow-lg"

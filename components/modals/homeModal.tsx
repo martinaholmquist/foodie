@@ -359,6 +359,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
                   onClick={() => {
                     handleClickLike(index)
                     likeRecepie(item.id)
+                    recepieData()
                   }}
                 >
                   <img
