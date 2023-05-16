@@ -51,10 +51,14 @@ const RecepieView = () => {
   )
 
   const likeRecepie = async (recepieId: any) => {
-    await axios.post("/api/recepies/likeRecepie", {
-      recepieId: recepieId,
-      authorId: currentUser?.id,
-    })
+    try {
+      await axios.post("/api/recepies/likeRecepie", {
+        recepieId: recepieId,
+        authorId: currentUser?.id,
+      })
+    } catch (error) {
+      console.log(error)
+    }
 
     setData((prevData) => {
       if (prevData) {
@@ -95,8 +99,10 @@ const RecepieView = () => {
   }
 
   useEffect(() => {
-    recepieData()
-  }, [])
+    if (id) {
+      recepieData()
+    }
+  }, [id])
 
   return (
     <div className="" key={data?.id}>
