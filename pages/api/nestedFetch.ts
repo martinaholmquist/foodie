@@ -1,13 +1,20 @@
 import prismadb from "@/libs/prismadb"
+import { Like } from "@prisma/client"
 import type { NextApiRequest, NextApiResponse } from "next"
 
-interface Data {
-  // Define your response data structure here if needed
+interface Recepie {
+  id: string
+  likes: Like[]
+  author: {
+    id: string
+    username: string
+    profileImage: string | null
+  }
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<Recepie[]>
 ) {
   if (req.method !== "GET") {
     return res.status(404).end()
@@ -15,7 +22,7 @@ export default async function handler(
 
   try {
     // fetch all recipes
-    const allRecipes = await prismadb.recepie.findMany({
+    const recepie = await prismadb.recepie.findMany({
       orderBy: [
         {
           createdAt: "desc",
@@ -33,7 +40,7 @@ export default async function handler(
       },
     })
 
-    return res.status(200).json(allRecipes)
+    return res.status(200).json(recepie)
   } catch (error) {
     console.error(error)
     return res.status(400).end()
