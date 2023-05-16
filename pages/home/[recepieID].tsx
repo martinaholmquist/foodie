@@ -98,7 +98,11 @@ const RecepieView = () => {
 
             <div className="flex items-center justify-between pt-[13px] ">
               <div className=" pl-2 flex  items-center">
-                <div className="h-4 w-4 bg-crimsonRed rounded-full"></div>
+                <img
+                  src="/Profil icon.png"
+                  alt="profil icon"
+                  className=" h-4 w-4"
+                />
                 <p className="pl-2 font-sans text-1xl font-medium">
                   {data?.author?.username}
                 </p>
