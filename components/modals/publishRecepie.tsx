@@ -8,6 +8,7 @@ import useCurrentUser from "@/hooks/useCurrentUser"
 import { ImageUpload } from "./imageUpload"
 import handleUpload from "@/libs/testUpload"
 import KuriosaForm from "../newRecepieComponents/kuriosaForm"
+import deleteImage from "@/libs/deleteImage"
 
 type Recepie = {
   title: string
@@ -98,6 +99,12 @@ const RecepieModule = ({}) => {
     await handleUpload({ imageUpload: image, setUrl: setURL })
   }
 
+  const deleteImg = async () => {
+    await deleteImage(image?.name)
+    setImage(null)
+    setURL("")
+  }
+
   const body = {
     authorId: currentUser?.id,
     title: recepie.title,
@@ -123,6 +130,7 @@ const RecepieModule = ({}) => {
   }
 
   /* start */
+  useEffect(() => {}, [image])
 
   return (
     <>
@@ -147,28 +155,30 @@ const RecepieModule = ({}) => {
                 htmlFor="dropzone-file"
                 className="flex justify-center w-full h-full bg-white rounded-md shadow-lg"
               >
-                <div className="flex flex-col items-center justify-center">
-                  {!url ? (
-                    <img src="image 60.svg" alt="foto link" />
-                  ) : (
-                    <img
-                      src={url}
-                      className=" bg-slate-500 h-full"
-                      alt=""
-                    />
-                  )}
+                {url && (
+                  <img
+                    src={url}
+                    className="  h-full object-contain w-full "
+                    alt="uploaded img"
+                  />
+                )}
+                <div className="flex flex-col items-center justify-center h-full">
+                  {!url && <img src="image 60.svg" alt="foto link" />}
 
                   {!image && <p>Click to select an image</p>}
-                  <div className="">
-                    {!url && <div>{image?.name}</div>}
-                  </div>
+                  <div className="">{!url && <div>{image?.name}</div>}</div>
                   {image && (
                     <button
-                      className="px-7 py-3 bg-crimsonRed mt-5 rounded-full absolute bottom-2 right-2 shadow-lg"
+                      className={`px-7 py-3 bg-crimsonRed mt-5 rounded-full absolute bottom-2 right-2 shadow-lg ${
+                        url && " px-0 py-0 w-8 h-8"
+                      }`}
                       type="button"
-                      onClick={() => upload()}
+                      onClick={() => (!url ? upload() : deleteImg())}
                     >
-                      <span className="text-white">Upload</span>
+                      <span className={`text-white ${url && "hidden"} `}>
+                        Upload
+                      </span>
+                      <span className={`${!url && "hidden"} `}>X</span>
                     </button>
                   )}
                 </div>
