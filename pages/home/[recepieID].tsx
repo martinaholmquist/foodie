@@ -91,7 +91,7 @@ const RecepieView = () => {
                 </div>
                 <p className="pl-2 font-sans font-medium text-1xl ">
                   {" "}
-                  {data?.time} min
+                  {data?.time}
                 </p>
               </div>
             </div>
