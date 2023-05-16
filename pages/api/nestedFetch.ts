@@ -1,6 +1,13 @@
 import prismadb from "@/libs/prismadb"
-import { Like } from "@prisma/client"
+
 import type { NextApiRequest, NextApiResponse } from "next"
+import { type } from "os"
+
+type Like = {
+  id: string
+  authorId: string
+  recepieId: string
+}
 
 interface Recepie {
   id: string
