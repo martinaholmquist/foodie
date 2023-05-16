@@ -38,6 +38,9 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
 
   const [isLiked, setIsliked] = useState<boolean[]>(data.map((item) => false))
 
+  // State to toggle displaying favorites
+  const [showFavorites, setShowFavorites] = useState(false)
+
   /* Tillfällig lösning för färg på varje knapp om klickad på och vid Rensa val sätt all värg till default HACK*/
   const [button1Active, setButton1Active] = useState(false)
   const [button2Active, setButton2Active] = useState(false)
@@ -133,7 +136,18 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
     recepieData()
   }, [isLiked])
 
-  const myFavorites = () => {}
+  // Toggle displaying favorites
+  const toggleFavorites = () => {
+    setShowFavorites(!showFavorites)
+  }
+
+  // Render only favorite recipes
+  const renderFavorites = () => {
+    const favoriteRecepies = data.filter((recipe) =>
+      recipe.likes?.some((like) => like.authorId === currentUser?.id)
+    )
+    setFilteredData(favoriteRecepies)
+  }
 
   // Hantera category filter selection
   const handleCategoryFilter = (selectCategory: any) => {
@@ -162,19 +176,21 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
       <div className="">
         <div className="flex justify-center space-x-2 ">
           {/* Button för "Pasta" category */}
+          {/* Button for "Favorites" */}
           <button
             type="button"
-            className={` p-1 px-5 rounded-full mt-5 shadow-lg focus:border-none border-[1px]  
-            
-              ${button1Active ? "bg-primaryPink" : "bg-white"}
-
-            `}
+            className={`p-1 px-5 rounded-full mt-5 shadow-lg focus:border-none border-[1px]
+              ${showFavorites ? "bg-primaryPink" : "bg-white"}`}
             onClick={() => {
-              myFavorites()
-              handleButton1Click()
+              toggleFavorites()
+              if (showFavorites) {
+                setFilteredData(data)
+              } else {
+                renderFavorites()
+              }
             }}
           >
-            Favoriter
+            Favorites
           </button>
 
           {/* Button för "Vegetariskt" category */}
@@ -218,7 +234,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
         {showMoreCategories && (
           <div
             data-modal
-            className=" top-0 w-full h-auto mt-[17rem] bg-anotherpink rounded-3xl  fixed items-center justify-center z-10 focus:border-none border-[3px] shadow-2xl shadow-black"
+            className=" z-40 top-0 w-full h-auto mt-[17rem] bg-anotherpink rounded-3xl  fixed items-center justify-center focus:border-none border-[3px] shadow-2xl shadow-black"
           >
             <div className="flex justify-end mr-4 mt-4 ">
               <button onClick={handleToggle}>
@@ -353,7 +369,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
             key={item.id}
           >
             {/* Vissar recipe bild */}
-            <div className="absolute z-50 right-6  mt-[9.9rem] ">
+            <div className="absolute z-10 right-6  mt-[9.9rem] ">
               <div className="bg-anotherpink/80  right-0 mr-2 mb-10 px-[13px]  rounded-full ">
                 <button
                   onClick={() => {
