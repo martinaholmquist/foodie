@@ -26,12 +26,7 @@ export default async function handler(
             id: true,
           },
         },
-        likes: {
-          select: {
-            id: true,
-            authorId: true,
-          },
-        },
+        likes: {},
       },
     })
 
