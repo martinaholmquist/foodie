@@ -57,7 +57,7 @@ model Recepie {
   comments           Comment[]
   createdAt          DateTime @default(now())
   category           String
-  likes              Like[] 
+  likes              Like[]
 }
 
 model Comment {
