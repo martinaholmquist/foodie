@@ -152,7 +152,8 @@ const RecepieView = () => {
                           </h2>
                         </div>
                         <div className="mt-4 font-sans bg-white">
-                          <p>{data?.kuriosa}</p>
+                          <textarea  cols={28} rows={5} value={data?.kuriosa} className="resize-none">
+                          </textarea>
                         </div>
                       </>
                     )}
@@ -164,10 +165,10 @@ const RecepieView = () => {
                 {data?.intructions.map((item, index) => (
                   <>
                     <ul className="pl-4 flex items-left pb-5 relative">
-                      <div className="mt-1 flex justify-center h-6 w-6 rounded-full border-[1px] border-black bg-white absolute">
+                      <div className=" flex justify-center h-6 w-6 rounded-full border-[1px] border-black bg-white">
                         <span>{index + 1}</span>
                       </div>
-                      <li className="pl-9">{item}</li>
+                      <li className="pl-9 absolute">{item}</li>
                     </ul>
                   </>
                 ))}

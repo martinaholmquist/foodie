@@ -92,6 +92,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
     setButton6Active(false)
     setButton7Active(false)
     setButton8Active(false)
+    setShowFavorites(false)
   }
   /* Fortsättning på vanlig kod */
 
@@ -190,7 +191,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
               }
             }}
           >
-            Favorites
+            Favoriter
           </button>
 
           {/* Button för "Vegetariskt" category */}
@@ -210,11 +211,11 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
           <button
             type="button"
             className={` p-1 px-5 rounded-full mt-5 shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-          ${button3Active ? "bg-primaryPink" : "bg-white"}
+          ${button1Active ? "bg-primaryPink" : "bg-white"}
           }`}
             onClick={() => {
               handleCategoryFilter("Pasta")
-              handleButton3Click()
+              handleButton1Click()
             }}
           >
             Pasta
@@ -234,31 +235,34 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
         {showMoreCategories && (
           <div
             data-modal
-            className=" z-40 top-0 w-full h-auto mt-[17rem] bg-anotherpink rounded-3xl  fixed items-center justify-center focus:border-none border-[3px] shadow-2xl shadow-black"
+            className=" z-40 top-0 w-full h-auto mt-[16rem] bg-anotherpink rounded-3xl  fixed justify-center focus:border-none border-[3px] shadow-2xl shadow-black"
           >
-            <div className="flex justify-end mr-4 mt-4 ">
+            <div className="flex justify-end mt-4 ">
               <button onClick={handleToggle}>
-                <img src="/X.png" alt="Kryss knapp" />
+                <img src="/X.png" alt="Kryss knapp" className="mr-4" />
               </button>
             </div>
             <div className="flex justify-center  ">
-              <p className="font-sans">Välj dina favoriter!</p>
+              <p className="font-sans">Filtrera</p>
             </div>
 
             <div className="ml-4  mb-3 space-x-3 space-y-4">
               <button
                 type="button"
                 className={`  ml-4 p-1 px-5 rounded-full  shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-          ${button1Active ? "bg-primaryPink" : "bg-white"}
+          ${showFavorites ? "bg-primaryPink" : "bg-white"}
               }`}
                 onClick={() => {
-                  handleCategoryFilter("Pasta")
-                  handleButton1Click()
+                  toggleFavorites()
+                  if (showFavorites) {
+                    setFilteredData(data)
+                  } else {
+                    renderFavorites()
+                  }
                 }}
               >
-                Pasta
+                Favoriter
               </button>
-
               {/* Button för "Vegetariskt" category */}
               <button
                 type="button"
@@ -270,20 +274,20 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
                   handleButton2Click()
                 }}
               >
-                Vegetariskt
+                Vego
               </button>
-              {/* Button för "Fågel" category */}
+              {/* Button för "Pasta" category */}
               <button
                 type="button"
-                className={`p-1 px-5 rounded-full shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
-         ${button3Active ? "bg-primaryPink" : "bg-white"}
-              }`}
+                className={` p-1 px-5 rounded-full  shadow-lg  focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+          ${button1Active ? "bg-primaryPink" : "bg-white"}
+                `}
                 onClick={() => {
-                  handleCategoryFilter("Fågel")
-                  handleButton3Click()
+                  handleCategoryFilter("Pasta")
+                  handleButton1Click()
                 }}
               >
-                Fågel
+                Pasta
               </button>
               <button
                 className={` p-1 px-5 rounded-full  shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
@@ -307,6 +311,8 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
               >
                 Kött och chark
               </button>
+
+              {/* Button för "Bakning" category */}
               <button
                 className={` p-1 px-5 rounded-full shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
          ${button6Active ? "bg-primaryPink" : "bg-white"}
@@ -318,6 +324,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
               >
                 Bakning
               </button>
+              {/* Button för "Dessert" category */}
               <button
                 className={` p-1 px-5 rounded-full shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
          ${button7Active ? "bg-primaryPink" : "bg-white"}
@@ -329,6 +336,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
               >
                 Dessert
               </button>
+              {/* Button för "Dryck" category */}
               <button
                 className={` p-1 px-5 rounded-full shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
           ${button8Active ? "bg-primaryPink" : "bg-white"}
@@ -340,7 +348,21 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
               >
                 Dryck
               </button>
+              {/* Button för "Fågel" category */}
+              <button
+                type="button"
+                className={`p-1 px-5 rounded-full shadow-lg focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
+         ${button3Active ? "bg-primaryPink" : "bg-white"}
+              }`}
+                onClick={() => {
+                  handleCategoryFilter("Fågel")
+                  handleButton3Click()
+                }}
+              >
+                Fågel
+              </button>
               <div className="flex justify-end pr-[16px]">
+                {/* Button för "Rensa val" category */}
                 <button
                   className={`bg-white p-1 px-3 rounded-full shadow-2xl focus:border-none border-[1px] "border-primaryPink" : "border-black/20"
                 }`}
