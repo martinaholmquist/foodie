@@ -1,13 +1,10 @@
 import prismadb from "@/libs/prismadb"
-import type { NextApiRequest, NextApiResponse } from "next"
 
-interface Data {
-  // Define your response data structure here if needed
-}
+import type { NextApiRequest, NextApiResponse } from "next"
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
   if (req.method !== "GET") {
     return res.status(404).end()
@@ -15,7 +12,7 @@ export default async function handler(
 
   try {
     // fetch all recipes
-    const allRecipes = await prismadb.recepie.findMany({
+    const recepie = await prismadb.recepie.findMany({
       orderBy: [
         {
           createdAt: "desc",
@@ -26,19 +23,13 @@ export default async function handler(
           select: {
             username: true,
             profileImage: true,
-            id: true,
           },
         },
-        likes: {
-          select: {
-            id: true,
-            authorId: true,
-          },
-        },
+        likes: true,
       },
     })
 
-    return res.status(200).json(allRecipes)
+    return res.status(200).json(recepie)
   } catch (error) {
     console.error(error)
     return res.status(400).end()
