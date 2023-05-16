@@ -4,7 +4,7 @@ import RenderOutRecepiesModals from "@/components/modals/homeModal"
 import RecepieModule from "@/components/modals/publishRecepie"
 import SearchResultModal from "@/components/modals/searchResultModal"
 import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecepieFormView"
-import SearchInput from "@/components/searchInput"
+
 import { NextPage } from "next"
 import { signOut, useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
