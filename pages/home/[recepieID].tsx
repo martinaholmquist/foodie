@@ -148,7 +148,7 @@ const RecepieView = () => {
                           </h2>
                         </div>
                         <div className="mt-4 font-sans bg-white">
-                          <textarea  cols={28} rows={5} value={data?.kuriosa} className="resize-none">
+                          <textarea  disabled cols={26} rows={5} value={data?.kuriosa} className="resize-none px-3 py-2">
                           </textarea>
                         </div>
                       </>
