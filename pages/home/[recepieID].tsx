@@ -41,13 +41,13 @@ const RecepieView = () => {
     setAction("DoLikeThis")
   }
 
-  const { q } = router.query //tina**
+  const { q } = router.query
   const [encodedSearchQuery, setEncodedSearchQuery] = useState<string>(
     q ? q.toString() : ""
   )
 
   const handleClick = (id: any) => {
-    console.log("detta händer när jag klickar tillbaka", encodedSearchQuery)
+    //puch the search word to the url in home if it exist
     if (encodedSearchQuery) {
       router.push(`/home?q=${encodedSearchQuery}`)
     } else {

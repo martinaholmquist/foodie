@@ -175,7 +175,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
       className={`bg-anotherpink flex items-center flex-col justify-center space-y-4`}
     >
       <div className="">
-        <div className="flex justify-center space-x-2 ">
+        <div className="flex justify-center space-x-3 ">
           {/* Button för "Pasta" category */}
           {/* Button for "Favorites" */}
           <button
