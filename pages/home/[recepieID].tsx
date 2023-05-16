@@ -168,7 +168,7 @@ const RecepieView = () => {
             ) : (
               <div>
                 {data?.intructions.map((item, index) => (
-                  <div className="pb-5">
+                  <div className="pb-5" key={item}>
                     <ul
                       className="pl-4 flex items-left
                     "
