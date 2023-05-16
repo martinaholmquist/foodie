@@ -153,22 +153,22 @@ const RecepieModule = ({}) => {
                   ) : (
                     <img
                       src={url}
-                      width={200}
-                      height={100}
-                      className=" bg-slate-500"
+                      className=" bg-slate-500 h-full"
                       alt=""
                     />
                   )}
 
                   {!image && <p>Click to select an image</p>}
-                  {!url && <div>{image?.name}</div>}
+                  <div className="">
+                    {!url && <div>{image?.name}</div>}
+                  </div>
                   {image && (
                     <button
                       className="px-7 py-3 bg-crimsonRed mt-5 rounded-full absolute bottom-2 right-2 shadow-lg"
                       type="button"
                       onClick={() => upload()}
                     >
-                      <span className="text-white">Upload </span>
+                      <span className="text-white">Upload</span>
                     </button>
                   )}
                 </div>
@@ -199,10 +199,10 @@ const RecepieModule = ({}) => {
           {/* Tid */}
           <NewRecepiePopUpTableOption
             name="Tid"
-            a={"5"}
-            b={"15"}
-            c={"45"}
-            d={"60"}
+            a={"5 min"}
+            b={"15 min"}
+            c={"45 min"}
+            d={"60 min"}
             value={recepie.time}
             onChange={(e) => setRecepie({ ...recepie, time: e.target.value })}
           />

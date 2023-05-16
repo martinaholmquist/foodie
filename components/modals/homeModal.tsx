@@ -427,7 +427,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
                   alt="image"
                   width={550}
                   height={100}
-                  className="object-cover rounded-lg w-100 h-52 relative"
+                  className="object-cover rounded-lg w-100 h-52"
                 />
               </div>
 
@@ -454,7 +454,7 @@ const RenderOutRecepiesModals: NextPage<recepieProps> = () => {
 
                 {/* Vissar recipe till lagningstid */}
                 <p className="pl-4 font-sans font-medium text-1xl">
-                  {item.time} min
+                  {item.time}
                 </p>
               </div>
             </div>
