@@ -1,27 +1,10 @@
 import prismadb from "@/libs/prismadb"
 
 import type { NextApiRequest, NextApiResponse } from "next"
-import { type } from "os"
-
-type Like = {
-  id: string
-  authorId: string
-  recepieId: string
-}
-
-interface Recepie {
-  id: string
-  likes: Like[]
-  author: {
-    id: string
-    username: string
-    profileImage: string | null
-  }
-}
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Recepie[]>
+  res: NextApiResponse
 ) {
   if (req.method !== "GET") {
     return res.status(404).end()
@@ -43,7 +26,12 @@ export default async function handler(
             id: true,
           },
         },
-        likes: {},
+        likes: {
+          select: {
+            id: true,
+            authorId: true,
+          },
+        },
       },
     })
 
