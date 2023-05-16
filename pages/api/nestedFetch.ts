@@ -23,10 +23,9 @@ export default async function handler(
           select: {
             username: true,
             profileImage: true,
-            id: true,
           },
         },
-        likes: {},
+        likes: true,
       },
     })
 
