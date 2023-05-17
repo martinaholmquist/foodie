@@ -1,6 +1,8 @@
 import SearchResultModal from "@/components/modals/searchResultModal"
 import SingleRecepieModule from "@/components/modals/singleRecepieModule"
 import RubrikRecepieFormView from "@/components/newRecepieComponents/rubrikRecepieFormView"
+import useCurrentUser from "@/hooks/useCurrentUser"
+import axios from "axios"
 
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -19,12 +21,14 @@ type recpieData = {
     username: string
     profileImage: string
   }
+  likes?: { authorId: string }[]
 }
 
 const RecepieView = () => {
   const [data, setData] = useState<recpieData>()
   const [action, setAction] = useState("Ingredienser")
 
+  const { data: currentUser } = useCurrentUser()
   const router = useRouter()
   const id = router.query.recepieID
 
@@ -46,6 +50,45 @@ const RecepieView = () => {
     q ? q.toString() : ""
   )
 
+  const likeRecepie = async (recepieId: any) => {
+    try {
+      await axios.post("/api/recepies/likeRecepie", {
+        recepieId: recepieId,
+        authorId: currentUser?.id,
+      })
+    } catch (error) {
+      console.log(error)
+    }
+
+    setData((prevData) => {
+      if (prevData) {
+        const likedByCurrentUser = (prevData.likes || []).some(
+          (like) => like.authorId === currentUser?.id
+        )
+        let updatedLikes = []
+        if (likedByCurrentUser) {
+          // If the current user already liked the recipe, remove their like
+          updatedLikes = (prevData.likes || []).filter(
+            (like) => like.authorId !== currentUser?.id
+          )
+        } else {
+          // If the current user didn't like the recipe, add their like
+          updatedLikes = [
+            ...(prevData.likes || []),
+            { authorId: currentUser?.id },
+          ]
+        }
+
+        return {
+          ...prevData,
+          likes: updatedLikes,
+        }
+      }
+
+      return prevData
+    })
+  }
+
   const handleClick = (id: any) => {
     //puch the search word to the url in home if it exist
     if (encodedSearchQuery) {
@@ -56,30 +99,56 @@ const RecepieView = () => {
   }
 
   useEffect(() => {
-    recepieData()
-  }, [])
+    if (id) {
+      recepieData()
+    }
+  }, [id])
 
   return (
     <div className="" key={data?.id}>
-      <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4 ">
+      <div className="bg-anotherpink flex items-center flex-col justify-center space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-primaryPink relative pb-[22px] rounded-md">
             <button
               type="button"
-              className="absolute top-2 left-2"
+              className="absolute top-2 left-2 z-50"
               onClick={handleClick}
             >
               {" "}
               <img src="/Tillbaka-pil.png" alt="tillbakaknapp" />{" "}
             </button>
-
-            <img
-              src={data?.image}
-              alt="image"
-              width={550}
-              height={100}
-              className="object-cover rounded-lg w-100 h-52"
-            />
+            <div className=" relative">
+              <img
+                src={data?.image}
+                alt="image"
+                width={550}
+                height={100}
+                className="object-cover rounded-lg w-100 h-52 relative"
+              />
+              <div className="bg-anotherpink/80 absolute bottom-0  right-0 mr-2 mb-2  px-[13px]  rounded-full ">
+                <button
+                  onClick={() => {
+                    likeRecepie(data?.id)
+                    recepieData()
+                  }}
+                >
+                  <img
+                    src={
+                      data?.likes
+                        ?.map((item) => item.authorId)
+                        .includes(currentUser.id)
+                        ? "/liked.png"
+                        : "/like.png"
+                    }
+                    alt=""
+                    width={18.55}
+                    height={17}
+                    className="mt-[5px]"
+                  />
+                  <p className="text-sm">{data?.likes?.length}</p>
+                </button>
+              </div>
+            </div>
 
             <div className="flex items-center justify-between pt-2 ">
               <p className="font-title font-medium text-2xl pl-2 ">
@@ -168,14 +237,19 @@ const RecepieView = () => {
             ) : (
               <div>
                 {data?.intructions.map((item, index) => (
-                  <>
-                    <ul className="pl-4 flex items-left pb-5 relative">
-                      <div className=" flex justify-center h-6 w-6 rounded-full border-[1px] border-black bg-white">
-                        <span>{index + 1}</span>
+                  <div className="pb-5" key={item}>
+                    <ul
+                      className="pl-4 flex items-left
+                    "
+                    >
+                      <div className="pb-6">
+                        <div className="  flex justify-center h-6 w-6 rounded-full border-[1px] border-black bg-white">
+                          <span>{index + 1}</span>
+                        </div>
                       </div>
-                      <li className="pl-9 absolute">{item}</li>
+                      <li className="ml-6 mr-4">{item}</li>
                     </ul>
-                  </>
+                  </div>
                 ))}
               </div>
             )}

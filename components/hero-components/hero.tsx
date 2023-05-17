@@ -30,7 +30,7 @@ export const Hero = ({
         <p className="text-left font-normal text-base w-full ">{heroText}</p>
       </div>
       <div className="flex pl-3 pt-9 w-full ">
-        <ul className="list-disc pl-[3.3rem] space-y-3 text-xl w-[25rem] font-semibold ">
+        <ul className="list-disc pl-[3.3rem] space-y-3 text-xl w-[30rem] font-semibold ">
           <li className="">{bulletOne}</li>
           <li>{bulletTwo}</li>
           <li>{bulletThree}</li>
