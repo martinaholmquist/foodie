@@ -19,7 +19,6 @@ const SingleRecepieModule = (props: Props) => {
         <div className="font-title relative">
           <button
             className="pb-2"
-            //className="border-b-[6px] border-black rounded-[3px]"
             onClick={props.onExploreClick}
             disabled={props.exploreDisabled}
           >

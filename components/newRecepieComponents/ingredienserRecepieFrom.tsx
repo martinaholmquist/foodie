@@ -15,15 +15,6 @@ export const IngredienserRecepieFrom = ({
   onChange,
   onClick,
 }: Props) => {
-  /*  const [ingrediens, setIngrediens] = useState(['']) */
-
-  /*   const [inputFields, setInputFields] = useState([{ Ingredient: ""}]) */
-  /* const handleFormChange = (index, event) => {
-    const data = { ...inputFields }
-    data[index], [event.target.name] = event.target.value
-    setInputFields(data)
-  } */
-
   return (
     <div className="flex w-full items-center pt-4">
       <div className=" pl-2 pr-3">
@@ -56,45 +47,4 @@ export const IngredienserRecepieFrom = ({
 export default IngredienserRecepieFrom
 
 {
-  /*
-  ingrediens
-        <button className="bg-white"
-          onClick={() => {
-            setIngrediens([...ingrediens, ""])
-          }}>
-          ADDING ingrediens
-        </button>
-        {ingrediens.map((ingredient, index) => {
-          return (
-            <div className="flex">
-              <input type="text" value={ingredient} />
-              <button
-                onClick={() => {
-                  const ingrediensArray = ingrediens.filter((i, j) => {
-                    return index !== j
-                  })
-                  console.log(ingrediensArray)
-                  setIngrediens(ingrediensArray)
-                }}
-              ></button>
-            </div>
-          )
-        })} 
-  
-   <div>
-      {inputFields.map((inputIngrediens, index) => {
-        return (
-          <div key={index}>
-            <input
-              type="text"
-              placeholder="ingrediens"
-              value={inputIngrediens.Ingredient}
-             onChange={(event) => handleFormChange(index, event)} 
-            />
-          </div>
-        )
-      })}
-    </div>
-  
-  */
 }
